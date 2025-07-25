@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 220px;
+  width: 250px; /* Increased from 220px */
   background: #1e293b;
   color: #f1f5f9;
   display: flex;
@@ -157,7 +157,7 @@
   border: none;
   color: #94a3b8;
   font-size: 1rem;
-  padding: 12px 24px;
+  padding: 12px 14px; /* Reduced horizontal padding from 24px to 14px */
   border-radius: 8px;
   margin: 0 8px;
   cursor: pointer;
@@ -170,9 +170,12 @@
   text-align: center;
 }
 .sidebar-nav-btn .nav-label {
-  white-space: nowrap;
+  /* white-space: nowrap; */ /* Remove nowrap to allow wrapping */
   font-weight: 500;
   letter-spacing: 0.01em;
+  word-break: break-word;
+  line-height: 1.2;
+  max-width: 140px; /* Prevents label from being too wide */
 }
 .sidebar-nav-btn.active, .sidebar-nav-btn:hover {
   background: #334155;
@@ -191,7 +194,7 @@
 @media (max-width: 900px) {
   .sidebar-left {
     left: 0;
-    width: 180px;
+    width: 200px; /* Increased from 180px */
   }
   .sidebar-left.collapsed {
     width: 56px;
@@ -230,5 +233,8 @@
   
   .sidebar-user-role {
     font-size: 0.7rem;
+  }
+  .sidebar-nav-btn .nav-label {
+    max-width: 80px;
   }
 } 

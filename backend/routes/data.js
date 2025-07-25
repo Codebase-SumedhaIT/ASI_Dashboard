@@ -309,10 +309,23 @@ router.get('/filter-options', auth, async (req, res) => {
 
     // Get domains for the selected project only
     if (project_id) {
-      [domains] = await pool.query(
-        'SELECT d.id, d.full_name FROM domains d INNER JOIN projects p ON d.id = p.domain_id WHERE p.id = ? AND d.is_active = 1',
-        [project_id]
-      );
+      try {
+        const domainSql = `
+          SELECT DISTINCT d.id, d.full_name FROM domains d
+          WHERE d.id IN (
+            SELECT domain_id FROM pd_data_raw WHERE project_id = ?
+            UNION
+            SELECT domain_id FROM dv_data_raw WHERE project_id = ?
+            -- Add more tables here if you have more domain-specific tables
+          ) AND d.is_active = 1
+          ORDER BY d.full_name
+        `;
+        const [domainRows] = await pool.query(domainSql, [project_id, project_id]);
+        domains = domainRows;
+      } catch (err) {
+        console.error('[filter-options] Domain join failed, falling back to all active domains:', err.message);
+        [domains] = await pool.query('SELECT id, full_name FROM domains WHERE is_active = 1 ORDER BY full_name');
+      }
     } else {
       [domains] = await pool.query('SELECT id, full_name FROM domains WHERE is_active = 1 ORDER BY full_name');
     }
@@ -1159,6 +1172,45 @@ router.get('/customer-data', auth, async (req, res) => {
     res.status(500).json({
       error: 'Error fetching customer data',
       details: error.message
+    });
+  }
+});
+
+// Manual CSV processing endpoint
+router.post('/process-csv', auth, async (req, res) => {
+  try {
+    const { filePath } = req.body;
+    const userId = req.user.userId;
+    
+    if (!filePath) {
+      return res.status(400).json({ message: 'File path is required' });
+    }
+
+    // Check if user is admin
+    const [users] = await pool.execute(
+      'SELECT r.role_name FROM users u JOIN user_roles r ON u.role_id = r.id WHERE u.id = ?',
+      [userId]
+    );
+
+    if (users.length === 0 || users[0].role_name !== 'Admin') {
+      return res.status(403).json({ message: 'Access denied. Admin privileges required.' });
+    }
+
+    const enhancedCSVProcessor = require('../utils/enhancedCSVProcessor');
+    const result = await enhancedCSVProcessor(filePath, userId);
+
+    res.json({
+      success: true,
+      message: 'CSV processing completed',
+      result
+    });
+
+  } catch (error) {
+    console.error('Manual CSV processing error:', error);
+    res.status(500).json({ 
+      success: false,
+      message: 'Error processing CSV file',
+      error: error.message 
     });
   }
 });

@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
-const processCSVFile = require('./csvProcessor');
+const processCSVFile = require('./enhancedCSVProcessor');
 const getCSVFiles = require('./getCSVFiles');
+const logger = require('./logger');
 
 class FileWatcher {
   constructor(db) {
@@ -52,7 +53,7 @@ class FileWatcher {
           this.processedFiles.delete(filePath);
         })
         .on('error', (error) => {
-          console.error('❌ File watcher error:', error);
+          logger.error(`File watcher error: ${error.message}\n${error.stack}`, 'fileWatcher');
         })
         .on('ready', () => {
           console.log('👀 File watcher is ready and monitoring for new CSV files...');
@@ -60,7 +61,7 @@ class FileWatcher {
         });
 
     } catch (error) {
-      console.error('❌ Error starting file watcher:', error);
+      logger.error(`Error starting file watcher: ${error.message}\n${error.stack}`, 'fileWatcher');
     }
   }
 
@@ -85,7 +86,7 @@ class FileWatcher {
       }
 
     } catch (error) {
-      console.error('❌ Error processing existing files:', error);
+      logger.error(`Error processing existing files: ${error.message}\n${error.stack}`, 'fileWatcher');
     }
   }
 
@@ -124,12 +125,13 @@ class FileWatcher {
 
       // Process the CSV file
       const collectedByUserId = 1; // Default admin user
-      await processCSVFile(filePath, this.db, collectedByUserId);
+      const result = await processCSVFile(filePath, collectedByUserId);
+      console.log(`📊 Processing result:`, result);
       this.processedFiles.add(filePath);
       // Move processed file to archive folder
       await this.archiveFile(filePath);
     } catch (error) {
-      console.error(`❌ Error processing file ${path.basename(filePath)}:`, error);
+      logger.error(`Error processing file ${path.basename(filePath)}: ${error.message}\n${error.stack}`, 'fileWatcher');
     }
   }
 
@@ -161,7 +163,7 @@ class FileWatcher {
       }
 
     } catch (error) {
-      console.error('❌ Error archiving file:', error);
+      logger.error('Error archiving file', 'fileWatcher', { error: error.message });
     }
   }
 

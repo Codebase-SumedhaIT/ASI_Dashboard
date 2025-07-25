@@ -187,9 +187,10 @@ class Logger {
       if (fs.existsSync(this.logPath)) {
         fs.writeFileSync(this.logPath, '');
       }
-      if (fs.existsSync(this.errorLogPath)) {
-        fs.writeFileSync(this.errorLogPath, '');
-      }
+      // Do NOT clear errors.log to keep error logs safe
+      // if (fs.existsSync(this.errorLogPath)) {
+      //   fs.writeFileSync(this.errorLogPath, '');
+      // }
       if (fs.existsSync(this.infoLogPath)) {
         fs.writeFileSync(this.infoLogPath, '');
       }

@@ -34,13 +34,6 @@ const DataVisualization = ({ projectFilters = {} }) => {
     fetchCurrentUser();
   }, []);
 
-  // Add logging for fetched data and filters
-  useEffect(() => {
-    console.log('[EngineerView] Filters from projectFilters:', projectFilters);
-    console.log('[EngineerView] Local filters state:', filters);
-    console.log('[EngineerView] Raw fetched pdData:', pdData);
-  }, [pdData, filters, projectFilters]);
-
   // Update filters when projectFilters prop changes
   useEffect(() => {
     setFilters(prevFilters => ({
@@ -137,7 +130,6 @@ const DataVisualization = ({ projectFilters = {} }) => {
       if (aVal > bVal) return sortConfig.direction === 'asc' ? 1 : -1;
       return 0;
     });
-    console.log('[EngineerView] Data passed to table (after sorting/filtering):', sorted);
     return sorted;
   };
 
@@ -622,7 +614,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
                 <table className="data-table">
                   <thead>
                     <tr>
-                      {renderSortableHeader('project_name', 'Project')}
+                      {!filters.project_id && renderSortableHeader('project_name', 'Project')}
                       {renderSortableHeader('block_name', 'Block Name')}
                       {renderSortableHeader('experiment', 'Experiment')}
                       {renderSortableHeader('RTL_tag', 'RTL Tag')}
@@ -640,8 +632,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
                       {renderSortableHeader('area_um2', 'Area (um²)')}
                       {renderSortableHeader('inst_count', 'Inst Count')}
                       {renderSortableHeader('utilization', 'Utilization')}
-                      <th>Logs Errors & Warnings</th>
-                      {renderSortableHeader('run_status', 'Run Status')}
+                      <th>Run Status</th>
                       {renderSortableHeader('runtime_seconds', 'Runtime')}
                       <th>AI Summary</th>
                       <th>IR (Static)</th>
@@ -659,20 +650,19 @@ const DataVisualization = ({ projectFilters = {} }) => {
                           className={`data-row ${selectedRow === index ? 'selected-row' : ''} ${index % 2 === 0 ? 'even-row' : 'odd-row'}`}
                           onClick={() => handleRowClick(row, index)}
                         >
-                          <td className="project-cell">
-                            <div 
-                              className="cell-content project-clickable"
-                              // Removed onClick handler for project cell
-                            >
-                              <span className="cell-text">{row.project_name || 'N/A'}</span>
-                              <div className="project-indicator">
-                                {/* Removed project indicator */}
+                          {!filters.project_id && (
+                            <td className="project-cell">
+                              <div 
+                                className="cell-content project-clickable"
+                              >
+                                <span className="cell-text">{row.project_name || 'N/A'}</span>
+                                <div className="project-indicator"></div>
+                                {selectedRow === index && (
+                                  <div className="row-indicator">▶</div>
+                                )}
                               </div>
-                              {selectedRow === index && (
-                                <div className="row-indicator">▶</div>
-                              )}
-                            </div>
-                          </td>
+                            </td>
+                          )}
                           <td>{row.block_name || 'N/A'}</td>
                           <td>{row.experiment || 'N/A'}</td>
                           <td>{row.RTL_tag || 'N/A'}</td>
@@ -727,11 +717,6 @@ const DataVisualization = ({ projectFilters = {} }) => {
                                 </div>
                               </div>
                             ) : 'N/A'}
-                          </td>
-                          <td className="logs-cell">
-                            <div className="logs-content" title={row.logs_errors_warnings || 'N/A'}>
-                              {row.logs_errors_warnings || 'N/A'}
-                            </div>
                           </td>
                           <td className="status-cell">
                             <span className={`status-badge ${getStatusColor(row.run_status)}`}>

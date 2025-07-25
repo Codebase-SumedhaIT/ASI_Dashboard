@@ -1,37 +1,38 @@
 class DVProcessor {
-  async process(rows, db, userId) {
+  async process(rows, userId) {
+    const { pool } = require('../config/database');
+    let processedCount = 0;
+    let skippedCount = 0;
+    let errorCount = 0;
+
     for (const row of rows) {
       try {
-        // Find or create project
-        const [existingProject] = await db.query(
-          'SELECT id FROM projects WHERE project_name = ? AND domain_id = 3',
-          [row.project, 3]
-        );
-        let projectId;
-        if (existingProject.length > 0) {
-          projectId = existingProject[0].id;
-        } else {
-          const [result] = await db.query(
-            'INSERT INTO projects (project_name, domain_id, created_by, description) VALUES (?, 3, ?, ?)',
-            [row.project, userId, `Project ${row.project} for Design Verification`]
-          );
-          projectId = result.insertId;
+        // Use mapped project and domain IDs from enhanced processor
+        const projectId = row.mapped_project_id;
+        const domainId = row.mapped_domain_id;
+
+        // Skip if no project or domain mapping found
+        if (!projectId || !domainId) {
+          console.warn(`[DVProcessor] Skipping row - no project/domain mapping. Project: ${row.project || 'unknown'}, Domain: ${row.mapped_domain_code || 'unknown'}`);
+          skippedCount++;
+          continue;
         }
 
         // Check for duplicate (project_id + module, not deleted)
-        const [dupes] = await db.query(
+        const [dupes] = await pool.execute(
           'SELECT id FROM dv_data_raw WHERE project_id = ? AND module = ? AND is_deleted = FALSE',
           [projectId, row.module]
         );
         if (dupes.length > 0) {
-          console.warn(`[DVProcessor] Duplicate found for project: ${row.project}, module: ${row.module}. Skipping.`);
+          console.warn(`[DVProcessor] Duplicate found for project_id: ${projectId}, module: ${row.module}. Skipping.`);
+          skippedCount++;
           continue;
         }
 
         // Prepare insert data (all raw values, no conversion)
         const insertData = {
           project_id: projectId,
-          domain_id: 3,
+          domain_id: domainId,
           module: row.module || null,
           tb_dev_total: row.tb_dev_total || null,
           tb_dev_coded: row.tb_dev_coded || null,
@@ -82,12 +83,21 @@ class DVProcessor {
           insertData.block_status,
           insertData.collected_by
         ];
-        await db.query(query, values);
-        console.log(`[DVProcessor] Inserted DV row for project: ${row.project}, module: ${row.module}`);
+        await pool.execute(query, values);
+        console.log(`[DVProcessor] Inserted DV row for project_id: ${projectId}, domain_id: ${domainId}, module: ${row.module}`);
+        processedCount++;
       } catch (err) {
-        console.error(`[DVProcessor] Error inserting DV row for project: ${row.project}, module: ${row.module}:`, err);
+        console.error(`[DVProcessor] Error inserting DV row for project_id: ${row.mapped_project_id}, module: ${row.module}:`, err);
+        errorCount++;
       }
     }
+
+    return {
+      processed: processedCount,
+      skipped: skippedCount,
+      errors: errorCount,
+      total: rows.length
+    };
   }
 }
 

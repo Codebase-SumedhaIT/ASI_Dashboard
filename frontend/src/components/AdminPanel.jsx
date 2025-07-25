@@ -20,7 +20,6 @@ const AdminPanel = () => {
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    console.log('AdminPanel: Fetching users, roles, and projects...');
     fetchUsers();
     fetchRoles();
     fetchProjects();
@@ -28,7 +27,6 @@ const AdminPanel = () => {
 
   const fetchUsers = async () => {
     try {
-      console.log('AdminPanel: Fetching users with token:', token ? 'Token exists' : 'No token');
       const response = await fetch('http://localhost:5000/api/users', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -36,7 +34,6 @@ const AdminPanel = () => {
         }
       });
 
-      console.log('AdminPanel: Users response status:', response.status);
       if (!response.ok) {
         const errorData = await response.json();
         console.error('AdminPanel: Users fetch error:', errorData);
@@ -44,7 +41,6 @@ const AdminPanel = () => {
       }
 
       const data = await response.json();
-      console.log('AdminPanel: Users fetched successfully:', data.users.length, 'users');
       setUsers(data.users);
     } catch (error) {
       console.error('AdminPanel: Users fetch error:', error);

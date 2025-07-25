@@ -1,21 +1,21 @@
 class PDProcessor {
-  async process(rows, db, userId) {
+  async process(rows, userId) {
+    const { pool } = require('../config/database');
+    let processedCount = 0;
+    let skippedCount = 0;
+    let errorCount = 0;
+
     for (const row of rows) {
       try {
-        // Find or create project
-        const [existingProject] = await db.query(
-          'SELECT id FROM projects WHERE project_name = ? AND domain_id = 1',
-          [row.project, 1]
-        );
-        let projectId;
-        if (existingProject.length > 0) {
-          projectId = existingProject[0].id;
-        } else {
-          const [result] = await db.query(
-            'INSERT INTO projects (project_name, domain_id, created_by, description) VALUES (?, 1, ?, ?)',
-            [row.project, userId, `Project ${row.project} for Physical Design`]
-          );
-          projectId = result.insertId;
+        // Use mapped project and domain IDs from enhanced processor
+        const projectId = row.mapped_project_id;
+        const domainId = row.mapped_domain_id;
+
+        // Skip if no project or domain mapping found
+        if (!projectId || !domainId) {
+          console.warn(`[PDProcessor] Skipping row - no project/domain mapping. Project: ${row.project || 'unknown'}, Domain: ${row.mapped_domain_code || 'unknown'}`);
+          skippedCount++;
+          continue;
         }
 
         // Parse run_end_time (support DD/MM/YYYY)
@@ -30,19 +30,20 @@ class PDProcessor {
         }
 
         // Check for duplicate (project_id + block_name + experiment + run_end_time, not deleted)
-        const [dupes] = await db.query(
+        const [dupes] = await pool.execute(
           'SELECT id FROM pd_data_raw WHERE project_id = ? AND block_name = ? AND experiment = ? AND run_end_time = ? AND is_deleted = FALSE',
           [projectId, row.block_name, row.experiment, runEndTime]
         );
         if (dupes.length > 0) {
-          console.warn(`[PDProcessor] Duplicate found for project: ${row.project}, block: ${row.block_name}, experiment: ${row.experiment}, run_end_time: ${runEndTime}. Skipping.`);
+          console.warn(`[PDProcessor] Duplicate found for project_id: ${projectId}, block: ${row.block_name}, experiment: ${row.experiment}, run_end_time: ${runEndTime}. Skipping.`);
+          skippedCount++;
           continue;
         }
 
         // Prepare insert data (all raw values, no conversion)
         const insertData = {
           project_id: projectId,
-          domain_id: 1,
+          domain_id: domainId,
           block_name: row.block_name || null,
           experiment: row.experiment || null,
           RTL_tag: row.rtl__tag || null,
@@ -112,12 +113,21 @@ class PDProcessor {
           insertData.lec,
           insertData.collected_by
         ];
-        await db.query(query, values);
-        console.log(`[PDProcessor] Inserted PD row for project: ${row.project}, block: ${row.block_name}, experiment: ${row.experiment}, run_end_time: ${runEndTime}`);
+        await pool.execute(query, values);
+        console.log(`[PDProcessor] Inserted PD row for project_id: ${projectId}, domain_id: ${domainId}, block: ${row.block_name}, experiment: ${row.experiment}, run_end_time: ${runEndTime}`);
+        processedCount++;
       } catch (err) {
-        console.error(`[PDProcessor] Error inserting PD row for project: ${row.project}, block: ${row.block_name}, experiment: ${row.experiment}:`, err);
+        console.error(`[PDProcessor] Error inserting PD row for project_id: ${row.mapped_project_id}, block: ${row.block_name}, experiment: ${row.experiment}:`, err);
+        errorCount++;
       }
     }
+
+    return {
+      processed: processedCount,
+      skipped: skippedCount,
+      errors: errorCount,
+      total: rows.length
+    };
   }
 }
 

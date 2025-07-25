@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import AdminPanel from './AdminPanel';
+import ProjectManagement from './ProjectManagement';
 import DataVisualization from './DataVisualization';
-import LogsNavigation from './LogsNavigation';
 import ManagerView from './ManagerView';
 import LeadView from './LeadView';
 import CustomerView from './CustomerView';
@@ -11,6 +11,7 @@ import SlideBar from './SlideBar';
 import UserProfilePage from './UserProfilePage';
 import DVManagerView from './DVManagerView';
 import DVLeadView from './DVLeadView';
+import LogsDashboard from './LogsDashboard';
 
 function Dashboard({ user, onLogout, onUserUpdate }) {
   const [activeView, setActiveView] = useState(null); // No view by default
@@ -18,6 +19,13 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
   const [projectFilters, setProjectFilters] = useState({ domain_id: '', project_id: '' });
   const [clickedButton, setClickedButton] = useState(null);
   const [showProfilePage, setShowProfilePage] = useState(false);
+
+  // Set default view for admin users
+  useEffect(() => {
+    if (user?.role_name === 'Admin' && !activeView) {
+      setActiveView('project-management');
+    }
+  }, [user, activeView]);
 
   // Check if user is a customer
   const isCustomer = user?.role_name === 'Customer';
@@ -79,8 +87,9 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
     if (isCustomer) {
       return <CustomerView user={user} projectFilters={projectFilters} />;
     }
+    if (activeView === 'logs') return <LogsDashboard user={user} />;
     if (activeView === 'admin') return <AdminPanel />;
-    if (activeView === 'logs') return <LogsNavigation />;
+    if (activeView === 'project-management') return <ProjectManagement />;
     // DV domain-specific views
     if ((projectFilters.domain_id === '3' || projectFilters.domain_id === 3)) {
       if (activeView === 'manager') return <DVManagerView filters={projectFilters} />;
@@ -133,7 +142,7 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
         onLogout={onLogout}
       />
       <div className="dashboard-content">
-        {!(activeView === 'admin' || activeView === 'logs') && (
+        {!(activeView === 'admin' || activeView === 'project-management' || activeView === 'logs') && (
           <ProjectFilter
             onFilterChange={setProjectFilters}
             selectedFilters={projectFilters}

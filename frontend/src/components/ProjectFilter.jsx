@@ -15,14 +15,6 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
     fetchProjects();
   }, []);
 
-  // For customers, automatically select the first project if none is selected
-  useEffect(() => {
-    if (isCustomer && projects.length > 0 && !selectedFilters.project_id) {
-      const firstProject = projects[0];
-      handleFilterChange('project_id', firstProject.id);
-    }
-  }, [isCustomer, projects, selectedFilters.project_id]);
-
   useEffect(() => {
     if (selectedFilters.project_id) {
       fetchDomains(selectedFilters.project_id);
@@ -33,7 +25,14 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
 
   // Track when a view is selected
   useEffect(() => {
-    setViewSelected(activeView !== null && activeView !== 'admin' && activeView !== 'logs');
+    setViewSelected(activeView !== null && activeView !== 'admin');
+  }, [activeView]);
+
+  // Ensure main filter page is shown when Dashboard is selected
+  useEffect(() => {
+    if (activeView === null || activeView === 'dashboard') {
+      setViewSelected(false);
+    }
   }, [activeView]);
 
   const fetchProjects = async () => {
@@ -82,18 +81,10 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
   };
 
   const clearFilters = () => {
-    if (isCustomer) {
-      // For customers, only clear domain filter, keep the first project selected
-      onFilterChange({
-        project_id: selectedFilters.project_id || (projects.length > 0 ? projects[0].id : ''),
-        domain_id: ''
-      });
-    } else {
     onFilterChange({
       project_id: '',
       domain_id: ''
     });
-    }
   };
 
   const handleViewChange = (viewId) => {
@@ -158,7 +149,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
                 onChange={(e) => handleFilterChange('project_id', e.target.value)}
                 className="filter-select"
               >
-                <option value="">All Projects</option>
+                <option value="" disabled>Select Project</option>
                 {projects.map((project) => (
                   <option key={project.id} value={project.id}>
                     {project.project_name}
@@ -175,7 +166,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
                   onChange={(e) => handleFilterChange('domain_id', e.target.value)}
                   className="filter-select"
                 >
-                  <option value="">All Domains</option>
+                  <option value="" disabled>Select Domain</option>
                   {domains.map((domain) => (
                     <option key={domain.id} value={domain.id}>
                       {domain.full_name}

@@ -16,7 +16,6 @@ const columns = [
   { key: 'area', label: 'Area' },
   { key: 'inst_count', label: 'Inst count' },
   { key: 'utilization', label: 'Utilization' },
-  { key: 'logs_errors_warnings', label: 'Logs Errors & Warnings' },
   { key: 'run_status', label: 'Run Status' },
   { key: 'runtime_seconds', label: 'Runtime' },
   { key: 'ai_overall_summary', label: 'AI Summary & Suggestions' },

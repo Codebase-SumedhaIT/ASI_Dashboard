@@ -41,11 +41,6 @@ const CustomerView = ({ user, projectFilters = {} }) => {
           setBlockNameOptions(result.blocks || []);
           setProjects(result.projects || []);
 
-          // Debug: Log user and project_ids
-          console.log('CustomerView user:', user);
-          console.log('CustomerView user.project_ids:', user?.project_ids);
-          console.log('CustomerView all projects:', result.projects);
-
           // Filter projects to only show user's assigned projects
           if (user && user.project_ids && user.project_ids.length > 0) {
             // Ensure both IDs are numbers for comparison
@@ -53,7 +48,6 @@ const CustomerView = ({ user, projectFilters = {} }) => {
               user.project_ids.includes(project.id) || user.project_ids.includes(String(project.id)) || user.project_ids.includes(Number(project.id))
             );
             setUserAssignedProjects(assignedProjects);
-            console.log('CustomerView userAssignedProjects:', assignedProjects);
             // Auto-select first project if none selected
             if (!selectedProjectId && assignedProjects.length > 0) {
               setSelectedProjectId(assignedProjects[0].id);

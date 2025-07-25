@@ -45,13 +45,11 @@ INSERT INTO domains (short_code, full_name, description) VALUES
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     project_name VARCHAR(100) NOT NULL,
-    domain_id INT NOT NULL,
     description TEXT,
     status ENUM('active', 'completed', 'on_hold', 'cancelled') DEFAULT 'active',
     created_by INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (domain_id) REFERENCES domains(id),
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
@@ -177,3 +175,10 @@ CREATE INDEX idx_dv_data_module ON dv_data_raw(module);
 CREATE INDEX idx_dv_data_code_coverage ON dv_data_raw(code_coverage_percent);
 CREATE INDEX idx_dv_data_functional_coverage ON dv_data_raw(functional_coverage_percent); 
 
+CREATE TABLE project_domains (
+  project_id INT NOT NULL,
+  domain_id INT NOT NULL,
+  PRIMARY KEY (project_id, domain_id),
+  FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+  FOREIGN KEY (domain_id) REFERENCES domains(id) ON DELETE CASCADE
+);

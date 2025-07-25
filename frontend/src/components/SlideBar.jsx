@@ -3,14 +3,16 @@ import './SlideBar.css';
 
 const navItems = [
   { id: 'dashboard', label: 'Dashboard', icon: '🏠' },
+  { id: 'logs', label: 'Logs', icon: '📊' }, // Add Logs menu item
   { id: 'admin', label: 'Admin Panel', icon: '👑' },
-  { id: 'logs', label: 'Logs', icon: '📝' },
+  { id: 'project-management', label: 'Project Management', icon: '📁' }
 ];
 
 const SlideBar = ({ activeView, onViewChange, user, open, setOpen, onLogout, onProfileClick }) => {
-  // Only show admin/logs for admin
+  // Only show admin/project-management for admin, and hide logs for Customer
   const filteredNav = navItems.filter(item => {
-    if ((item.id === 'admin' || item.id === 'logs') && user?.role_name !== 'Admin') return false;
+    if ((item.id === 'admin' || item.id === 'project-management') && user?.role_name !== 'Admin') return false;
+    if (item.id === 'logs' && user?.role_name === 'Customer') return false;
     return true;
   });
 
