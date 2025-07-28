@@ -28,7 +28,6 @@ const LogsDashboard = ({ user }) => {
   const [levelFilter, setLevelFilter] = useState('all');
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(''); // <-- Add error state
   const logsEndRef = useRef(null);
   const socketRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -81,13 +80,14 @@ const LogsDashboard = ({ user }) => {
   // Use the filter for the chart
   const logsOverTime = getLogsOverTimeMultiSeries(levelFilter);
 
-  // Helper to get error reasons for a given minute
+  // Helper to get error reasons for a given minute (robust to seconds in log timestamp)
   const getErrorReasonsForMinute = (minuteLabel) => {
     const timeRegex = /^\[(.*?)\]/;
     // Find logs for the selected minute and that are errors
     return logs.filter(log => {
       const match = log.match(timeRegex);
       if (!match) return false;
+      // Format log's timestamp to HH:mm to match chart label
       const logMinute = dayjs(match[1]).format('HH:mm');
       return logMinute === minuteLabel && /error|exception|fail/i.test(log);
     });
@@ -128,7 +128,6 @@ const LogsDashboard = ({ user }) => {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    setError(''); // Reset error on mount
     // Fetch initial logs from backend
     const fetchLogs = async () => {
       try {
@@ -144,8 +143,7 @@ const LogsDashboard = ({ user }) => {
           setLogs(data.errors.slice(-500));
         }
       } catch (err) {
-        setError('Could not connect to server. Please check if the backend is running.');
-        setLogs([]);
+        // Optionally handle error
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -153,16 +151,12 @@ const LogsDashboard = ({ user }) => {
     fetchLogs();
 
     // Connect to socket.io server
-    try {
-      socketRef.current = io('http://localhost:5000');
-      // On receiving a log line
-      socketRef.current.on('log', (line) => {
-        setLogs(prevLogs => [...prevLogs, line].slice(-500)); // Keep last 500 logs
-        setLoading(false);
-      });
-    } catch (err) {
-      setError('Could not connect to server (socket).');
-    }
+    socketRef.current = io('http://localhost:5000');
+    // On receiving a log line
+    socketRef.current.on('log', (line) => {
+      setLogs(prevLogs => [...prevLogs, line].slice(-500)); // Keep last 500 logs
+      setLoading(false);
+    });
     // Clean up on unmount
     return () => {
       isMounted = false;
@@ -190,11 +184,6 @@ const LogsDashboard = ({ user }) => {
   return (
     <div className="dashboard-content" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', minHeight: '100vh' }}>
       <h2 style={{ fontWeight: 700, fontSize: '2rem', marginBottom: 24 }}>Logs & Analytics</h2>
-      {error && (
-        <div style={{ background: '#fee2e2', color: '#b91c1c', padding: 16, borderRadius: 12, marginBottom: 24, fontWeight: 600, fontSize: 18, textAlign: 'center', border: '1px solid #fca5a5' }}>
-          {error}
-        </div>
-      )}
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 32 }}>
         <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(59,130,246,0.12)' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Total Logs</div>
@@ -253,247 +242,246 @@ const LogsDashboard = ({ user }) => {
       </div>
 
       {/* Graphs (Logs Over Time) - Modern Card */}
-      {!error && (
+      <div style={{
+        display: 'flex',
+        gap: 24,
+        marginBottom: 32,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}>
         <div style={{
+          flex: 1,
+          minWidth: 0,
+          width: '100%',
+          maxWidth: 1200,
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e0e8f0 100%)',
+          borderRadius: 32,
+          padding: 0,
+          boxShadow: '0 8px 32px 0 rgba(59,130,246,0.18)',
+          border: '2px solid #3b82f6',
           display: 'flex',
-          gap: 24,
-          marginBottom: 32,
-          flexWrap: 'wrap',
+          flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'center',
+          margin: 0,
+          position: 'relative',
+          overflow: 'hidden',
         }}>
+          {/* Animated Gradient Overlay */}
           <div style={{
-            flex: 1,
-            minWidth: 0,
+            position: 'absolute',
+            top: 0,
+            left: 0,
             width: '100%',
-            maxWidth: 1200,
-            background: 'linear-gradient(135deg, #f8fafc 0%, #e0e8f0 100%)',
-            borderRadius: 32,
-            padding: 0,
-            boxShadow: '0 8px 32px 0 rgba(59,130,246,0.18)',
-            border: '2px solid #3b82f6',
+            height: '100%',
+            background: 'radial-gradient(circle at 80% 20%, #3b82f633 0%, transparent 70%), radial-gradient(circle at 20% 80%, #f59e4266 0%, transparent 70%)',
+            zIndex: 0,
+            pointerEvents: 'none',
+            animation: 'pulseGradient 6s ease-in-out infinite',
+          }} />
+          {/* Title Row */}
+          <div style={{
+            width: '100%',
             display: 'flex',
-            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            margin: 0,
-            position: 'relative',
-            overflow: 'hidden',
+            justifyContent: 'space-between',
+            padding: '32px 40px 0 40px',
+            zIndex: 2,
           }}>
-            {/* Animated Gradient Overlay */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'radial-gradient(circle at 80% 20%, #3b82f633 0%, transparent 70%), radial-gradient(circle at 20% 80%, #f59e4266 0%, transparent 70%)',
-              zIndex: 0,
-              pointerEvents: 'none',
-              animation: 'pulseGradient 6s ease-in-out infinite',
-            }} />
-            {/* Title Row */}
-            <div style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '32px 40px 0 40px',
-              zIndex: 2,
-            }}>
-              <div style={{ fontWeight: 800, fontSize: 28, color: '#1e293b', letterSpacing: 1 }}>Logs Over Time</div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                <span style={{
-                  background: 'linear-gradient(90deg, #10b981 0%, #3b82f6 100%)',
-                  color: '#fff',
-                  fontWeight: 700,
-                  borderRadius: 12,
-                  padding: '4px 16px',
-                  fontSize: 16,
-                  boxShadow: '0 2px 8px #3b82f633',
-                  letterSpacing: 1,
-                }}>LIVE</span>
-              </div>
-            </div>
-            {/* Subtitle and Peak Info */}
-            <div style={{
-              width: '100%',
-              padding: '0 40px 0 40px',
-              marginBottom: 8,
-              marginTop: 4,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              zIndex: 2,
-            }}>
-              <div style={{ color: '#64748b', fontWeight: 500, fontSize: 16 }}>
-                {selectedDate ? `Showing logs for ${dayjs(selectedDate).format('YYYY-MM-DD')}` : 'Last 30 minutes (live)'}
-              </div>
-              {/* Peak log rate summary */}
-              <div style={{ color: '#3b82f6', fontWeight: 700, fontSize: 16 }}>
-                Peak: {Math.max(...logsOverTime.total, 0)} logs/min
-              </div>
-            </div>
-            {/* Chart */}
-            <div style={{
-              flex: 1,
-              width: '100%',
-              height: 'calc(100% - 64px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
-              zIndex: 2,
-              paddingBottom: 32,
-            }}>
-              {logsOverTime.labels.length > 0 ? (
-                <div style={{
-                  width: '100%',
-                  height: '100%',
-                  transition: 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)',
-                  opacity: animate ? 1 : 0,
-                  transform: animate ? 'translateY(0)' : 'translateY(40px)'
-                }}>
-                  <LineChart
-                    xAxis={[{
-                      data: logsOverTime.labels,
-                      scaleType: 'point',
-                      label: 'Time (minute)',
-                      tickLabelStyle: { fontSize: 14, fill: '#64748b' },
-                      labelStyle: { fontWeight: 700, fill: '#3b82f6' }
-                    }]}
-                    series={
-                      levelFilter === 'all'
-                        ? [
-                            {
-                              data: logsOverTime.total,
-                              label: 'Total',
-                              color: '#2563eb',
-                              showMark: false,
-                              area: false,
-                              curve: 'monotone',
-                              strokeWidth: 3,
-                            },
-                            {
-                              data: logsOverTime.error,
-                              label: 'Error',
-                              color: '#ef4444',
-                              showMark: false,
-                              area: false,
-                              curve: 'monotone',
-                              strokeWidth: 3,
-                            },
-                            {
-                              data: logsOverTime.warning,
-                              label: 'Warning',
-                              color: '#f59e42',
-                              showMark: false,
-                              area: false,
-                              curve: 'monotone',
-                              strokeWidth: 3,
-                            },
-                            {
-                              data: logsOverTime.info,
-                              label: 'Info',
-                              color: '#10b981',
-                              showMark: false,
-                              area: false,
-                              curve: 'monotone',
-                              strokeWidth: 3,
-                            },
-                          ]
-                        : [
-                            {
-                              data: logsOverTime[levelFilter],
-                              label: levelFilter.charAt(0).toUpperCase() + levelFilter.slice(1),
-                              color:
-                                levelFilter === 'error'
-                                  ? '#ef4444'
-                                  : levelFilter === 'warning'
-                                  ? '#f59e42'
-                                  : '#10b981',
-                              showMark: false,
-                              area: false,
-                              curve: 'monotone',
-                              strokeWidth: 3,
-                            },
-                          ]
-                    }
-                    width={window.innerWidth > 1200 ? 1100 : window.innerWidth - 80}
-                    height={window.innerHeight > 600 ? 420 : 280}
-                    margin={{ left: 80, right: 40, top: 40, bottom: 60 }}
-                    grid={{ vertical: true, horizontal: true }}
-                    slotProps={{
-                      legend: { hidden: false, position: 'top' },
-                      tooltip: {
-                        trigger: 'item',
-                        formatter: (params) => {
-                          if (!params || typeof params.value === 'undefined') return '';
-                          const idx = params.dataIndex;
-                          const minuteLabel = logsOverTime.labels[idx];
-                          let tooltip = `Time: ${minuteLabel}<br/>`;
-                          if (levelFilter === 'all' || levelFilter === 'error') {
-                            tooltip += `<span style='color:#ef4444'>●</span> Error: ${logsOverTime.error[idx]}<br/>`;
-                            // Show error reasons if hovering error point and there are errors
-                            if (
-                              (levelFilter === 'error' || (params.seriesLabel && params.seriesLabel.toLowerCase() === 'error')) &&
-                              logsOverTime.error[idx] > 0
-                            ) {
-                              const reasons = getErrorReasonsForMinute(minuteLabel);
-                              if (reasons.length > 0) {
-                                tooltip += `<div style='margin-top:4px;'><b>Error Reasons:</b><ul style='margin:0;padding-left:16px;'>`;
-                                reasons.slice(0, 5).forEach(r => {
-                                  tooltip += `<li style='font-size:12px;'>${r.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`;
-                                });
-                                if (reasons.length > 5) tooltip += `<li>...and more</li>`;
-                                tooltip += `</ul></div>`;
-                              }
-                            }
-                          }
-                          if (levelFilter === 'all' || levelFilter === 'warning')
-                            tooltip += `<span style='color:#f59e42'>●</span> Warning: ${logsOverTime.warning[idx]}<br/>`;
-                          if (levelFilter === 'all' || levelFilter === 'info')
-                            tooltip += `<span style='color:#10b981'>●</span> Info: ${logsOverTime.info[idx]}<br/>`;
-                          if (levelFilter === 'all')
-                            tooltip = `<span style='color:#2563eb'>●</span> Total: ${logsOverTime.total[idx]}<br/>` + tooltip;
-                          return tooltip;
-                        }
-                      }
-                    }}
-                    sx={{
-                      '.MuiLineElement-root': { filter: 'drop-shadow(0 2px 8px #2563eb22)', transition: 'd 0.8s cubic-bezier(0.4,0,0.2,1)' },
-                      '.MuiMarkElement-root': { transition: 'cx 0.8s, cy 0.8s' },
-                    }}
-                  />
-                </div>
-              ) : (
-                <Box sx={{
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: 'rgba(248,250,252,0.8)',
-                  borderRadius: 4,
-                  boxShadow: '0 2px 8px #e0e7ef33',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  zIndex: 2
-                }}>
-                  <CalendarMonthIcon sx={{ color: '#f59e42', fontSize: 60, mb: 2 }} />
-                  <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 600, mb: 1 }}>
-                    No log data for the selected date or month
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: '#94a3b8' }}>
-                    Try a different date or clear the filter.
-                  </Typography>
-                </Box>
-              )}
+            <div style={{ fontWeight: 800, fontSize: 28, color: '#1e293b', letterSpacing: 1 }}>Logs Over Time</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <span style={{
+                background: 'linear-gradient(90deg, #10b981 0%, #3b82f6 100%)',
+                color: '#fff',
+                fontWeight: 700,
+                borderRadius: 12,
+                padding: '4px 16px',
+                fontSize: 16,
+                boxShadow: '0 2px 8px #3b82f633',
+                letterSpacing: 1,
+              }}>LIVE</span>
             </div>
           </div>
+          {/* Subtitle and Peak Info */}
+          <div style={{
+            width: '100%',
+            padding: '0 40px 0 40px',
+            marginBottom: 8,
+            marginTop: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            zIndex: 2,
+          }}>
+            <div style={{ color: '#64748b', fontWeight: 500, fontSize: 16 }}>
+              {selectedDate ? `Showing logs for ${dayjs(selectedDate).format('YYYY-MM-DD')}` : 'Last 30 minutes (live)'}
+            </div>
+            {/* Peak log rate summary */}
+            <div style={{ color: '#3b82f6', fontWeight: 700, fontSize: 16 }}>
+              Peak: {Math.max(...logsOverTime.total, 0)} logs/min
+            </div>
+          </div>
+          {/* Chart */}
+          <div style={{
+            flex: 1,
+            width: '100%',
+            height: 'calc(100% - 64px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            zIndex: 2,
+            paddingBottom: 32,
+          }}>
+            {logsOverTime.labels.length > 0 ? (
+              <div style={{
+                width: '100%',
+                height: '100%',
+                transition: 'opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1)',
+                opacity: animate ? 1 : 0,
+                transform: animate ? 'translateY(0)' : 'translateY(40px)'
+              }}>
+                <LineChart
+                  xAxis={[{
+                    data: logsOverTime.labels,
+                    scaleType: 'point',
+                    label: 'Time (minute)',
+                    tickLabelStyle: { fontSize: 14, fill: '#64748b' },
+                    labelStyle: { fontWeight: 700, fill: '#3b82f6' }
+                  }]}
+                  series={
+                    levelFilter === 'all'
+                      ? [
+                          {
+                            data: logsOverTime.total,
+                            label: 'Total',
+                            color: '#2563eb',
+                            showMark: false,
+                            area: false,
+                            curve: 'monotone',
+                            strokeWidth: 3,
+                          },
+                          {
+                            data: logsOverTime.error,
+                            label: 'Error',
+                            color: '#ef4444',
+                            showMark: false,
+                            area: false,
+                            curve: 'monotone',
+                            strokeWidth: 3,
+                          },
+                          {
+                            data: logsOverTime.warning,
+                            label: 'Warning',
+                            color: '#f59e42',
+                            showMark: false,
+                            area: false,
+                            curve: 'monotone',
+                            strokeWidth: 3,
+                          },
+                          {
+                            data: logsOverTime.info,
+                            label: 'Info',
+                            color: '#10b981',
+                            showMark: false,
+                            area: false,
+                            curve: 'monotone',
+                            strokeWidth: 3,
+                          },
+                        ]
+                      : [
+                          {
+                            data: logsOverTime[levelFilter],
+                            label: levelFilter.charAt(0).toUpperCase() + levelFilter.slice(1),
+                            color:
+                              levelFilter === 'error'
+                                ? '#ef4444'
+                                : levelFilter === 'warning'
+                                ? '#f59e42'
+                                : '#10b981',
+                            showMark: false,
+                            area: false,
+                            curve: 'monotone',
+                            strokeWidth: 3,
+                          },
+                        ]
+                  }
+                  width={window.innerWidth > 1200 ? 1100 : window.innerWidth - 80}
+                  height={window.innerHeight > 600 ? 420 : 280}
+                  margin={{ left: 80, right: 40, top: 40, bottom: 60 }}
+                  grid={{ vertical: true, horizontal: true }}
+                  slotProps={{
+                    legend: { hidden: false, position: 'top' },
+                    tooltip: {
+                      trigger: 'item',
+                      formatter: (params) => {
+                        if (!params || typeof params.value === 'undefined') return '';
+                        const idx = params.dataIndex;
+                        const minuteLabel = logsOverTime.labels[idx];
+                        let tooltip = `Time: ${minuteLabel}<br/>`;
+                        if (levelFilter === 'all' || levelFilter === 'error') {
+                          tooltip += `<span style='color:#ef4444'>●</span> Error: ${logsOverTime.error[idx]}<br/>`;
+                          // Show error reasons if hovering error point and there are errors
+                          if (
+                            (levelFilter === 'error' || (params.seriesLabel && params.seriesLabel.toLowerCase() === 'error')) &&
+                            logsOverTime.error[idx] > 0
+                          ) {
+                            const reasons = getErrorReasonsForMinute(minuteLabel);
+                            if (reasons.length > 0) {
+                              tooltip += `<div style='margin-top:4px;'><b>Error Reasons:</b><ul style='margin:0;padding-left:16px;'>`;
+                              reasons.slice(0, 5).forEach(r => {
+                                tooltip += `<li style='font-size:12px;'>${r.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</li>`;
+                              });
+                              if (reasons.length > 5) tooltip += `<li>...and more</li>`;
+                              tooltip += `</ul></div>`;
+                            }
+                          }
+                        }
+                        if (levelFilter === 'all' || levelFilter === 'warning')
+                          tooltip += `<span style='color:#f59e42'>●</span> Warning: ${logsOverTime.warning[idx]}<br/>`;
+                        if (levelFilter === 'all' || levelFilter === 'info')
+                          tooltip += `<span style='color:#10b981'>●</span> Info: ${logsOverTime.info[idx]}<br/>`;
+                        if (levelFilter === 'all')
+                          tooltip = `<span style='color:#2563eb'>●</span> Total: ${logsOverTime.total[idx]}<br/>` + tooltip;
+                        return tooltip;
+                      }
+                    }
+                  }}
+                  sx={{
+                    '.MuiLineElement-root': { filter: 'drop-shadow(0 2px 8px #2563eb22)', transition: 'd 0.8s cubic-bezier(0.4,0,0.2,1)' },
+                    '.MuiMarkElement-root': { transition: 'cx 0.8s, cy 0.8s' },
+                  }}
+                />
+              </div>
+            ) : (
+              <Box sx={{
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'rgba(248,250,252,0.8)',
+                borderRadius: 4,
+                boxShadow: '0 2px 8px #e0e7ef33',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: 2
+              }}>
+                <CalendarMonthIcon sx={{ color: '#f59e42', fontSize: 60, mb: 2 }} />
+                <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 600, mb: 1 }}>
+                  No log data for the selected date or month
+                </Typography>
+                <Typography variant="body2" sx={{ color: '#94a3b8' }}>
+                  Try a different date or clear the filter.
+                </Typography>
+              </Box>
+            )}
+          </div>
         </div>
-      )}
+      </div>
+
       {/* Recent Activity */}
       <div style={{ background: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.04)', marginBottom: 32 }}>
         <div style={{ fontWeight: 600, marginBottom: 16 }}>Recent Activity</div>

@@ -19,7 +19,7 @@ class FileWatcher {
       // Ensure the directory exists
       if (!fs.existsSync(this.watchedDir)) {
         fs.mkdirSync(this.watchedDir, { recursive: true });
-        console.log(`📁 Created directory: ${this.watchedDir}`);
+        logger.info(`Created directory: ${this.watchedDir}`, 'fileWatcher');
       }
 
       // Process existing files first
@@ -41,22 +41,22 @@ class FileWatcher {
 
       this.watcher
         .on('add', async (filePath) => {
-          console.log(`📄 New file detected: ${path.basename(filePath)}`);
+          logger.info(`New file detected: ${path.basename(filePath)}`, 'fileWatcher');
           await this.processNewFile(filePath);
         })
         .on('change', async (filePath) => {
-          console.log(`📝 File modified: ${path.basename(filePath)}`);
+          logger.info(`File modified: ${path.basename(filePath)}`, 'fileWatcher');
           await this.processNewFile(filePath);
         })
         .on('unlink', (filePath) => {
-          console.log(`🗑️ File removed: ${path.basename(filePath)}`);
+          logger.info(`File removed: ${path.basename(filePath)}`, 'fileWatcher');
           this.processedFiles.delete(filePath);
         })
         .on('error', (error) => {
           logger.error(`File watcher error: ${error.message}\n${error.stack}`, 'fileWatcher');
         })
         .on('ready', () => {
-          console.log('👀 File watcher is ready and monitoring for new CSV files...');
+          logger.info('File watcher is ready and monitoring for new CSV files...', 'fileWatcher');
           this.isWatching = true;
         });
 
@@ -68,23 +68,19 @@ class FileWatcher {
   // Process existing CSV files in the directory
   async processExistingFiles() {
     try {
-      console.log('🔍 Scanning for existing CSV files...');
+      logger.info('Scanning for existing CSV files...', 'fileWatcher');
       const files = getCSVFiles(this.watchedDir);
-      
       if (files.length === 0) {
-        console.log('📁 No existing CSV files found in directory');
+        logger.info('No existing CSV files found in directory', 'fileWatcher');
         return;
       }
-
-      console.log(`📊 Found ${files.length} existing CSV file(s)`);
-      
+      logger.info(`Found ${files.length} existing CSV file(s)`, 'fileWatcher');
       for (const file of files) {
         const filePath = path.join(this.watchedDir, file);
         if (!this.processedFiles.has(filePath)) {
           await this.processNewFile(filePath);
         }
       }
-
     } catch (error) {
       logger.error(`Error processing existing files: ${error.message}\n${error.stack}`, 'fileWatcher');
     }
@@ -95,38 +91,32 @@ class FileWatcher {
     try {
       // Check if file is CSV
       if (!filePath.toLowerCase().endsWith('.csv')) {
-        console.log(`⏭️ Skipping non-CSV file: ${path.basename(filePath)}`);
+        logger.info(`Skipping non-CSV file: ${path.basename(filePath)}`, 'fileWatcher');
         return;
       }
-
       // Skip files that are already in the processed folder
       if (filePath.includes('processed')) {
-        console.log(`⏭️ Skipping already processed file: ${path.basename(filePath)}`);
+        logger.info(`Skipping already processed file: ${path.basename(filePath)}`, 'fileWatcher');
         return;
       }
-
       // Check if file is still being written (size is changing)
       const stats = fs.statSync(filePath);
       if (stats.size === 0) {
-        console.log(`⏳ File is empty, waiting for content: ${path.basename(filePath)}`);
+        logger.info(`File is empty, waiting for content: ${path.basename(filePath)}`, 'fileWatcher');
         return;
       }
-
       // Wait a bit to ensure file is completely written
       await new Promise(resolve => setTimeout(resolve, 1000));
-
       // Check if file was already processed
       if (this.processedFiles.has(filePath)) {
-        console.log(`✅ File already processed: ${path.basename(filePath)}`);
+        logger.info(`File already processed: ${path.basename(filePath)}`, 'fileWatcher');
         return;
       }
-
-      console.log(`🔄 Processing file: ${path.basename(filePath)}`);
-
+      logger.info(`Processing file: ${path.basename(filePath)}`, 'fileWatcher');
       // Process the CSV file
       const collectedByUserId = 1; // Default admin user
       const result = await processCSVFile(filePath, collectedByUserId);
-      console.log(`📊 Processing result:`, result);
+      logger.info(`Processing result: ${JSON.stringify(result)}`, 'fileWatcher');
       this.processedFiles.add(filePath);
       // Move processed file to archive folder
       await this.archiveFile(filePath);
@@ -142,10 +132,8 @@ class FileWatcher {
       if (!fs.existsSync(archiveDir)) {
         fs.mkdirSync(archiveDir, { recursive: true });
       }
-
       const fileName = path.basename(filePath);
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      
       // Create a clean archived name without multiple "processed" suffixes
       let cleanFileName = fileName;
       if (cleanFileName.includes('_processed_')) {
@@ -153,26 +141,24 @@ class FileWatcher {
       }
       const archivedName = `${cleanFileName}_processed_${timestamp}.csv`;
       const archivedPath = path.join(archiveDir, archivedName);
-
       // Check if file exists before trying to rename
       if (fs.existsSync(filePath)) {
         fs.renameSync(filePath, archivedPath);
-        console.log(`📦 Archived: ${fileName} → ${archivedName}`);
+        logger.info(`Archived: ${fileName} → ${archivedName}`, 'fileWatcher');
       } else {
-        console.log(`⚠️ File no longer exists: ${fileName}`);
+        logger.warn(`File no longer exists: ${fileName}`, 'fileWatcher');
       }
-
     } catch (error) {
       logger.error('Error archiving file', 'fileWatcher', { error: error.message });
     }
   }
 
-  // Stop watching
-  stopWatching() {
+  // Stop watching (returns a promise)
+  async stopWatching() {
     if (this.watcher) {
-      this.watcher.close();
+      await this.watcher.close();
       this.isWatching = false;
-      console.log('🛑 File watcher stopped');
+      logger.info('File watcher stopped', 'fileWatcher');
     }
   }
 

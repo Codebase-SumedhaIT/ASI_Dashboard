@@ -191,3 +191,5 @@ Error: Domain name is missing or not in the expected format in filename: p1.csv
     at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:135:13)
     at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:128:28)
     at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-07-28T09:42:31.684Z] [enhancedCSVProcessor] [ERROR] Error processing domain CL
+[2025-07-28T09:46:24.205Z] [enhancedCSVProcessor] [ERROR] Error processing domain CL

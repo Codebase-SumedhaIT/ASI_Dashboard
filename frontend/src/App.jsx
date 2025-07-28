@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import DVDataPage from './components/DVDataPage';
+import CLDataPage from './components/CLDataPage';
 import './App.css';
 
 function App() {
@@ -69,10 +70,12 @@ function App() {
       <div className="app">
         <nav style={{ padding: 10, background: '#f5f5f5' }}>
           <Link to="/">Dashboard</Link> |{' '}
-          <Link to="/dv-data">DV Data</Link>
+          <Link to="/dv-data">DV Data</Link> |{' '}
+          <Link to="/cl-data">CL Data</Link>
         </nav>
         <Routes>
           <Route path="/dv-data" element={<DVDataPage />} />
+          <Route path="/cl-data" element={<CLDataPage />} />
           <Route path="/" element={<Dashboard user={user} onLogout={handleLogout} onUserUpdate={handleUserUpdate} />} />
         </Routes>
       </div>

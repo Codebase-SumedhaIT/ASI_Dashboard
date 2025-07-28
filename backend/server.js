@@ -4,6 +4,9 @@ require('dotenv').config();
 const http = require('http');
 const socketIo = require('socket.io');
 const fs = require('fs');
+const chokidar = require('chokidar'); // Added for efficient file watching
+const helmet = require('helmet');
+const compression = require('compression');
 
 const { testConnection } = require('./config/database');
 const authRoutes = require('./routes/auth');
@@ -18,11 +21,13 @@ const logger = require('./utils/logger');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
-const io = socketIo(server, { cors: { origin: '*', methods: ['GET', 'POST'] } });
+const io = socketIo(server, { cors: { origin: process.env.CORS_ORIGIN, methods: ['GET', 'POST'] } });
 
 // Middleware
+app.use(helmet());
+app.use(compression());
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: process.env.CORS_ORIGIN,
   credentials: true
 }));
 app.use(express.json());
@@ -40,7 +45,7 @@ const fileWatcher = new FileWatcher(pool);
 
 // Start file watcher
 fileWatcher.startWatching().then(() => {
-  console.log('📁 File watcher initialized successfully');
+  logger.info('File watcher initialized successfully', 'server');
 }).catch(error => {
   console.error('❌ Error initializing file watcher:', error);
 });
@@ -49,7 +54,7 @@ fileWatcher.startWatching().then(() => {
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/data', dataRoutes);
-app.use('/api/data', duplicateErrorsRoutes);
+app.use('/api/data/duplicates', duplicateErrorsRoutes); // changed from '/api/data'
 app.use('/api/dv-data', dvDataRoute);
 app.use('/api/admin', adminRoutes);
 
@@ -69,50 +74,36 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-// Real-time log streaming via socket.io
-const logFile = './backend/logs/logs.log';
-let lastSize = 0;
+// Environment variable validation
+const requiredEnv = ['PORT', 'CORS_ORIGIN', 'DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
+const missingEnv = requiredEnv.filter(key => !process.env[key]);
+if (missingEnv.length) {
+  console.error('❌ Missing required environment variables:', missingEnv.join(', '));
+  process.exit(1);
+}
 
-const clients = [];
+// --- Socket.IO and Log Streaming Modularization ---
+const setupSocket = require('./utils/socket'); // New module for socket and log streaming
+setupSocket(io, logger);
 
-io.on('connection', (socket) => {
-  clients.push(socket);
-  socket.on('disconnect', () => {
-    const idx = clients.indexOf(socket);
-    if (idx !== -1) clients.splice(idx, 1);
+// Graceful shutdown logic
+function shutdown() {
+  server.close(() => {
+    logger.info('Server closed', 'server');
+    // Close database pool
+    if (pool && pool.end) {
+      pool.end(() => logger.info('Database pool closed', 'server'));
+    }
+    // Stop file watcher if possible
+    if (fileWatcher && fileWatcher.stopWatching) {
+      fileWatcher.stopWatching().then(() => logger.info('File watcher stopped', 'server'));
+    }
+    process.exit(0);
   });
-});
+}
 
-// Override console.log and console.error to emit to socket.io clients
-const origLog = console.log;
-const origError = console.error;
-
-console.log = function (...args) {
-  origLog.apply(console, args);
-  const msg = args.map(String).join(' ');
-  clients.forEach(socket => socket.emit('log', msg));
-};
-
-console.error = function (...args) {
-  origError.apply(console, args);
-  const msg = args.map(String).join(' ');
-  clients.forEach(socket => socket.emit('log', msg));
-};
-
-fs.watchFile(logFile, { interval: 1000 }, (curr, prev) => {
-  if (curr.size > prev.size) {
-    const stream = fs.createReadStream(logFile, {
-      start: prev.size,
-      end: curr.size
-    });
-    let leftover = '';
-    stream.on('data', (data) => {
-      const lines = (leftover + data.toString()).split('\n');
-      leftover = lines.pop();
-      lines.forEach(line => io.emit('log', line));
-    });
-  }
-});
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
 
 server.listen(PORT, () => {
   logger.info('Server started and listening for connections', 'server');

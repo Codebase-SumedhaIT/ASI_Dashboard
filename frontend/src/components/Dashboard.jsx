@@ -11,6 +11,7 @@ import SlideBar from './SlideBar';
 import UserProfilePage from './UserProfilePage';
 import DVManagerView from './DVManagerView';
 import DVLeadView from './DVLeadView';
+import CLEngineerView from './CLEngineerView';
 import LogsDashboard from './LogsDashboard';
 
 function Dashboard({ user, onLogout, onUserUpdate }) {
@@ -123,7 +124,15 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
         </div>
       );
     }
-    if (activeView === 'engineer') return <DataVisualization projectFilters={projectFilters} />;
+    // Check if CL domain is selected (domain_id = 5)
+    const isCLDomain = projectFilters.domain_id === '5' || projectFilters.domain_id === 5;
+    
+    if (activeView === 'engineer') {
+      if (isCLDomain) {
+        return <CLEngineerView filters={projectFilters} />;
+      }
+      return <DataVisualization projectFilters={projectFilters} />;
+    }
     if (activeView === 'manager') return <ManagerView user={user} projectFilters={projectFilters} />;
     if (activeView === 'lead') return <LeadView user={user} projectFilters={projectFilters} />;
     return null;

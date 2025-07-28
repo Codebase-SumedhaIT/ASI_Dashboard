@@ -182,3 +182,48 @@ CREATE TABLE project_domains (
   FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
   FOREIGN KEY (domain_id) REFERENCES domains(id) ON DELETE CASCADE
 );
+
+-- 8. CL (Custom Layout) Raw Data
+CREATE TABLE cl_data_raw (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    project_id INT NOT NULL,
+    domain_id INT NOT NULL,
+    phase VARCHAR(50),                    -- bronze, silver, gold, etc.
+    user_name VARCHAR(100),               -- user1, user2, etc.
+    block_name VARCHAR(100),              -- blk1, blk2, etc.
+    floor_plan VARCHAR(100),              -- completed/in progress
+    routing VARCHAR(100),                 -- completed/in progress
+    area_um2 DECIMAL(15,2),              -- Area in um2
+    pv_drc TEXT,                         -- PV - DRC (Base drc, metal drc, antenna)
+    pv_lvs_erc VARCHAR(100),             -- PV - LVS/ERC
+    run_directory TEXT,                   -- /proj/proj1/al/users/user1/blk1
+    runtime_seconds INT,                  -- Converted from hr:min format
+    run_end_time DATETIME,               -- run end time
+    ai_summary TEXT,                     -- AI based overall summary and suggestions
+    ir_static VARCHAR(100),              -- IR (Static)
+    ir_dynamic VARCHAR(100),             -- IR (Dynamic)
+    em_power_signal VARCHAR(100),        -- EM Iavg (power, signal)
+    em_rms_power_signal VARCHAR(100),    -- EM Irms (power, signal)
+    pv_perc VARCHAR(100),                -- PV - PERC
+    logs_errors_warnings TEXT,           -- Logs Errors & Warnings
+    run_status ENUM('pass', 'fail', 'continue_with_error', 'running', 'aborted') DEFAULT 'running',
+    user_id INT NOT NULL,
+    collected_by INT,
+    collected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    is_deleted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (domain_id) REFERENCES domains(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (collected_by) REFERENCES users(id)
+);
+
+-- Performance Indexes for CL Data
+CREATE INDEX idx_cl_data_project ON cl_data_raw(project_id);
+CREATE INDEX idx_cl_data_user ON cl_data_raw(user_id);
+CREATE INDEX idx_cl_data_run_end_time ON cl_data_raw(run_end_time);
+CREATE INDEX idx_cl_data_run_status ON cl_data_raw(run_status);
+CREATE INDEX idx_cl_data_block_name ON cl_data_raw(block_name);
+CREATE INDEX idx_cl_data_phase ON cl_data_raw(phase);
+CREATE INDEX idx_cl_data_user_name ON cl_data_raw(user_name);
+CREATE INDEX idx_cl_data_area ON cl_data_raw(area_um2);

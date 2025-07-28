@@ -1,6 +1,7 @@
 const classifyDomain = require('./domainClassifier');
 const PDProcessor = require('./pdProcessor');
 const DVProcessor = require('./dvProcessor');
+const CLProcessor = require('./clProcessor');
 const readAndNormalizeCSV = require('./readAndNormalizeCSV');
 const { pool } = require('../config/database');
 const path = require('path');
@@ -9,6 +10,7 @@ const logger = require('./logger');
 const processors = {
   PD: new PDProcessor(),
   DV: new DVProcessor(),
+  CL: new CLProcessor(),
   // Add more as you implement them
 };
 

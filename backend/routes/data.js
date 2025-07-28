@@ -307,20 +307,21 @@ router.get('/filter-options', auth, async (req, res) => {
       params.push(block_name);
     }
 
-    // Get domains for the selected project only
+    // Get domains that have data for the selected project
     if (project_id) {
       try {
         const domainSql = `
           SELECT DISTINCT d.id, d.full_name FROM domains d
           WHERE d.id IN (
-            SELECT domain_id FROM pd_data_raw WHERE project_id = ?
+            SELECT domain_id FROM pd_data_raw WHERE project_id = ? AND is_deleted = FALSE
             UNION
-            SELECT domain_id FROM dv_data_raw WHERE project_id = ?
-            -- Add more tables here if you have more domain-specific tables
+            SELECT domain_id FROM dv_data_raw WHERE project_id = ? AND is_deleted = FALSE
+            UNION
+            SELECT domain_id FROM cl_data_raw WHERE project_id = ? AND is_deleted = FALSE
           ) AND d.is_active = 1
           ORDER BY d.full_name
         `;
-        const [domainRows] = await pool.query(domainSql, [project_id, project_id]);
+        const [domainRows] = await pool.query(domainSql, [project_id, project_id, project_id]);
         domains = domainRows;
       } catch (err) {
         console.error('[filter-options] Domain join failed, falling back to all active domains:', err.message);
@@ -353,22 +354,20 @@ router.get('/filter-options', auth, async (req, res) => {
       }
     } else {
       // For non-customers, show all projects
-    if (domain_id) {
-      [projects] = await pool.query(`
-        SELECT DISTINCT p.id, p.project_name 
-        FROM projects p 
-        INNER JOIN pd_data_raw pd ON p.id = pd.project_id 
-        WHERE pd.domain_id = ? 
-        ORDER BY p.project_name
-      `, [domain_id]);
-    } else {
       [projects] = await pool.query('SELECT id, project_name FROM projects ORDER BY project_name');
-      }
     }
 
     // Get blocks based on domain and project
     if (domain_id || project_id) {
-      let blockQuery = 'SELECT DISTINCT block_name FROM pd_data_raw WHERE block_name IS NOT NULL';
+      let blockQuery = `
+        SELECT DISTINCT block_name FROM (
+          SELECT block_name, domain_id, project_id FROM pd_data_raw WHERE block_name IS NOT NULL
+          UNION
+          SELECT module as block_name, domain_id, project_id FROM dv_data_raw WHERE module IS NOT NULL
+          UNION
+          SELECT block_name, domain_id, project_id FROM cl_data_raw WHERE block_name IS NOT NULL
+        ) combined_data WHERE block_name IS NOT NULL
+      `;
       let blockParams = [];
       
       if (domain_id) {
@@ -384,10 +383,18 @@ router.get('/filter-options', auth, async (req, res) => {
       blockQuery += ' ORDER BY block_name';
       [blocks] = await pool.query(blockQuery, blockParams);
     } else {
-      [blocks] = await pool.query('SELECT DISTINCT block_name FROM pd_data_raw WHERE block_name IS NOT NULL ORDER BY block_name');
+      [blocks] = await pool.query(`
+        SELECT DISTINCT block_name FROM (
+          SELECT block_name FROM pd_data_raw WHERE block_name IS NOT NULL
+          UNION
+          SELECT module as block_name FROM dv_data_raw WHERE module IS NOT NULL
+          UNION
+          SELECT block_name FROM cl_data_raw WHERE block_name IS NOT NULL
+        ) combined_data WHERE block_name IS NOT NULL ORDER BY block_name
+      `);
     }
 
-    // Get experiments based on domain, project, and block
+    // Get experiments based on domain, project, and block (only for PD data)
     if (domain_id || project_id || block_name) {
       let experimentQuery = 'SELECT DISTINCT experiment FROM pd_data_raw WHERE experiment IS NOT NULL';
       let experimentParams = [];
@@ -1271,6 +1278,166 @@ router.delete('/pd-data/:id', auth, async (req, res) => {
   } catch (error) {
     console.error('Delete record error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get CL data with filters
+router.get('/cl-data', auth, async (req, res) => {
+  try {
+    const {
+      project_id,
+      block_name,
+      user_name,
+      phase,
+      run_status,
+      user_id,
+      start_date,
+      end_date,
+      limit = 100,
+      offset = 0,
+      domain_id,
+      include_deleted
+    } = req.query;
+
+    let query = `
+      SELECT 
+        cl.id,
+        cl.project_id,
+        cl.domain_id,
+        cl.phase,
+        cl.user_name,
+        cl.block_name,
+        cl.floor_plan,
+        cl.routing,
+        cl.area_um2,
+        cl.pv_drc,
+        cl.pv_lvs_erc,
+        cl.run_directory,
+        cl.runtime_seconds,
+        cl.run_end_time,
+        cl.ai_summary,
+        cl.ir_static,
+        cl.ir_dynamic,
+        cl.em_power_signal,
+        cl.em_rms_power_signal,
+        cl.pv_perc,
+        cl.logs_errors_warnings,
+        cl.run_status,
+        cl.collected_by,
+        cl.collected_at,
+        cl.updated_at,
+        cl.is_deleted,
+        p.project_name,
+        d.full_name as domain_name
+      FROM cl_data_raw cl
+      JOIN projects p ON cl.project_id = p.id
+      JOIN domains d ON cl.domain_id = d.id
+      WHERE 1=1
+    `;
+
+    const params = [];
+
+    if (!include_deleted || include_deleted === 'false') {
+      query += ' AND cl.is_deleted = FALSE';
+    }
+
+    if (project_id) {
+      query += ' AND cl.project_id = ?';
+      const projectId = parseInt(project_id);
+      if (!isNaN(projectId)) {
+        params.push(projectId);
+      }
+    }
+
+    if (block_name) {
+      query += ' AND cl.block_name LIKE ?';
+      params.push(`%${block_name}%`);
+    }
+
+    if (user_name) {
+      query += ' AND cl.user_name LIKE ?';
+      params.push(`%${user_name}%`);
+    }
+
+    if (phase) {
+      query += ' AND cl.phase = ?';
+      params.push(phase);
+    }
+
+    if (run_status) {
+      query += ' AND cl.run_status = ?';
+      params.push(run_status);
+    }
+
+    if (domain_id) {
+      query += ' AND cl.domain_id = ?';
+      const domainId = parseInt(domain_id);
+      if (!isNaN(domainId)) {
+        params.push(domainId);
+      }
+    }
+
+    if (start_date) {
+      query += ' AND DATE(cl.run_end_time) >= ?';
+      params.push(start_date);
+    }
+
+    if (end_date) {
+      query += ' AND DATE(cl.run_end_time) <= ?';
+      params.push(end_date);
+    }
+
+    query += ' ORDER BY cl.run_end_time DESC LIMIT ? OFFSET ?';
+    const limitVal = parseInt(limit) || 100;
+    const offsetVal = parseInt(offset) || 0;
+    params.push(limitVal, offsetVal);
+
+
+
+    const [rows] = await pool.query(query, params);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching CL data:', error);
+    res.status(500).json({ error: 'Failed to fetch CL data' });
+  }
+});
+
+// DELETE endpoint for CL data
+router.delete('/cl-data/:id', auth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    // Check if user is admin or owns the record
+    const [record] = await pool.execute(
+      'SELECT user_id FROM cl_data_raw WHERE id = ? AND is_deleted = FALSE',
+      [id]
+    );
+
+    if (record.length === 0) {
+      return res.status(404).json({ error: 'Record not found' });
+    }
+
+    const [user] = await pool.execute(
+      'SELECT role_name FROM users WHERE id = ?',
+      [userId]
+    );
+
+    // Only allow deletion if user is admin or owns the record
+    if (user[0].role_name !== 'Admin' && record[0].user_id !== userId) {
+      return res.status(403).json({ error: 'Not authorized to delete this record' });
+    }
+
+    // Soft delete the record
+    await pool.execute(
+      'UPDATE cl_data_raw SET is_deleted = TRUE WHERE id = ?',
+      [id]
+    );
+
+    res.json({ message: 'Record deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting CL record:', error);
+    res.status(500).json({ error: 'Failed to delete record' });
   }
 });
 

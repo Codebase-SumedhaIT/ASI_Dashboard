@@ -30,7 +30,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
 
   useEffect(() => {
     fetchPDStats();
-    fetchPDData();
+    fetchData();
     fetchCurrentUser();
   }, []);
 
@@ -65,7 +65,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
 
   // Fetch data when filters or page changes
   useEffect(() => {
-    fetchPDData();
+    fetchData();
     fetchPDStats();
   }, [filters, currentPage]);
 
@@ -169,7 +169,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
           const data = await response.json();
           if (data.timestamp && data.timestamp !== lastCsvTimestamp) {
             setLastCsvTimestamp(data.timestamp);
-            fetchPDData(true); // silent refresh
+            fetchData(true); // silent refresh
             fetchPDStats();
           }
         }
@@ -186,7 +186,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
   // Poll for run data every 10 seconds (silent refresh)
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchPDData(true); // silent refresh
+              fetchData(true); // silent refresh
       fetchPDStats();    // refresh stats too
     }, 10);
     return () => clearInterval(interval);
@@ -236,8 +236,8 @@ const DataVisualization = ({ projectFilters = {} }) => {
     }
   };
 
-  // fetchPDData: with optional silent param to avoid spinner for background refresh
-  const fetchPDData = async (silent = false) => {
+  // fetchData: with optional silent param to avoid spinner for background refresh
+  const fetchData = async (silent = false) => {
     try {
       if (!silent) setLoading(true);
       // Only include filters that have a value
@@ -249,7 +249,16 @@ const DataVisualization = ({ projectFilters = {} }) => {
         limit: 10,
         offset: (currentPage - 1) * 10
       });
-      const response = await fetch(`http://localhost:5000/api/data/pd-data?${queryParams}`, {
+
+      // Determine which API endpoint to use based on domain
+      let apiEndpoint = 'pd-data'; // default
+      if (filters.domain_id === '5' || filters.domain_id === 5) {
+        apiEndpoint = 'cl-data';
+      } else if (filters.domain_id === '3' || filters.domain_id === 3) {
+        apiEndpoint = 'dv-data';
+      }
+
+      const response = await fetch(`http://localhost:5000/api/data/${apiEndpoint}?${queryParams}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -257,11 +266,11 @@ const DataVisualization = ({ projectFilters = {} }) => {
       });
       if (response.ok) {
         const data = await response.json();
-        setPdData(data.data);
-        setTotalPages(Math.ceil(data.pagination.total / 10));
+        setPdData(data); // CL and DV data don't have pagination wrapper
+        setTotalPages(Math.ceil((data.length || 0) / 10));
       }
     } catch (error) {
-      console.error('Error fetching PD data:', error);
+      console.error('Error fetching data:', error);
     } finally {
       if (!silent) setLoading(false);
     }
@@ -297,7 +306,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
   const handleFilterSubmit = () => {
     // This is now handled by the useEffect that watches filters
     // But we can keep this for explicit user action
-    fetchPDData();
+    fetchData();
     fetchPDStats();
   };
 
@@ -402,6 +411,80 @@ const DataVisualization = ({ projectFilters = {} }) => {
 
   const toggleStageStats = () => {
     setIsStageStatsExpanded(!isStageStatsExpanded);
+  };
+
+  // Get table headers based on domain
+  const getTableHeaders = () => {
+    if (filters.domain_id === '5' || filters.domain_id === 5) {
+      // CL domain headers
+      return [
+        { key: 'project_name', label: 'Project', sortable: true },
+        { key: 'phase', label: 'Phase', sortable: true },
+        { key: 'user_name', label: 'User', sortable: true },
+        { key: 'block_name', label: 'Block', sortable: true },
+        { key: 'floor_plan', label: 'Floor Plan', sortable: false },
+        { key: 'routing', label: 'Routing', sortable: false },
+        { key: 'area_um2', label: 'Area (um²)', sortable: true },
+        { key: 'pv_drc', label: 'PV - DRC', sortable: false },
+        { key: 'pv_lvs_erc', label: 'PV - LVS/ERC', sortable: false },
+        { key: 'pv_perc', label: 'PV - PERC', sortable: false },
+        { key: 'ir_static', label: 'IR (Static)', sortable: false },
+        { key: 'ir_dynamic', label: 'IR (Dynamic)', sortable: false },
+        { key: 'em_power_signal', label: 'EM Iavg', sortable: false },
+        { key: 'em_rms_power_signal', label: 'EM Irms', sortable: false },
+        { key: 'runtime_seconds', label: 'Runtime', sortable: true },
+        { key: 'run_end_time', label: 'Run End Time', sortable: true },
+        { key: 'run_status', label: 'Status', sortable: true },
+        { key: 'logs_errors_warnings', label: 'Logs', sortable: false },
+        { key: 'ai_summary', label: 'AI Summary', sortable: false }
+      ];
+    } else {
+      // PD domain headers (default)
+      return [
+        { key: 'project_name', label: 'Project', sortable: true },
+        { key: 'block_name', label: 'Block Name', sortable: true },
+        { key: 'experiment', label: 'Experiment', sortable: true },
+        { key: 'RTL_tag', label: 'RTL Tag', sortable: true },
+        { key: 'user_name', label: 'User Name', sortable: true },
+        { key: 'run_directory', label: 'Run Directory', sortable: false },
+        { key: 'run_end_time', label: 'Run End Time', sortable: true },
+        { key: 'stage', label: 'Stage', sortable: true },
+        { key: 'internal_timing', label: 'Internal Timing', sortable: false },
+        { key: 'interface_timing', label: 'Interface Timing', sortable: false },
+        { key: 'max_tran_wns_nvp', label: 'Max Tran (WNS/NVP)', sortable: false },
+        { key: 'max_cap_wns_nvp', label: 'Max Cap (WNS/NVP)', sortable: false },
+        { key: 'noise', label: 'Noise', sortable: false },
+        { key: 'mpw_min_period_double_switching', label: 'MPW/Min Period/Double Switching', sortable: false },
+        { key: 'congestion_drc_metrics', label: 'Congestion/DRC Metrics', sortable: false },
+        { key: 'area_um2', label: 'Area (um²)', sortable: true },
+        { key: 'inst_count', label: 'Inst Count', sortable: true },
+        { key: 'utilization', label: 'Utilization', sortable: true },
+        { key: 'run_status', label: 'Run Status', sortable: true },
+        { key: 'runtime_seconds', label: 'Runtime', sortable: true },
+        { key: 'ai_summary', label: 'AI Summary', sortable: false },
+        { key: 'ir_static', label: 'IR (Static)', sortable: false },
+        { key: 'em_power_signal', label: 'EM (Power, Signal)', sortable: false },
+        { key: 'pv_drc', label: 'PV (DRC)', sortable: false },
+        { key: 'lvs', label: 'LVS', sortable: false },
+        { key: 'lec', label: 'LEC', sortable: false }
+      ];
+    }
+  };
+
+  // Get table cell value based on domain and field
+  const getCellValue = (row, field) => {
+    let value = row[field] || 'N/A';
+    
+    // Format specific fields
+    if (field === 'runtime_seconds') {
+      value = formatRuntime(value);
+    } else if (field === 'run_end_time') {
+      value = value !== 'N/A' ? new Date(value).toLocaleDateString() : 'N/A';
+    } else if (field === 'area_um2' && value !== 'N/A') {
+      value = parseFloat(value).toFixed(2);
+    }
+    
+    return value;
   };
 
   // Remove viewMode toggle buttons and EngineeringCharts rendering
@@ -614,32 +697,11 @@ const DataVisualization = ({ projectFilters = {} }) => {
                 <table className="data-table">
                   <thead>
                     <tr>
-                      {!filters.project_id && renderSortableHeader('project_name', 'Project')}
-                      {renderSortableHeader('block_name', 'Block Name')}
-                      {renderSortableHeader('experiment', 'Experiment')}
-                      {renderSortableHeader('RTL_tag', 'RTL Tag')}
-                      {renderSortableHeader('user_name', 'User Name')}
-                      <th>Run Directory</th>
-                      {renderSortableHeader('run_end_time', 'Run End Time')}
-                      {renderSortableHeader('stage', 'Stage')}
-                      <th>Internal Timing</th>
-                      <th>Interface Timing</th>
-                      <th>Max Tran (WNS/NVP)</th>
-                      <th>Max Cap (WNS/NVP)</th>
-                      <th>Noise</th>
-                      <th>MPW/Min Period/Double Switching</th>
-                      <th>Congestion/DRC Metrics</th>
-                      {renderSortableHeader('area_um2', 'Area (um²)')}
-                      {renderSortableHeader('inst_count', 'Inst Count')}
-                      {renderSortableHeader('utilization', 'Utilization')}
-                      <th>Run Status</th>
-                      {renderSortableHeader('runtime_seconds', 'Runtime')}
-                      <th>AI Summary</th>
-                      <th>IR (Static)</th>
-                      <th>EM (Power, Signal)</th>
-                      <th>PV (DRC)</th>
-                      <th>LVS</th>
-                      <th>LEC</th>
+                      {getTableHeaders().map(header => (
+                        header.sortable ? 
+                          renderSortableHeader(header.key, header.label) : 
+                          <th key={header.key}>{header.label}</th>
+                      ))}
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -650,98 +712,37 @@ const DataVisualization = ({ projectFilters = {} }) => {
                           className={`data-row ${selectedRow === index ? 'selected-row' : ''} ${index % 2 === 0 ? 'even-row' : 'odd-row'}`}
                           onClick={() => handleRowClick(row, index)}
                         >
-                          {!filters.project_id && (
-                            <td className="project-cell">
-                              <div 
-                                className="cell-content project-clickable"
-                              >
-                                <span className="cell-text">{row.project_name || 'N/A'}</span>
-                                <div className="project-indicator"></div>
-                                {selectedRow === index && (
-                                  <div className="row-indicator">▶</div>
-                                )}
-                              </div>
-                            </td>
-                          )}
-                          <td>{row.block_name || 'N/A'}</td>
-                          <td>{row.experiment || 'N/A'}</td>
-                          <td>{row.RTL_tag || 'N/A'}</td>
-                          <td>{row.user_name || 'N/A'}</td>
-                          <td className="directory-cell">
-                            <div className="truncated-text" title={row.run_directory || 'N/A'}>
-                              {row.run_directory || 'N/A'}
-                            </div>
-                          </td>
-                          <td className="date-cell">
-                            {row.run_end_time ? new Date(row.run_end_time).toLocaleDateString() : 'N/A'}
-                          </td>
-                          <td className="stage-cell">
-                            <span className="stage-badge">{row.stage || 'N/A'}</span>
-                          </td>
-                          <td className="timing-cell">
-                            <div className="timing-value" title={row.internal_timing || 'N/A'}>
-                              {row.internal_timing || 'N/A'}
-                            </div>
-                          </td>
-                          <td className="timing-cell">
-                            <div className="timing-value" title={row.interface_timing || 'N/A'}>
-                              {row.interface_timing || 'N/A'}
-                            </div>
-                          </td>
-                          <td className="metric-cell">{row.max_tran_wns_nvp || 'N/A'}</td>
-                          <td className="metric-cell">{row.max_cap_wns_nvp || 'N/A'}</td>
-                          <td className="metric-cell">{row.noise || 'N/A'}</td>
-                          <td className="metric-cell">{row.mpw_min_period_double_switching || 'N/A'}</td>
-                          <td className="metric-cell">{row.congestion_drc_metrics || 'N/A'}</td>
-                          <td className="area-cell">
-                            {row.area_um2 && !isNaN(parseFloat(row.area_um2)) ? (
-                              <span className="numeric-value">
-                                {parseFloat(row.area_um2).toFixed(2)}
-                              </span>
-                            ) : 'N/A'}
-                          </td>
-                          <td className="count-cell">
-                            {row.inst_count ? (
-                              <span className="numeric-value">{row.inst_count}</span>
-                            ) : 'N/A'}
-                          </td>
-                          <td className="utilization-cell">
-                            {row.utilization && !isNaN(parseFloat(row.utilization)) ? (
-                              <div className="utilization-display">
-                                <span className="utilization-value">{parseFloat(row.utilization).toFixed(1)}%</span>
-                                <div className="utilization-bar">
-                                  <div 
-                                    className="utilization-fill"
-                                    style={{ width: `${Math.min(parseFloat(row.utilization), 100)}%` }}
-                                  ></div>
+                          {getTableHeaders().map(header => (
+                            <td key={header.key} className={`${header.key}-cell`}>
+                              {header.key === 'project_name' && !filters.project_id ? (
+                                <div className="cell-content project-clickable">
+                                  <span className="cell-text">{getCellValue(row, header.key)}</span>
+                                  <div className="project-indicator"></div>
+                                  {selectedRow === index && (
+                                    <div className="row-indicator">▶</div>
+                                  )}
                                 </div>
-                              </div>
-                            ) : 'N/A'}
-                          </td>
-                          <td className="status-cell">
-                            <span className={`status-badge ${getStatusColor(row.run_status)}`}>
-                              {row.run_status || 'N/A'}
-                            </span>
-                          </td>
-                          <td className="runtime-cell">
-                            <span className="runtime-display">
-                              {formatRuntime(row.runtime_seconds)}
-                            </span>
-                          </td>
-                          <td className="summary-cell">
-                            <div className="summary-content" title={row.ai_summary || 'N/A'}>
-                              {row.ai_summary || 'N/A'}
-                            </div>
-                          </td>
-                          <td className="metric-cell">{row.ir_static || 'N/A'}</td>
-                          <td className="metric-cell">{row.em_power_signal || 'N/A'}</td>
-                          <td className="drc-cell">
-                            <div className="drc-content" title={row.pv_drc || 'N/A'}>
-                              {row.pv_drc || 'N/A'}
-                            </div>
-                          </td>
-                          <td className="metric-cell">{row.lvs || 'N/A'}</td>
-                          <td className="metric-cell">{row.lec || 'N/A'}</td>
+                              ) : header.key === 'run_status' ? (
+                                <span className={`status-badge ${getStatusColor(row.run_status)}`}>
+                                  {getCellValue(row, header.key)}
+                                </span>
+                              ) : header.key === 'runtime_seconds' ? (
+                                <span className="runtime-display">
+                                  {getCellValue(row, header.key)}
+                                </span>
+                              ) : header.key === 'ai_summary' ? (
+                                <div className="summary-content" title={getCellValue(row, header.key)}>
+                                  {getCellValue(row, header.key)}
+                                </div>
+                              ) : header.key === 'area_um2' ? (
+                                <span className="numeric-value">
+                                  {getCellValue(row, header.key)}
+                                </span>
+                              ) : (
+                                getCellValue(row, header.key)
+                              )}
+                            </td>
+                          ))}
                           <td className="actions-cell">
                             {currentUser && (
                               (currentUser.role_name === 'Admin') || 
