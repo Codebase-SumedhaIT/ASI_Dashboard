@@ -193,3 +193,57 @@ Error: Domain name is missing or not in the expected format in filename: p1.csv
     at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
 [2025-07-28T09:42:31.684Z] [enhancedCSVProcessor] [ERROR] Error processing domain CL
 [2025-07-28T09:46:24.205Z] [enhancedCSVProcessor] [ERROR] Error processing domain CL
+[2025-08-01T11:21:58.341Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:21:58.346Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:34:20.227Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:34:20.228Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:34:21.236Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:34:21.237Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:35:11.934Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:35:11.935Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:35:12.948Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:35:12.949Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)

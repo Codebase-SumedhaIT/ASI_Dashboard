@@ -37,7 +37,15 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/data/filter-options', {
+      // Determine data type based on active view
+      let dataType = 'pd'; // default to PD data
+      if (activeView && activeView.includes('dv')) {
+        dataType = 'dv';
+      } else if (activeView && activeView.includes('cl')) {
+        dataType = 'cl';
+      }
+      
+      const response = await fetch(`http://localhost:5000/api/data/filter-options?data_type=${dataType}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -55,7 +63,15 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
 
   const fetchDomains = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/data/filter-options?project_id=${projectId}`, {
+      // Determine data type based on active view
+      let dataType = 'pd'; // default to PD data
+      if (activeView && activeView.includes('dv')) {
+        dataType = 'dv';
+      } else if (activeView && activeView.includes('cl')) {
+        dataType = 'cl';
+      }
+      
+      const response = await fetch(`http://localhost:5000/api/data/filter-options?project_id=${projectId}&data_type=${dataType}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

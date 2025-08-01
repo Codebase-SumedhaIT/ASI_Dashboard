@@ -35,7 +35,8 @@
 }
 
 .add-domain-btn,
-.add-project-btn {
+.add-project-btn,
+.define-project-plan-btn {
   padding: 14px 28px;
   border: none;
   border-radius: 12px;
@@ -69,6 +70,18 @@
   background: linear-gradient(135deg, #e085e7 0%, #e54b60 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.define-project-plan-btn {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  margin-left: 10px;
+}
+
+.define-project-plan-btn:hover {
+  background: linear-gradient(135deg, #43a1f0 0%, #00e6f0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
 }
 
 .error-message {

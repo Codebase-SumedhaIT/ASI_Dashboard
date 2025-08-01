@@ -31,19 +31,14 @@ const LogsDashboard = ({ user }) => {
   const logsEndRef = useRef(null);
   const socketRef = useRef(null);
   const [selectedDate, setSelectedDate] = useState(null);
-  // Remove selectedMonth
+  const [availableDates, setAvailableDates] = useState([]);
+  const [selectedHour, setSelectedHour] = useState(null);
+  const [viewMode, setViewMode] = useState('hours'); // 'hours' or 'minutes'
 
   // Helper: Parse timestamps from log lines and group by minute and level, filtered by date if selected and by level if filtered
   const getLogsOverTimeMultiSeries = (levelFilter = 'all') => {
     const timeRegex = /^\[(.*?)\]/;
-    const now = dayjs();
-    const lastN = 30;
-    // Initialize counts for each minute and level
-    let counts = {};
-    for (let i = lastN - 1; i >= 0; i--) {
-      const minute = now.subtract(i, 'minute').format('YYYY-MM-DD HH:mm');
-      counts[minute] = { error: 0, warning: 0, info: 0, total: 0 };
-    }
+    
     // Filter logs by date if needed
     let filteredLogs = logs;
     if (selectedDate) {
@@ -54,28 +49,161 @@ const LogsDashboard = ({ user }) => {
         return dayjs(match[1]).format('YYYY-MM-DD') === dateStr;
       });
     }
-    // Count logs per minute and level
-    filteredLogs.forEach(log => {
-      const match = log.match(timeRegex);
-      if (match) {
-        const minute = dayjs(match[1]).format('YYYY-MM-DD HH:mm');
-        let level = 'info';
-        if (/error|exception|fail/i.test(log)) level = 'error';
-        else if (/warn/i.test(log)) level = 'warning';
-        counts[minute] = counts[minute] || { error: 0, warning: 0, info: 0, total: 0 };
-        counts[minute][level]++;
-        counts[minute].total++;
+
+    // If no date is selected, use last 30 minutes
+    if (!selectedDate) {
+      const now = dayjs();
+      const lastN = 30;
+      // Initialize counts for each minute and level
+      let counts = {};
+      for (let i = lastN - 1; i >= 0; i--) {
+        const minute = now.subtract(i, 'minute').format('YYYY-MM-DD HH:mm');
+        counts[minute] = { error: 0, total: 0 };
       }
-    });
-    // Prepare data arrays
-    const labels = Object.keys(counts);
-    return {
-      labels: labels.map(l => dayjs(l).format('HH:mm')),
-      error: labels.map(minute => counts[minute].error),
-      warning: labels.map(minute => counts[minute].warning),
-      info: labels.map(minute => counts[minute].info),
-      total: labels.map(minute => counts[minute].total),
-    };
+      
+      // Count logs per minute and level (errors and success)
+      filteredLogs.forEach(log => {
+        const match = log.match(timeRegex);
+        if (match) {
+          const minute = dayjs(match[1]).format('YYYY-MM-DD HH:mm');
+          
+          // More precise detection logic
+          const hasSuccessTrue = /"success":\s*true/i.test(log);
+          const hasProcessedSuccess = /processed.*success/i.test(log);
+          const hasInsertedSuccess = /inserted.*success/i.test(log);
+          const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+          
+          // Check for actual errors (including [ERROR] logs)
+          const hasErrorTrue = /"error":\s*true/i.test(log);
+          const hasException = /exception|fail/i.test(log);
+          const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+          const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+          const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+          
+          counts[minute] = counts[minute] || { error: 0, success: 0, total: 0 };
+          
+          if (isSuccess) {
+            counts[minute].success++;
+            counts[minute].total++;
+          } else if (isError) {
+            counts[minute].error++;
+            counts[minute].total++;
+          }
+        }
+      });
+      
+      // Prepare data arrays for last 30 minutes
+      const labels = Object.keys(counts);
+      return {
+        labels: labels.map(l => dayjs(l).format('HH:mm')),
+        error: labels.map(minute => counts[minute].error),
+        success: labels.map(minute => counts[minute].success),
+        total: labels.map(minute => counts[minute].total),
+      };
+    } else {
+      // For selected date, show hours by default, or minutes if a specific hour is selected
+      let counts = {};
+      
+      if (viewMode === 'hours' || !selectedHour) {
+        // Initialize counts for each hour of the selected date
+        for (let hour = 0; hour < 24; hour++) {
+          const hourStr = dayjs(selectedDate).hour(hour).format('YYYY-MM-DD HH');
+          counts[hourStr] = { error: 0, success: 0, total: 0 };
+        }
+        
+        // Count logs per hour and level (errors and success)
+        filteredLogs.forEach(log => {
+          const match = log.match(timeRegex);
+          if (match) {
+            const hour = dayjs(match[1]).format('YYYY-MM-DD HH');
+            
+            // More precise detection logic
+            const hasSuccessTrue = /"success":\s*true/i.test(log);
+            const hasProcessedSuccess = /processed.*success/i.test(log);
+            const hasInsertedSuccess = /inserted.*success/i.test(log);
+            const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+            
+            // Check for actual errors (including [ERROR] logs)
+            const hasErrorTrue = /"error":\s*true/i.test(log);
+            const hasException = /exception|fail/i.test(log);
+            const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+            const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+            const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+            
+            counts[hour] = counts[hour] || { error: 0, success: 0, total: 0 };
+            
+            if (isSuccess) {
+              counts[hour].success++;
+              counts[hour].total++;
+            } else if (isError) {
+              counts[hour].error++;
+              counts[hour].total++;
+            }
+          }
+        });
+        
+        // Prepare data arrays for selected date (hours)
+        const labels = Object.keys(counts);
+        return {
+          labels: labels.map(l => dayjs(l).format('HH:00')),
+          error: labels.map(hour => counts[hour].error),
+          success: labels.map(hour => counts[hour].success),
+          total: labels.map(hour => counts[hour].total),
+        };
+      } else {
+        // Show minutes for the selected hour
+        const selectedHourStr = dayjs(selectedDate).hour(selectedHour).format('YYYY-MM-DD HH');
+        
+        // Initialize counts for each minute of the selected hour
+        for (let minute = 0; minute < 60; minute++) {
+          const minuteStr = dayjs(selectedDate).hour(selectedHour).minute(minute).format('YYYY-MM-DD HH:mm');
+          counts[minuteStr] = { error: 0, success: 0, total: 0 };
+        }
+        
+        // Count logs per minute and level for the selected hour
+        filteredLogs.forEach(log => {
+          const match = log.match(timeRegex);
+          if (match) {
+            const logHour = dayjs(match[1]).format('YYYY-MM-DD HH');
+            if (logHour === selectedHourStr) {
+              const minute = dayjs(match[1]).format('YYYY-MM-DD HH:mm');
+              
+              // More precise detection logic
+              const hasSuccessTrue = /"success":\s*true/i.test(log);
+              const hasProcessedSuccess = /processed.*success/i.test(log);
+              const hasInsertedSuccess = /inserted.*success/i.test(log);
+              const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+              
+              // Check for actual errors (including [ERROR] logs)
+              const hasErrorTrue = /"error":\s*true/i.test(log);
+              const hasException = /exception|fail/i.test(log);
+              const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+              const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+              const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+              
+              counts[minute] = counts[minute] || { error: 0, success: 0, total: 0 };
+              
+              if (isSuccess) {
+                counts[minute].success++;
+                counts[minute].total++;
+              } else if (isError) {
+                counts[minute].error++;
+                counts[minute].total++;
+              }
+            }
+          }
+        });
+        
+        // Prepare data arrays for selected hour (minutes)
+        const labels = Object.keys(counts);
+        return {
+          labels: labels.map(l => dayjs(l).format('HH:mm')),
+          error: labels.map(minute => counts[minute].error),
+          success: labels.map(minute => counts[minute].success),
+          total: labels.map(minute => counts[minute].total),
+        };
+      }
+    }
   };
   // Use the filter for the chart
   const logsOverTime = getLogsOverTimeMultiSeries(levelFilter);
@@ -102,25 +230,37 @@ const LogsDashboard = ({ user }) => {
   }, [
     logsOverTime.labels.join(','),
     logsOverTime.total.join(','),
-    logsOverTime.error.join(','),
-    logsOverTime.warning.join(','),
-    logsOverTime.info.join(',')
+    logsOverTime.error.join(',')
   ]);
 
   // Update stats when logs change
   useEffect(() => {
-    let errorCount = 0, warningCount = 0, infoCount = 0;
+    let errorCount = 0;
     logs.forEach(log => {
-      if (/error|exception|fail/i.test(log)) errorCount++;
-      else if (/warn/i.test(log)) warningCount++;
-      else infoCount++;
+      // More precise detection logic
+      const hasSuccessTrue = /"success":\s*true/i.test(log);
+      const hasProcessedSuccess = /processed.*success/i.test(log);
+      const hasInsertedSuccess = /inserted.*success/i.test(log);
+      const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+      
+      // Check for actual errors (including [ERROR] logs)
+      const hasErrorTrue = /"error":\s*true/i.test(log);
+      const hasException = /exception|fail/i.test(log);
+      const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+      const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+      const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+      
+      // Only count actual errors, not success messages
+      if (!isSuccess && isError) {
+        errorCount++;
+      }
     });
     setStats(stats => ({
       ...stats,
-      totalLogs: logs.length,
+      totalLogs: errorCount, // Only count actual errors
       errorCount,
-      warningCount,
-      infoCount,
+      warningCount: 0, // Don't show warning count
+      infoCount: 0, // Don't show info count
     }));
   }, [logs]);
 
@@ -128,11 +268,14 @@ const LogsDashboard = ({ user }) => {
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
-    // Fetch initial logs from backend
+    
+    // Fetch initial logs from backend (last 30 minutes)
     const fetchLogs = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('http://localhost:5000/api/data/logs?limit=500', {
+        // Get logs from the last 30 minutes
+        const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+        const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=1000&since=${thirtyMinutesAgo}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -140,15 +283,42 @@ const LogsDashboard = ({ user }) => {
         if (!res.ok) throw new Error('Failed to fetch logs');
         const data = await res.json();
         if (isMounted && data.errors) {
-          setLogs(data.errors.slice(-500));
+          setLogs(data.errors);
         }
       } catch (err) {
+        console.error('Failed to fetch logs:', err);
         // Optionally handle error
       } finally {
         if (isMounted) setLoading(false);
       }
     };
+
+    // Fetch log statistics
+    const fetchLogStats = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:5000/api/data/duplicates/logs/stats', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!res.ok) throw new Error('Failed to fetch log stats');
+        const data = await res.json();
+        if (isMounted) {
+          setStats(prevStats => ({
+            ...prevStats,
+            ...data,
+            recentActivity: data.recentActivity || []
+          }));
+          setAvailableDates(data.availableDates || []);
+        }
+      } catch (err) {
+        console.error('Failed to fetch log stats:', err);
+      }
+    };
+
     fetchLogs();
+    fetchLogStats();
 
     // Connect to socket.io server
     socketRef.current = io('http://localhost:5000');
@@ -173,45 +343,174 @@ const LogsDashboard = ({ user }) => {
     }
   }, [logs]);
 
-  // Filter logs by level and search
+  // Fetch logs when date changes
+  useEffect(() => {
+    if (selectedDate) {
+      fetchLogsForDate(selectedDate);
+    }
+  }, [selectedDate]);
+
+  // Filter logs by level and search (exclude info logs by default)
   const filteredLogs = logs.filter(log => {
-    if (levelFilter !== 'all' && !log.toLowerCase().includes(levelFilter)) return false;
+    // More precise detection logic
+    const hasSuccessTrue = /"success":\s*true/i.test(log);
+    const hasProcessedSuccess = /processed.*success/i.test(log);
+    const hasInsertedSuccess = /inserted.*success/i.test(log);
+    const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+    
+    // Check for actual errors (including [ERROR] logs)
+    const hasErrorTrue = /"error":\s*true/i.test(log);
+    const hasException = /exception|fail/i.test(log);
+    const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+    const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+    const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+    
+    // Check for warning logs
+    const isWarning = /\[warning\]/i.test(log);
+    
+    // Check for info logs (to exclude them)
+    const isInfo = /\[info\]/i.test(log);
+    
+    // Show all logs except info by default, or filter by type if specified
+    if (levelFilter === 'error' && !isError) return false;
+    if (levelFilter === 'success' && !isSuccess) return false;
+    if (levelFilter === 'warning' && !isWarning) return false;
+    if (levelFilter === 'all') {
+      // Show all logs except info logs
+      if (isInfo) return false;
+    }
+    
     if (search && !log.toLowerCase().includes(search.toLowerCase())) return false;
     return true;
   });
 
+  // Clear logs function
+  const clearLogs = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:5000/api/data/duplicates/logs/clear', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!res.ok) throw new Error('Failed to clear logs');
+      
+      // Clear local logs
+      setLogs([]);
+      setStats(prevStats => ({
+        ...prevStats,
+        totalLogs: 0,
+        errorCount: 0,
+        warningCount: 0,
+        infoCount: 0
+      }));
+      
+      alert('Logs cleared successfully!');
+    } catch (err) {
+      console.error('Failed to clear logs:', err);
+      alert('Failed to clear logs');
+    }
+  };
+
+  // Refresh logs function
+  const refreshLogs = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      // Get logs from the last 30 minutes
+      const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+      const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=1000&since=${thirtyMinutesAgo}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!res.ok) throw new Error('Failed to fetch logs');
+      const data = await res.json();
+      if (data.errors) {
+        setLogs(data.errors);
+      }
+    } catch (err) {
+      console.error('Failed to refresh logs:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch logs for specific date
+  const fetchLogsForDate = async (date) => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const dateStr = dayjs(date).format('YYYY-MM-DD');
+      const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=1000&date=${dateStr}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (!res.ok) throw new Error('Failed to fetch logs for date');
+      const data = await res.json();
+      if (data.errors) {
+        setLogs(data.errors);
+      }
+    } catch (err) {
+      console.error('Failed to fetch logs for date:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Modern UI inspired by Dribbble shot
   return (
     <div className="dashboard-content" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', minHeight: '100vh' }}>
-      <h2 style={{ fontWeight: 700, fontSize: '2rem', marginBottom: 24 }}>Logs & Analytics</h2>
+      <h2 style={{ fontWeight: 700, fontSize: '2rem', marginBottom: 24 }}>System Status Dashboard</h2>
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 32 }}>
         <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(59,130,246,0.12)' }}>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>Total Logs</div>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>Total Errors</div>
           <div style={{ fontSize: 32, fontWeight: 800 }}>{stats.totalLogs}</div>
         </div>
         <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #ef4444 0%, #f87171 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(239,68,68,0.12)' }}>
           <div style={{ fontSize: 18, fontWeight: 600 }}>Errors</div>
           <div style={{ fontSize: 32, fontWeight: 800 }}>{stats.errorCount}</div>
         </div>
-        <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #f59e42 0%, #fbbf24 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(251,191,36,0.12)' }}>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>Warnings</div>
-          <div style={{ fontSize: 32, fontWeight: 800 }}>{stats.warningCount}</div>
-        </div>
         <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(16,185,129,0.12)' }}>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>Info</div>
-          <div style={{ fontSize: 32, fontWeight: 800 }}>{stats.infoCount}</div>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>Success</div>
+          <div style={{ fontSize: 32, fontWeight: 800 }}>{filteredLogs.filter(log => {
+            const hasSuccessTrue = /"success":\s*true/i.test(log);
+            const hasProcessedSuccess = /processed.*success/i.test(log);
+            const hasInsertedSuccess = /inserted.*success/i.test(log);
+            return hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+          }).length}</div>
         </div>
       </div>
 
       {/* Filters for date (MUI DatePicker) */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 3, p: 2, background: '#f8fafc', borderRadius: 2, boxShadow: '0 2px 8px #e0e7ef33', maxWidth: 700, mx: 'auto' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          gap: 2, 
+          alignItems: 'center', 
+          mb: 3, 
+          p: 3, 
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', 
+          borderRadius: 3, 
+          boxShadow: '0 4px 16px #e0e7ef33', 
+          maxWidth: 900, 
+          mx: 'auto',
+          flexWrap: 'wrap'
+        }}>
           <CalendarMonthIcon sx={{ color: '#3b82f6', fontSize: 32, mr: 1 }} />
-          <Typography sx={{ fontWeight: 600, mr: 1 }}>Filter by Date:</Typography>
+          <Typography sx={{ fontWeight: 700, mr: 2, fontSize: 18 }}>Filter by Date:</Typography>
           <DatePicker
             value={selectedDate}
             onChange={date => setSelectedDate(date)}
-            slotProps={{ textField: { size: 'small', sx: { minWidth: 160 } } }}
+            slotProps={{ 
+              textField: { 
+                size: 'small', 
+                sx: { minWidth: 180, backgroundColor: '#fff' },
+                placeholder: 'Select date...'
+              } 
+            }}
             format="YYYY-MM-DD"
             disableFuture
           />
@@ -225,20 +524,69 @@ const LogsDashboard = ({ user }) => {
               Clear
             </Button>
           )}
+          
+          {/* Available dates info */}
+          {availableDates.length > 0 && (
+            <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography sx={{ fontSize: 14, color: '#64748b', fontWeight: 500 }}>
+                Available dates: {availableDates.length}
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', maxWidth: 300 }}>
+                {availableDates.slice(0, 5).map((date, idx) => (
+                  <Box
+                    key={date}
+                    sx={{
+                      px: 1,
+                      py: 0.5,
+                      borderRadius: 1,
+                      backgroundColor: '#e2e8f0',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      color: '#475569',
+                      cursor: 'pointer',
+                      '&:hover': {
+                        backgroundColor: '#3b82f6',
+                        color: '#fff'
+                      }
+                    }}
+                    onClick={() => setSelectedDate(dayjs(date))}
+                  >
+                    {dayjs(date).format('MM/DD')}
+                  </Box>
+                ))}
+                {availableDates.length > 5 && (
+                  <Box sx={{ px: 1, py: 0.5, fontSize: 12, color: '#64748b' }}>
+                    +{availableDates.length - 5} more
+                  </Box>
+                )}
+              </Box>
+            </Box>
+          )}
         </Box>
       </LocalizationProvider>
 
       {/* Filters */}
       <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
         <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)} style={{ padding: 8, borderRadius: 8, border: '1px solid #d1d5db' }}>
-          <option value="all">All Levels</option>
-          <option value="error">Error</option>
-          <option value="warning">Warning</option>
-          <option value="info">Info</option>
+          <option value="all">All Logs (No Info)</option>
+          <option value="error">Error Only</option>
+          <option value="success">Success Only</option>
+          <option value="warning">Warning Only</option>
         </select>
         <input type="text" placeholder="Search logs..." value={search} onChange={e => setSearch(e.target.value)} style={{ padding: 8, borderRadius: 8, border: '1px solid #d1d5db', flex: 1 }} />
+        <button 
+          onClick={refreshLogs}
+          style={{ padding: '8px 16px', borderRadius: 8, background: '#10b981', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}
+        >
+          Refresh
+        </button>
         <button style={{ padding: '8px 16px', borderRadius: 8, background: '#3b82f6', color: '#fff', border: 'none', fontWeight: 600 }}>Export CSV</button>
-        <button style={{ padding: '8px 16px', borderRadius: 8, background: '#ef4444', color: '#fff', border: 'none', fontWeight: 600 }}>Clear Logs</button>
+        <button 
+          onClick={clearLogs}
+          style={{ padding: '8px 16px', borderRadius: 8, background: '#ef4444', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}
+        >
+          Clear Logs
+        </button>
       </div>
 
       {/* Graphs (Logs Over Time) - Modern Card */}
@@ -288,7 +636,39 @@ const LogsDashboard = ({ user }) => {
             padding: '32px 40px 0 40px',
             zIndex: 2,
           }}>
-            <div style={{ fontWeight: 800, fontSize: 28, color: '#1e293b', letterSpacing: 1 }}>Logs Over Time</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              {viewMode === 'minutes' && selectedHour !== null && (
+                <button
+                  onClick={() => {
+                    setViewMode('hours');
+                    setSelectedHour(null);
+                  }}
+                  style={{
+                    background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '8px 16px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    fontSize: 14,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  ← Back to Hours
+                </button>
+              )}
+              <div style={{ fontWeight: 800, fontSize: 28, color: '#1e293b', letterSpacing: 1 }}>
+                Errors & Success Over Time
+                {viewMode === 'minutes' && selectedHour !== null && (
+                  <span style={{ fontSize: 20, color: '#64748b', marginLeft: 12 }}>
+                    - Hour {selectedHour}:00
+                  </span>
+                )}
+              </div>
+            </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
               <span style={{
                 background: 'linear-gradient(90deg, #10b981 0%, #3b82f6 100%)',
@@ -314,11 +694,21 @@ const LogsDashboard = ({ user }) => {
             zIndex: 2,
           }}>
             <div style={{ color: '#64748b', fontWeight: 500, fontSize: 16 }}>
-              {selectedDate ? `Showing logs for ${dayjs(selectedDate).format('YYYY-MM-DD')}` : 'Last 30 minutes (live)'}
+              {selectedDate 
+                ? viewMode === 'minutes' && selectedHour !== null
+                  ? `Showing minute details for ${dayjs(selectedDate).format('YYYY-MM-DD')} Hour ${selectedHour}:00 (${filteredLogs.length} items)`
+                  : `Showing errors & success for ${dayjs(selectedDate).format('YYYY-MM-DD')} (${filteredLogs.length} items) - Click on any hour to see minute details`
+                : `Last 30 minutes (live) - ${filteredLogs.length} recent logs`
+              }
             </div>
             {/* Peak log rate summary */}
             <div style={{ color: '#3b82f6', fontWeight: 700, fontSize: 16 }}>
-              Peak: {Math.max(...logsOverTime.total, 0)} logs/min
+              {selectedDate 
+                ? viewMode === 'minutes' && selectedHour !== null
+                  ? `Peak: ${Math.max(...logsOverTime.total, 0)} logs/min`
+                  : `Peak: ${Math.max(...logsOverTime.total, 0)} logs/hour`
+                : `Peak: ${Math.max(...logsOverTime.total, 0)} logs/min`
+              }
             </div>
           </div>
           {/* Chart */}
@@ -333,7 +723,7 @@ const LogsDashboard = ({ user }) => {
             zIndex: 2,
             paddingBottom: 32,
           }}>
-            {logsOverTime.labels.length > 0 ? (
+            {logsOverTime.labels.length > 0 && (logsOverTime.total.some(val => val > 0) || logsOverTime.error.some(val => val > 0) || logsOverTime.success.some(val => val > 0)) ? (
               <div style={{
                 width: '100%',
                 height: '100%',
@@ -345,17 +735,25 @@ const LogsDashboard = ({ user }) => {
                   xAxis={[{
                     data: logsOverTime.labels,
                     scaleType: 'point',
-                    label: 'Time (minute)',
+                    label: viewMode === 'minutes' ? 'Time (minute)' : 'Time (hour)',
                     tickLabelStyle: { fontSize: 14, fill: '#64748b' },
                     labelStyle: { fontWeight: 700, fill: '#3b82f6' }
                   }]}
-                  series={
+                  onAxisClick={(event, data) => {
+                    if (selectedDate && viewMode === 'hours' && data && data.value !== undefined) {
+                      const hourIndex = data.value;
+                      const hour = parseInt(logsOverTime.labels[hourIndex].split(':')[0]);
+                      setSelectedHour(hour);
+                      setViewMode('minutes');
+                    }
+                  }}
+                                    series={
                     levelFilter === 'all'
                       ? [
                           {
-                            data: logsOverTime.total,
-                            label: 'Total',
-                            color: '#2563eb',
+                            data: logsOverTime.success,
+                            label: 'Success',
+                            color: '#10b981',
                             showMark: false,
                             area: false,
                             curve: 'monotone',
@@ -370,34 +768,14 @@ const LogsDashboard = ({ user }) => {
                             curve: 'monotone',
                             strokeWidth: 3,
                           },
-                          {
-                            data: logsOverTime.warning,
-                            label: 'Warning',
-                            color: '#f59e42',
-                            showMark: false,
-                            area: false,
-                            curve: 'monotone',
-                            strokeWidth: 3,
-                          },
-                          {
-                            data: logsOverTime.info,
-                            label: 'Info',
-                            color: '#10b981',
-                            showMark: false,
-                            area: false,
-                            curve: 'monotone',
-                            strokeWidth: 3,
-                          },
                         ]
                       : [
                           {
-                            data: logsOverTime[levelFilter],
+                            data: logsOverTime[levelFilter] || logsOverTime.error || logsOverTime.success || [],
                             label: levelFilter.charAt(0).toUpperCase() + levelFilter.slice(1),
                             color:
                               levelFilter === 'error'
                                 ? '#ef4444'
-                                : levelFilter === 'warning'
-                                ? '#f59e42'
                                 : '#10b981',
                             showMark: false,
                             area: false,
@@ -419,13 +797,14 @@ const LogsDashboard = ({ user }) => {
                         const idx = params.dataIndex;
                         const minuteLabel = logsOverTime.labels[idx];
                         let tooltip = `Time: ${minuteLabel}<br/>`;
-                        if (levelFilter === 'all' || levelFilter === 'error') {
+                        
+                        if (levelFilter === 'all') {
+                          tooltip += `<span style='color:#10b981'>●</span> Success: ${logsOverTime.success[idx]}<br/>`;
+                          tooltip += `<span style='color:#ef4444'>●</span> Error: ${logsOverTime.error[idx]}<br/>`;
+                        } else if (levelFilter === 'error') {
                           tooltip += `<span style='color:#ef4444'>●</span> Error: ${logsOverTime.error[idx]}<br/>`;
                           // Show error reasons if hovering error point and there are errors
-                          if (
-                            (levelFilter === 'error' || (params.seriesLabel && params.seriesLabel.toLowerCase() === 'error')) &&
-                            logsOverTime.error[idx] > 0
-                          ) {
+                          if (logsOverTime.error[idx] > 0) {
                             const reasons = getErrorReasonsForMinute(minuteLabel);
                             if (reasons.length > 0) {
                               tooltip += `<div style='margin-top:4px;'><b>Error Reasons:</b><ul style='margin:0;padding-left:16px;'>`;
@@ -436,13 +815,10 @@ const LogsDashboard = ({ user }) => {
                               tooltip += `</ul></div>`;
                             }
                           }
+                        } else if (levelFilter === 'success') {
+                          tooltip += `<span style='color:#10b981'>●</span> Success: ${logsOverTime.success[idx]}<br/>`;
                         }
-                        if (levelFilter === 'all' || levelFilter === 'warning')
-                          tooltip += `<span style='color:#f59e42'>●</span> Warning: ${logsOverTime.warning[idx]}<br/>`;
-                        if (levelFilter === 'all' || levelFilter === 'info')
-                          tooltip += `<span style='color:#10b981'>●</span> Info: ${logsOverTime.info[idx]}<br/>`;
-                        if (levelFilter === 'all')
-                          tooltip = `<span style='color:#2563eb'>●</span> Total: ${logsOverTime.total[idx]}<br/>` + tooltip;
+                        
                         return tooltip;
                       }
                     }
@@ -471,10 +847,13 @@ const LogsDashboard = ({ user }) => {
               }}>
                 <CalendarMonthIcon sx={{ color: '#f59e42', fontSize: 60, mb: 2 }} />
                 <Typography variant="h6" sx={{ color: '#64748b', fontWeight: 600, mb: 1 }}>
-                  No log data for the selected date or month
+                  No log data available
                 </Typography>
                 <Typography variant="body2" sx={{ color: '#94a3b8' }}>
-                  Try a different date or clear the filter.
+                  {selectedDate 
+                    ? `No logs found for ${dayjs(selectedDate).format('YYYY-MM-DD')}. Try a different date.`
+                    : 'No recent log activity. Logs will appear here when system activity is detected.'
+                  }
                 </Typography>
               </Box>
             )}
@@ -482,33 +861,56 @@ const LogsDashboard = ({ user }) => {
         </div>
       </div>
 
-      {/* Recent Activity */}
-      <div style={{ background: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.04)', marginBottom: 32 }}>
-        <div style={{ fontWeight: 600, marginBottom: 16 }}>Recent Activity</div>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-          {stats.recentActivity.map((act, idx) => (
-            <li key={idx} style={{ marginBottom: 12, color: act.level === 'error' ? '#ef4444' : act.level === 'warning' ? '#f59e42' : '#10b981' }}>
-              <span style={{ fontWeight: 600 }}>{act.level.toUpperCase()}</span> - {act.message} <span style={{ color: '#64748b', fontSize: 12 }}>({act.file}, {new Date(act.timestamp).toLocaleString()})</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+
 
       {/* Real-time Logs Table */}
       <div style={{ background: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-        <div style={{ fontWeight: 600, marginBottom: 16 }}>Live Logs</div>
+        <div style={{ fontWeight: 600, marginBottom: 16 }}>Live System Activity</div>
         {loading ? <div>Loading logs...</div> : (
           <div style={{ maxHeight: 320, overflowY: 'auto', fontFamily: 'monospace', fontSize: 14 }}>
             {filteredLogs.map((log, idx) => {
-              const isError = /error|exception|fail/i.test(log);
+              // More precise detection logic
+              const hasSuccessTrue = /"success":\s*true/i.test(log);
+              const hasProcessedSuccess = /processed.*success/i.test(log);
+              const hasInsertedSuccess = /inserted.*success/i.test(log);
+              const isSuccess = hasSuccessTrue || hasProcessedSuccess || hasInsertedSuccess;
+              
+              // Check for actual errors (including [ERROR] logs)
+              const hasErrorTrue = /"error":\s*true/i.test(log);
+              const hasException = /exception|fail/i.test(log);
+              const hasErrorCount = /"errors":\s*[1-9]/i.test(log); // errors > 0
+              const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
+              const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
+              
+              // Check for info and warning logs
+              const isInfo = /\[info\]/i.test(log);
+              const isWarning = /\[warning\]/i.test(log);
+              
+              let textColor = '#374151'; // default color
+              let fontWeight = 'normal';
+              
+              if (isSuccess) {
+                textColor = '#10b981'; // green for success
+                fontWeight = 'bold';
+              } else if (isError) {
+                textColor = '#ef4444'; // red for errors
+                fontWeight = 'bold';
+              } else if (isWarning) {
+                textColor = '#f59e0b'; // orange for warnings
+                fontWeight = 'bold';
+              } else if (isInfo) {
+                textColor = '#3b82f6'; // blue for info
+                fontWeight = 'normal';
+              }
+              
               return (
                 <div
                   key={idx}
                   style={{
                     padding: '4px 0',
                     borderBottom: '1px solid #f1f5f9',
-                    color: isError ? '#ef4444' : undefined,
-                    fontWeight: isError ? 700 : undefined
+                    color: textColor,
+                    fontWeight: fontWeight
                   }}
                 >
                   {log}

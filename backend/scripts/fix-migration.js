@@ -6,7 +6,7 @@ const dbConfig = {
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   port: process.env.DB_PORT || 3306,
-  database: process.env.DB_NAME || 'eda_dashboard'
+  database: process.env.DB_NAME || 'dashboard'
 };
 
 async function fixMigration() {

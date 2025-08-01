@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProjectManagement.css';
+import ProjectSelectionModal from './ProjectSelectionModal';
+import DVPlannedWorkForm from './DVPlannedWorkForm';
 
 const ProjectManagement = () => {
   const [domains, setDomains] = useState([]);
@@ -21,13 +23,10 @@ const ProjectManagement = () => {
     status: 'active',
     start_date: ''
   });
-  const [showProjectPlanModal, setShowProjectPlanModal] = useState(false);
-  const [projectPlanForm, setProjectPlanForm] = useState({
-    projectId: '',
-    domainId: '',
-    file: null,
-    description: ''
-  });
+  const [showSelectionModal, setShowSelectionModal] = useState(false);
+  const [showDVPlannedWork, setShowDVPlannedWork] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState(null);
 
   const token = localStorage.getItem('token');
 
@@ -261,6 +260,18 @@ const ProjectManagement = () => {
     );
   }
 
+  // If DV Planned Work is active, show only that
+  if (showDVPlannedWork) {
+    return (
+      <DVPlannedWorkForm 
+        isOpen={showDVPlannedWork}
+        onClose={() => setShowDVPlannedWork(false)}
+        selectedProject={selectedProject}
+        selectedDomain={selectedDomain}
+      />
+    );
+  }
+
   return (
     <div className="project-management">
       <div className="management-header">
@@ -281,11 +292,20 @@ const ProjectManagement = () => {
             + Add Project
           </button>
           <button
-            className="project-plan-btn"
-            onClick={() => setShowProjectPlanModal(true)}
-            style={{ marginLeft: '10px' }}
+            className="define-project-plan-btn"
+            onClick={() => {
+              if (projects.length === 0) {
+                setError('Please create a project first');
+                return;
+              }
+              if (domains.length === 0) {
+                setError('Please create domains first');
+                return;
+              }
+              setShowSelectionModal(true);
+            }}
           >
-            Project Plan
+            📋 Project Plan
           </button>
         </div>
       </div>
@@ -425,74 +445,7 @@ const ProjectManagement = () => {
         </div>
       )}
 
-      {showProjectPlanModal && (
-        <div className="form-overlay">
-          <div className="form-card">
-            <div className="form-header">
-              <h3>Upload Project Plan</h3>
-              <button className="close-btn" onClick={() => setShowProjectPlanModal(false)} title="Close">×</button>
-            </div>
-            <form className="project-plan-form">
-              <div className="form-group">
-                <label htmlFor="project-select">Select Project</label>
-                <select
-                  id="project-select"
-                  value={projectPlanForm.projectId}
-                  onChange={e => setProjectPlanForm({ ...projectPlanForm, projectId: e.target.value })}
-                  required
-                >
-                  <option value="">-- Select Project --</option>
-                  {projects.map(project => (
-                    <option key={project.id} value={project.id}>{project.project_name}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="domain-select">Select Domain</label>
-                <select
-                  id="domain-select"
-                  value={projectPlanForm.domainId}
-                  onChange={e => setProjectPlanForm({ ...projectPlanForm, domainId: e.target.value })}
-                  required
-                >
-                  <option value="">-- Select Domain --</option>
-                  {domains.map(domain => (
-                    <option key={domain.id} value={domain.id}>{domain.full_name} ({domain.short_code})</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="plan-file">Upload Plan File</label>
-                <input
-                  type="file"
-                  id="plan-file"
-                  onChange={e => setProjectPlanForm({ ...projectPlanForm, file: e.target.files[0] })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="plan-description">Description</label>
-                <textarea
-                  id="plan-description"
-                  value={projectPlanForm.description}
-                  onChange={e => setProjectPlanForm({ ...projectPlanForm, description: e.target.value })}
-                  placeholder="Enter plan description..."
-                  rows="3"
-                  required
-                />
-              </div>
-              <div className="form-actions">
-                <button type="button" onClick={() => setShowProjectPlanModal(false)} className="cancel-btn">
-                  Cancel
-                </button>
-                <button type="submit" className="save-btn" disabled={loading}>
-                  Upload
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+
 
       <div className="management-content">
         {/* Projects Section - Full Width */}
@@ -604,6 +557,24 @@ const ProjectManagement = () => {
           )}
         </div>
       </div>
+
+      {/* Project Selection Modal */}
+      {showSelectionModal && (
+        <ProjectSelectionModal
+          isOpen={showSelectionModal}
+          onClose={() => setShowSelectionModal(false)}
+          projects={projects}
+          domains={domains}
+          onConfirm={(projectId, domainId) => {
+            setSelectedProject(projectId);
+            setSelectedDomain(domainId);
+            setShowSelectionModal(false);
+            setShowDVPlannedWork(true);
+          }}
+        />
+      )}
+
+
     </div>
   );
 };

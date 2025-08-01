@@ -62,6 +62,7 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
     if (isCustomer) {
       return [];
     }
+    
     // If DV domain is selected, only show Manager and Lead views
     if (projectFilters.domain_id === '3' || projectFilters.domain_id === 3) {
       return [
@@ -69,6 +70,13 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
         { id: 'lead', label: 'Lead View', icon: '👥' }
       ];
     }
+    // If CL domain is selected, only show Engineer view
+    if (projectFilters.domain_id === '5' || projectFilters.domain_id === 5) {
+      return [
+        { id: 'engineer', label: 'Engineer View', icon: '⚙️' }
+      ];
+    }
+    
     const views = [];
     if (projectFilters.domain_id) {
       views.push(

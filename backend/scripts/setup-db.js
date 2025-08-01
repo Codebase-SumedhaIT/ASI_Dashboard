@@ -25,11 +25,11 @@ async function setupDatabase() {
     console.log('🔗 Connected to MySQL server');
 
     // Create database if it doesn't exist
-    await connection.execute(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'eda_dashboard'}`);
+    await connection.execute(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'dashboard'}`);
     console.log('✅ Database created/verified');
 
     // Use the database
-    await connection.execute(`USE ${process.env.DB_NAME || 'eda_dashboard'}`);
+    await connection.execute(`USE ${process.env.DB_NAME || 'dashboard'}`);
 
     // Create tables
     const createTables = `

@@ -30,7 +30,7 @@ const CustomerView = ({ user, projectFilters = {} }) => {
     const fetchOptions = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/api/data/filter-options', {
+        const response = await fetch('http://localhost:5000/api/data/filter-options?data_type=pd', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
