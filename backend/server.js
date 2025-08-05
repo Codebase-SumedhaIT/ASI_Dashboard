@@ -35,7 +35,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from uploads directory
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads', {
+  setHeaders: (res, path) => {
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}));
 
 // Test database connection
 testConnection();

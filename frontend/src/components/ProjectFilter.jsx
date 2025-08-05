@@ -7,7 +7,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [clickedButton, setClickedButton] = useState(null);
-  const [viewSelected, setViewSelected] = useState(false); // New state to track if a view is selected
+  const [viewSelected, setViewSelected] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -113,6 +113,18 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
     }, 300);
   };
 
+  const getProjectTypeIcon = (projectName) => {
+    if (projectName?.toLowerCase().includes('dv')) return '📊';
+    if (projectName?.toLowerCase().includes('cl')) return '⚙️';
+    return '📋';
+  };
+
+  const getDomainTypeIcon = (domainName) => {
+    if (domainName?.toLowerCase().includes('dv')) return '📈';
+    if (domainName?.toLowerCase().includes('cl')) return '🔧';
+    return '📁';
+  };
+
   if (loading) {
     return (
       <div className="project-filter-loading">
@@ -128,13 +140,23 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
         // Show compact view button when a view is selected
         <div className="view-button-container">
           <div className="view-button-info">
-            <span className="view-button-project">
-              {projects.find(p => p.id === parseInt(selectedFilters.project_id))?.project_name || 'Project'}
-            </span>
-            {selectedFilters.domain_id && (
-              <span className="view-button-domain">
-                • {domains.find(d => d.id === parseInt(selectedFilters.domain_id))?.full_name || 'Domain'}
+            <div className="view-button-main">
+              <span className="view-button-icon">
+                {getProjectTypeIcon(projects.find(p => p.id === parseInt(selectedFilters.project_id))?.project_name)}
               </span>
+              <span className="view-button-project">
+                {projects.find(p => p.id === parseInt(selectedFilters.project_id))?.project_name || 'Project'}
+              </span>
+            </div>
+            {selectedFilters.domain_id && (
+              <div className="view-button-sub">
+                <span className="view-button-domain-icon">
+                  {getDomainTypeIcon(domains.find(d => d.id === parseInt(selectedFilters.domain_id))?.full_name)}
+                </span>
+                <span className="view-button-domain">
+                  {domains.find(d => d.id === parseInt(selectedFilters.domain_id))?.full_name || 'Domain'}
+                </span>
+              </div>
             )}
           </div>
           <div className="view-button-actions">
@@ -142,12 +164,14 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
               className="view-button-change"
               onClick={() => setViewSelected(false)}
             >
+              <span className="action-icon">⚙️</span>
               Change Filters
             </button>
             <button
               className="view-button-clear"
               onClick={clearFilters}
             >
+              <span className="action-icon">🗑️</span>
               Clear
             </button>
           </div>
@@ -158,7 +182,10 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
           <div className="filter-controls">
             {/* Always show project dropdown */}
             <div className="filter-group">
-              <label htmlFor="project-select">Project:</label>
+              <label htmlFor="project-select">
+                <span className="label-icon">📋</span>
+                Project:
+              </label>
               <select
                 id="project-select"
                 value={selectedFilters.project_id || ''}
@@ -168,14 +195,17 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
                 <option value="" disabled>Select Project</option>
                 {projects.map((project) => (
                   <option key={project.id} value={project.id}>
-                    {project.project_name}
+                    {getProjectTypeIcon(project.project_name)} {project.project_name}
                   </option>
                 ))}
               </select>
             </div>
             {selectedFilters.project_id && domains.length > 0 && (
               <div className="filter-group">
-                <label htmlFor="domain-select">Domain:</label>
+                <label htmlFor="domain-select">
+                  <span className="label-icon">📁</span>
+                  Domain:
+                </label>
                 <select
                   id="domain-select"
                   value={selectedFilters.domain_id || ''}
@@ -185,7 +215,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
                   <option value="" disabled>Select Domain</option>
                   {domains.map((domain) => (
                     <option key={domain.id} value={domain.id}>
-                      {domain.full_name}
+                      {getDomainTypeIcon(domain.full_name)} {domain.full_name}
                     </option>
                   ))}
                 </select>
@@ -196,6 +226,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
               className="clear-filters-btn"
               disabled={!selectedFilters.project_id && !selectedFilters.domain_id}
             >
+              <span className="clear-icon">🗑️</span>
               Clear Filters
             </button>
           </div>
@@ -203,16 +234,24 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
           {/* View Navigation Tabs - Only show for non-customers when domain is selected */}
           {!isCustomer && getTabViews().length > 0 && (
             <div className="view-nav">
-              {getTabViews().map(view => (
-                <button
-                  key={view.id}
-                  className={`view-nav-btn${activeView === view.id ? ' active' : ''}${clickedButton === view.id ? ' clicked' : ''}`}
-                  onClick={() => handleViewChange(view.id)}
-                >
-                  <span className="view-nav-icon">{view.icon}</span>
-                  <span className="view-nav-label">{view.label}</span>
-                </button>
-              ))}
+              <div className="view-nav-header">
+                <span className="view-nav-title">
+                  <span className="view-nav-title-icon">👁️</span>
+                  Available Views
+                </span>
+              </div>
+              <div className="view-nav-buttons">
+                {getTabViews().map(view => (
+                  <button
+                    key={view.id}
+                    className={`view-nav-btn${activeView === view.id ? ' active' : ''}${clickedButton === view.id ? ' clicked' : ''}`}
+                    onClick={() => handleViewChange(view.id)}
+                  >
+                    <span className="view-nav-icon">{view.icon}</span>
+                    <span className="view-nav-label">{view.label}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </>
@@ -220,6 +259,7 @@ const ProjectFilter = ({ onFilterChange, selectedFilters, activeView, onViewChan
       
       {error && (
         <div className="filter-error">
+          <span className="error-icon">⚠️</span>
           <p>Error: {error}</p>
         </div>
       )}

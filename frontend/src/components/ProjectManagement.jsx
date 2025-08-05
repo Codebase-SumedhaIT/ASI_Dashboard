@@ -239,10 +239,16 @@ const ProjectManagement = () => {
         }
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to delete project');
+        throw new Error(data.message || 'Failed to delete project');
       }
 
+      // Show success message
+      setError(''); // Clear any previous errors
+      alert(data.message || 'Project deleted successfully');
+      
       await fetchProjects();
     } catch (error) {
       setError(error.message);
@@ -470,20 +476,6 @@ const ProjectManagement = () => {
                     </div>
                     <div className="project-card-content">
                       <div className="project-info">
-                        <div className="info-item">
-                          <span className="info-label">Domains:</span>
-                          <span className="project-domains">
-                            {project.domains && project.domains.length > 0 ? (
-                              project.domains.map(domain => (
-                                <span key={domain.id} className="domain-badge" title={domain.full_name}>
-                                  {domain.short_code}
-                                </span>
-                              ))
-                            ) : (
-                              <span className="unknown-domain">No domains</span>
-                            )}
-                          </span>
-                        </div>
                         <div className="info-item">
                           <span className="info-label">Description:</span>
                           <span className="info-value">{project.description || 'No description'}</span>
