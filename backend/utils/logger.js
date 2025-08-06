@@ -146,6 +146,18 @@ class Logger {
         return match ? match[2] : null;
       }).filter(Boolean)));
 
+      // Extract available dates
+      const availableDates = Array.from(new Set(logs.map(log => {
+        const timestampMatch = log.match(/^\[(.*?)\]/);
+        if (!timestampMatch) return null;
+        try {
+          const logDate = new Date(timestampMatch[1]);
+          return logDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+        } catch (error) {
+          return null;
+        }
+      }).filter(Boolean))).sort().reverse(); // Sort in descending order
+
       // Get recent activity (last 10 logs)
       const recentActivity = logs.slice(-10).map(log => {
         const timestampMatch = log.match(/\[(.*?)\]/);
@@ -166,6 +178,7 @@ class Logger {
         warningCount,
         infoCount,
         files,
+        availableDates,
         recentActivity
       };
     } catch (error) {
@@ -176,6 +189,7 @@ class Logger {
         warningCount: 0,
         infoCount: 0,
         files: [],
+        availableDates: [],
         recentActivity: []
       };
     }
@@ -250,6 +264,38 @@ class Logger {
       if (filters.search) {
         const searchLower = filters.search.toLowerCase();
         logs = logs.filter(log => log.toLowerCase().includes(searchLower));
+      }
+
+      // Apply date filter
+      if (filters.date) {
+        const targetDate = new Date(filters.date);
+        const targetDateStr = targetDate.toISOString().split('T')[0]; // YYYY-MM-DD format
+        logs = logs.filter(log => {
+          const timestampMatch = log.match(/^\[(.*?)\]/);
+          if (!timestampMatch) return false;
+          try {
+            const logDate = new Date(timestampMatch[1]);
+            const logDateStr = logDate.toISOString().split('T')[0];
+            return logDateStr === targetDateStr;
+          } catch (error) {
+            return false;
+          }
+        });
+      }
+
+      // Apply time filter (since parameter)
+      if (filters.since) {
+        const sinceTime = new Date(filters.since);
+        logs = logs.filter(log => {
+          const timestampMatch = log.match(/^\[(.*?)\]/);
+          if (!timestampMatch) return false;
+          try {
+            const logTime = new Date(timestampMatch[1]);
+            return logTime >= sinceTime;
+          } catch (error) {
+            return false;
+          }
+        });
       }
 
       // Apply pagination

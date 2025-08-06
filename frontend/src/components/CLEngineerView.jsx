@@ -10,6 +10,7 @@ const CLEngineerView = ({ filters = {} }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [showOnlySelectedRow, setShowOnlySelectedRow] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -203,11 +204,35 @@ const CLEngineerView = ({ filters = {} }) => {
     ? [getSortedData()[selectedRow]] 
     : getSortedData();
 
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  };
+
+  const handleEscapeKey = (event) => {
+    if (event.key === 'Escape' && isFullScreen) {
+      setIsFullScreen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isFullScreen) {
+      document.addEventListener('keydown', handleEscapeKey);
+      return () => document.removeEventListener('keydown', handleEscapeKey);
+    }
+  }, [isFullScreen]);
+
   return (
-    <div className="cl-engineer-view">
+    <div className={`cl-engineer-view ${isFullScreen ? 'fullscreen-mode' : ''}`}>
       <div className="view-header">
         <h2>Custom Layout - Engineer View</h2>
         <div className="view-actions">
+          <button 
+            className="fullscreen-btn"
+            onClick={toggleFullScreen}
+            title={isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
+          >
+            {isFullScreen ? '⛶' : '⛶'}
+          </button>
           {showOnlySelectedRow && (
             <button 
               className="back-to-all-btn"
@@ -228,7 +253,7 @@ const CLEngineerView = ({ filters = {} }) => {
           <p>Loading CL data...</p>
         </div>
       ) : (
-        <div className="table-container">
+        <div className={`table-container ${isFullScreen ? 'fullscreen-table' : ''}`}>
           <table className="cl-data-table">
             <thead>
               <tr>

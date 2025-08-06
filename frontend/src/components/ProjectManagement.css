@@ -4,6 +4,10 @@
   margin: 0 auto;
   background: #f8fafc;
   min-height: 100vh;
+  height: auto;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
 }
 
 .management-header {
@@ -35,7 +39,8 @@
 }
 
 .add-domain-btn,
-.add-project-btn {
+.add-project-btn,
+.define-project-plan-btn {
   padding: 14px 28px;
   border: none;
   border-radius: 12px;
@@ -69,6 +74,18 @@
   background: linear-gradient(135deg, #e085e7 0%, #e54b60 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.define-project-plan-btn {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  margin-left: 10px;
+}
+
+.define-project-plan-btn:hover {
+  background: linear-gradient(135deg, #43a1f0 0%, #00e6f0 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
 }
 
 .error-message {
@@ -250,6 +267,9 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  height: auto;
+  overflow: visible;
+  min-height: fit-content;
 }
 
 .domains-section,
@@ -260,7 +280,11 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  height: auto;
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .full-width {
@@ -306,6 +330,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 24px;
+  height: auto;
+  overflow: visible;
+  flex: 1;
+  min-height: fit-content;
 }
 
 .project-card {
@@ -313,9 +341,10 @@
   border-radius: 16px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
+  overflow: visible;
   transition: all 0.3s ease;
   position: relative;
+  height: auto;
 }
 
 .project-card:hover {
@@ -386,11 +415,13 @@
 /* Modern Table Design */
 .domains-table,
 .projects-table {
-  overflow: hidden;
+  overflow: visible;
   border-radius: 16px;
   border: 1px solid #e2e8f0;
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  min-height: fit-content;
 }
 
 .domains-table table,
@@ -625,12 +656,18 @@
 @media (max-width: 1200px) {
   .projects-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    height: auto;
+    overflow: visible;
   }
 }
 
 @media (max-width: 768px) {
   .project-management {
     padding: 16px;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
   }
   
   .management-header {
@@ -656,11 +693,25 @@
   .domains-section,
   .projects-section {
     padding: 24px;
+    height: auto;
+    overflow: visible;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    height: auto;
+    overflow: visible;
+    flex: 1;
+    min-height: fit-content;
+  }
+  
+  .project-card {
+    height: auto;
+    overflow: visible;
   }
   
   .project-card-header {
@@ -678,6 +729,8 @@
   .domains-table,
   .projects-table {
     font-size: 12px;
+    flex: 1;
+    min-height: fit-content;
   }
   
   .domains-table th,
@@ -699,28 +752,4 @@
   }
 } 
 
-.project-domains {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-left: 8px;
-}
-
-.project-card .domain-badge {
-  font-size: 13px;
-  padding: 7px 14px;
-  border-radius: 16px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #f093fb 0%, #667eea 100%);
-  color: white;
-  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.15);
-  margin-right: 0;
-  margin-bottom: 2px;
-  letter-spacing: 0.5px;
-  transition: background 0.2s;
-}
-
-.project-card .domain-badge:hover {
-  background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
-} 
+ 

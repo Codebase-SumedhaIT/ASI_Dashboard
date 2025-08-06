@@ -13,6 +13,8 @@ import DVManagerView from './DVManagerView';
 import DVLeadView from './DVLeadView';
 import CLEngineerView from './CLEngineerView';
 import LogsDashboard from './LogsDashboard';
+import QMSPage from './QMSPage';
+import PDCharts from './PDCharts';
 
 function Dashboard({ user, onLogout, onUserUpdate }) {
   const [activeView, setActiveView] = useState(null); // No view by default
@@ -62,6 +64,7 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
     if (isCustomer) {
       return [];
     }
+    
     // If DV domain is selected, only show Manager and Lead views
     if (projectFilters.domain_id === '3' || projectFilters.domain_id === 3) {
       return [
@@ -69,6 +72,22 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
         { id: 'lead', label: 'Lead View', icon: '👥' }
       ];
     }
+    // If CL domain is selected, only show Engineer view
+    if (projectFilters.domain_id === '5' || projectFilters.domain_id === 5) {
+      return [
+        { id: 'engineer', label: 'Engineer View', icon: '⚙️' }
+      ];
+    }
+    // If PD domain is selected, show all views including Charts
+    if (projectFilters.domain_id === '1' || projectFilters.domain_id === 1) {
+      return [
+        { id: 'engineer', label: 'Engineer View', icon: '⚙️' },
+        { id: 'lead', label: 'Lead View', icon: '👥' },
+        { id: 'manager', label: 'Manager View', icon: '📈' },
+        { id: 'charts', label: 'PD Charts', icon: '📊' }
+      ];
+    }
+    
     const views = [];
     if (projectFilters.domain_id) {
       views.push(
@@ -89,6 +108,7 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
       return <CustomerView user={user} projectFilters={projectFilters} />;
     }
     if (activeView === 'logs') return <LogsDashboard user={user} />;
+    if (activeView === 'qms') return <QMSPage user={user} />;
     if (activeView === 'admin') return <AdminPanel />;
     if (activeView === 'project-management') return <ProjectManagement />;
     // DV domain-specific views
@@ -126,12 +146,17 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
     }
     // Check if CL domain is selected (domain_id = 5)
     const isCLDomain = projectFilters.domain_id === '5' || projectFilters.domain_id === 5;
+    // Check if PD domain is selected (domain_id = 1)
+    const isPDDomain = projectFilters.domain_id === '1' || projectFilters.domain_id === 1;
     
     if (activeView === 'engineer') {
       if (isCLDomain) {
         return <CLEngineerView filters={projectFilters} />;
       }
       return <DataVisualization projectFilters={projectFilters} />;
+    }
+    if (activeView === 'charts' && isPDDomain) {
+      return <PDCharts projectFilters={projectFilters} />;
     }
     if (activeView === 'manager') return <ManagerView user={user} projectFilters={projectFilters} />;
     if (activeView === 'lead') return <LeadView user={user} projectFilters={projectFilters} />;
@@ -151,7 +176,7 @@ function Dashboard({ user, onLogout, onUserUpdate }) {
         onLogout={onLogout}
       />
       <div className="dashboard-content">
-        {!(activeView === 'admin' || activeView === 'project-management' || activeView === 'logs') && (
+        {!(activeView === 'admin' || activeView === 'project-management' || activeView === 'logs' || activeView === 'qms' || showProfilePage) && (
           <ProjectFilter
             onFilterChange={setProjectFilters}
             selectedFilters={projectFilters}

@@ -279,7 +279,7 @@ router.get('/pd-stats', auth, async (req, res) => {
 // Get unique values for filters
 router.get('/filter-options', auth, async (req, res) => {
   try {
-    const { domain_id, project_id, block_name } = req.query;
+    const { domain_id, project_id, block_name, data_type } = req.query;
     const userId = req.user.userId;
     const userRole = req.user.role;
     
@@ -357,18 +357,29 @@ router.get('/filter-options', auth, async (req, res) => {
       [projects] = await pool.query('SELECT id, project_name FROM projects ORDER BY project_name');
     }
 
-    // Get blocks based on domain and project
+    // Get blocks based on domain and project - data type aware
     if (domain_id || project_id) {
-      let blockQuery = `
-        SELECT DISTINCT block_name FROM (
-          SELECT block_name, domain_id, project_id FROM pd_data_raw WHERE block_name IS NOT NULL
-          UNION
-          SELECT module as block_name, domain_id, project_id FROM dv_data_raw WHERE module IS NOT NULL
-          UNION
-          SELECT block_name, domain_id, project_id FROM cl_data_raw WHERE block_name IS NOT NULL
-        ) combined_data WHERE block_name IS NOT NULL
-      `;
+      let blockQuery = '';
       let blockParams = [];
+      
+      // Determine which table to query based on data_type or default to pd_data_raw
+      if (data_type === 'dv') {
+        blockQuery = `
+          SELECT DISTINCT module as block_name FROM dv_data_raw 
+          WHERE module IS NOT NULL AND is_deleted = FALSE
+        `;
+      } else if (data_type === 'cl') {
+        blockQuery = `
+          SELECT DISTINCT block_name FROM cl_data_raw 
+          WHERE block_name IS NOT NULL AND is_deleted = FALSE
+        `;
+      } else {
+        // Default to pd_data_raw for PD data view
+        blockQuery = `
+          SELECT DISTINCT block_name FROM pd_data_raw 
+          WHERE block_name IS NOT NULL AND is_deleted = FALSE
+        `;
+      }
       
       if (domain_id) {
         blockQuery += ' AND domain_id = ?';
@@ -383,41 +394,57 @@ router.get('/filter-options', auth, async (req, res) => {
       blockQuery += ' ORDER BY block_name';
       [blocks] = await pool.query(blockQuery, blockParams);
     } else {
-      [blocks] = await pool.query(`
-        SELECT DISTINCT block_name FROM (
-          SELECT block_name FROM pd_data_raw WHERE block_name IS NOT NULL
-          UNION
-          SELECT module as block_name FROM dv_data_raw WHERE module IS NOT NULL
-          UNION
-          SELECT block_name FROM cl_data_raw WHERE block_name IS NOT NULL
-        ) combined_data WHERE block_name IS NOT NULL ORDER BY block_name
-      `);
+      // For no filters, show all blocks from the appropriate table
+      if (data_type === 'dv') {
+        [blocks] = await pool.query(`
+          SELECT DISTINCT module as block_name FROM dv_data_raw 
+          WHERE module IS NOT NULL AND is_deleted = FALSE 
+          ORDER BY module
+        `);
+      } else if (data_type === 'cl') {
+        [blocks] = await pool.query(`
+          SELECT DISTINCT block_name FROM cl_data_raw 
+          WHERE block_name IS NOT NULL AND is_deleted = FALSE 
+          ORDER BY block_name
+        `);
+      } else {
+        [blocks] = await pool.query(`
+          SELECT DISTINCT block_name FROM pd_data_raw 
+          WHERE block_name IS NOT NULL AND is_deleted = FALSE 
+          ORDER BY block_name
+        `);
+      }
     }
 
     // Get experiments based on domain, project, and block (only for PD data)
-    if (domain_id || project_id || block_name) {
-      let experimentQuery = 'SELECT DISTINCT experiment FROM pd_data_raw WHERE experiment IS NOT NULL';
-      let experimentParams = [];
-      
-      if (domain_id) {
-        experimentQuery += ' AND domain_id = ?';
-        experimentParams.push(domain_id);
+    if (data_type === 'pd' || !data_type) {
+      if (domain_id || project_id || block_name) {
+        let experimentQuery = 'SELECT DISTINCT experiment FROM pd_data_raw WHERE experiment IS NOT NULL AND is_deleted = FALSE';
+        let experimentParams = [];
+        
+        if (domain_id) {
+          experimentQuery += ' AND domain_id = ?';
+          experimentParams.push(domain_id);
+        }
+        
+        if (project_id) {
+          experimentQuery += ' AND project_id = ?';
+          experimentParams.push(project_id);
+        }
+        
+        if (block_name) {
+          experimentQuery += ' AND block_name = ?';
+          experimentParams.push(block_name);
+        }
+        
+        experimentQuery += ' ORDER BY experiment';
+        [experiments] = await pool.query(experimentQuery, experimentParams);
+      } else {
+        [experiments] = await pool.query('SELECT DISTINCT experiment FROM pd_data_raw WHERE experiment IS NOT NULL AND is_deleted = FALSE ORDER BY experiment');
       }
-      
-      if (project_id) {
-        experimentQuery += ' AND project_id = ?';
-        experimentParams.push(project_id);
-      }
-      
-      if (block_name) {
-        experimentQuery += ' AND block_name = ?';
-        experimentParams.push(block_name);
-      }
-      
-      experimentQuery += ' ORDER BY experiment';
-      [experiments] = await pool.query(experimentQuery, experimentParams);
     } else {
-      [experiments] = await pool.query('SELECT DISTINCT experiment FROM pd_data_raw WHERE experiment IS NOT NULL ORDER BY experiment');
+      // For non-PD data types, return empty experiments array
+      experiments = [];
     }
 
     res.json({

@@ -139,6 +139,7 @@ const DataVisualization = ({ projectFilters = {} }) => {
       if (domainId) queryParams.append('domain_id', domainId);
       if (projectId) queryParams.append('project_id', projectId);
       if (blockName) queryParams.append('block_name', blockName);
+      queryParams.append('data_type', 'pd'); // Specify PD data type for engineer view
 
       const response = await fetch(`http://localhost:5000/api/data/filter-options?${queryParams}`, {
         headers: {
@@ -265,9 +266,18 @@ const DataVisualization = ({ projectFilters = {} }) => {
         }
       });
       if (response.ok) {
-        const data = await response.json();
-        setPdData(data); // CL and DV data don't have pagination wrapper
-        setTotalPages(Math.ceil((data.length || 0) / 10));
+        const responseData = await response.json();
+        
+        // Handle different response formats for different domains
+        if (apiEndpoint === 'pd-data') {
+          // PD data has pagination wrapper
+          setPdData(responseData.data || []);
+          setTotalPages(Math.ceil((responseData.pagination?.total || 0) / 10));
+        } else {
+          // CL and DV data don't have pagination wrapper
+          setPdData(responseData || []);
+          setTotalPages(Math.ceil((responseData.length || 0) / 10));
+        }
       }
     } catch (error) {
       console.error('Error fetching data:', error);

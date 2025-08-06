@@ -16,6 +16,7 @@ const duplicateErrorsRoutes = require('./routes/duplicateErrors');
 const FileWatcher = require('./utils/fileWatcher');
 const dvDataRoute = require('./routes/dvData');
 const adminRoutes = require('./routes/admin');
+const plannedWorkRoutes = require('./routes/plannedWork');
 const logger = require('./utils/logger');
 
 const app = express();
@@ -34,7 +35,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from uploads directory
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads', {
+  setHeaders: (res, path) => {
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}));
 
 // Test database connection
 testConnection();
@@ -57,6 +64,7 @@ app.use('/api/data', dataRoutes);
 app.use('/api/data/duplicates', duplicateErrorsRoutes); // changed from '/api/data'
 app.use('/api/dv-data', dvDataRoute);
 app.use('/api/admin', adminRoutes);
+app.use('/api/planned-work', plannedWorkRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

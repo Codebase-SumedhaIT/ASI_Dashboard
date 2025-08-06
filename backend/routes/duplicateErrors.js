@@ -6,9 +6,9 @@ const logger = require('../utils/logger');
 // GET /api/data/logs - Get all logs with optional filtering
 router.get('/logs', auth, async (req, res) => {
   try {
-    const { level, file, search, limit = 1000, offset = 0 } = req.query;
+    const { level, file, search, limit = 1000, offset = 0, date } = req.query;
     
-    const result = logger.getLogs({ level, file, search, limit, offset });
+    const result = logger.getLogs({ level, file, search, limit, offset, date });
     
     res.json({ 
       errors: result.logs,

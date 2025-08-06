@@ -254,98 +254,1561 @@
 [2025-07-28T10:19:06.131Z] [server] [INFO] Server started and listening for connections
 [2025-07-28T10:19:06.133Z] [server] [INFO] File watcher initialized successfully
 [2025-07-28T10:19:06.157Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-28T13:24:52.100Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:24:52.104Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:27:07.428Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:27:07.431Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:30:11.741Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:30:11.743Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:30:40.291Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:30:40.295Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:33:52.748Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:33:52.751Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:33:52.851Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:33:52.854Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:34:09.656Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:34:09.661Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:34:50.406Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:34:50.410Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:35:38.475Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:35:38.478Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:39:32.835Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:39:32.839Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:43:25.261Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:43:25.264Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:50:34.237Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:50:34.239Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:50:34.244Z] [server] [INFO] Server started and listening for connections
-[2025-07-28T13:50:34.246Z] [server] [INFO] File watcher initialized successfully
-[2025-07-28T13:50:34.270Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-28T13:50:41.470Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:50:41.473Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:50:41.478Z] [server] [INFO] Server started and listening for connections
-[2025-07-28T13:50:41.480Z] [server] [INFO] File watcher initialized successfully
-[2025-07-28T13:50:41.501Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-28T13:50:52.982Z] [server] [INFO] Server closed
-[2025-07-28T13:52:31.296Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T13:52:31.299Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T13:52:31.305Z] [server] [INFO] Server started and listening for connections
-[2025-07-28T13:52:31.308Z] [server] [INFO] File watcher initialized successfully
-[2025-07-28T13:52:31.330Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-28T14:06:07.950Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-28T14:06:07.952Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-28T14:06:07.957Z] [server] [INFO] Server started and listening for connections
-[2025-07-28T14:06:07.958Z] [server] [INFO] File watcher initialized successfully
-[2025-07-28T14:06:07.977Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T08:10:14.347Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T08:10:14.353Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T08:10:14.372Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T08:10:14.381Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T08:10:14.413Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T08:21:53.047Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T08:21:53.052Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T08:21:53.063Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T08:21:53.069Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T08:21:53.120Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T08:23:48.775Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T08:23:48.781Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T08:23:48.795Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T08:23:48.802Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T08:23:48.855Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T08:40:35.353Z] [server] [INFO] Server closed
-[2025-07-29T08:40:44.297Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T08:40:44.302Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T08:40:44.311Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T08:40:44.317Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T08:40:44.382Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T08:49:23.663Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T08:49:23.668Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T08:49:23.678Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T08:49:23.684Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T08:49:23.740Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T10:18:49.668Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T10:18:49.671Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T10:18:49.676Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T10:18:49.678Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T10:18:49.698Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T10:20:05.377Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T10:20:05.385Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T10:20:05.401Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T10:20:05.410Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T10:20:05.467Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-07-29T10:20:40.493Z] [socket] [INFO] New client connected to log stream
-[2025-07-29T10:20:47.326Z] [socket] [INFO] Client disconnected from log stream
-[2025-07-29T10:22:05.275Z] [socket] [INFO] New client connected to log stream
-[2025-07-29T10:22:14.653Z] [socket] [INFO] Client disconnected from log stream
-[2025-07-29T10:30:02.241Z] [socket] [INFO] New client connected to log stream
-[2025-07-29T10:30:19.594Z] [socket] [INFO] Client disconnected from log stream
-[2025-07-29T10:49:54.500Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-07-29T10:49:54.506Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-07-29T10:49:54.519Z] [server] [INFO] Server started and listening for connections
-[2025-07-29T10:49:54.524Z] [server] [INFO] File watcher initialized successfully
-[2025-07-29T10:49:54.570Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
-[2025-08-06T06:31:54.434Z] [fileWatcher] [INFO] Scanning for existing CSV files...
-[2025-08-06T06:31:54.437Z] [fileWatcher] [INFO] No existing CSV files found in directory
-[2025-08-06T06:31:54.441Z] [server] [INFO] Server started and listening for connections
-[2025-08-06T06:31:54.444Z] [server] [INFO] File watcher initialized successfully
-[2025-08-06T06:31:54.476Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T12:57:06.435Z] [server] [INFO] Server closed
+[2025-07-28T12:57:21.401Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T12:57:21.488Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T12:57:21.496Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T12:57:21.499Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T12:57:21.548Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:45:30.241Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:45:30.244Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:45:30.248Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:45:30.250Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:45:30.274Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:45:42.214Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:45:42.217Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:45:42.223Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:45:42.225Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:45:42.252Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:45:52.567Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:45:52.570Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:45:52.576Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:45:52.578Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:45:52.607Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:46:01.781Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:46:01.783Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:46:01.787Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:46:01.789Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:46:01.817Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:46:11.756Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:46:11.758Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:46:11.763Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:46:11.765Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:46:11.795Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:46:21.660Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:46:21.664Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:46:21.670Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:46:21.673Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:46:21.702Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:47:38.990Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:47:38.993Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:47:38.997Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:47:39.000Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:47:39.032Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T13:49:01.159Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-28T13:49:01.162Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-28T13:49:01.168Z] [server] [INFO] Server started and listening for connections
+[2025-07-28T13:49:01.170Z] [server] [INFO] File watcher initialized successfully
+[2025-07-28T13:49:01.199Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-28T15:03:19.450Z] [server] [INFO] Server closed
+[2025-07-29T07:51:13.455Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T07:51:13.459Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T07:51:13.466Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T07:51:13.468Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T07:51:13.480Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:02:01.551Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:02:01.554Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:02:01.560Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:02:01.563Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:02:01.590Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:02:05.210Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:02:05.213Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:02:05.218Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:02:05.220Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:02:05.243Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:03:04.677Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:03:04.680Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:03:04.684Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:03:04.686Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:03:04.708Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:05:40.623Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:05:40.626Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:05:40.632Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:05:40.634Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:05:40.662Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:05:45.297Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:05:45.300Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:05:45.306Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:05:45.308Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:05:45.337Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:05:59.547Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:05:59.550Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:05:59.554Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:05:59.556Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:05:59.580Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:06:09.188Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T08:06:09.191Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T08:06:09.197Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T08:06:09.199Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T08:06:09.222Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T08:53:10.011Z] [socket] [INFO] New client connected to log stream
+[2025-07-29T08:53:13.367Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-29T08:56:53.038Z] [fileWatcher] [INFO] New file detected: ASi_pd.csv
+[2025-07-29T08:56:54.040Z] [fileWatcher] [INFO] Processing file: ASi_pd.csv
+[2025-07-29T08:56:54.123Z] [fileWatcher] [INFO] Processing result: {"total_rows":4,"mapped_rows":4,"unmapped_rows":0,"mapping_stats":{"high_confidence":4,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"PD","rows_processed":4,"success":true,"result":{"processed":4,"skipped":0,"errors":0,"total":4}}],"unmapped_samples":[]}
+[2025-07-29T08:56:54.128Z] [fileWatcher] [INFO] Archived: ASi_pd.csv → ASi_pd.csv_processed_2025-07-29T08-56-54-126Z.csv
+[2025-07-29T08:56:54.231Z] [fileWatcher] [INFO] File removed: ASi_pd.csv
+[2025-07-29T09:10:37.873Z] [socket] [INFO] New client connected to log stream
+[2025-07-29T09:10:41.089Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-29T09:11:08.873Z] [fileWatcher] [INFO] New file detected: P1_dv.csv
+[2025-07-29T09:11:09.875Z] [fileWatcher] [INFO] Processing file: P1_dv.csv
+[2025-07-29T09:11:09.880Z] [fileWatcher] [INFO] Processing result: {"total_rows":0,"mapped_rows":0,"unmapped_rows":0,"mapping_stats":{},"processing_results":[],"unmapped_samples":[],"skipped_reason":"Project 'P1' not found in database. File skipped."}
+[2025-07-29T09:11:09.882Z] [fileWatcher] [INFO] Archived: P1_dv.csv → P1_dv.csv_processed_2025-07-29T09-11-09-881Z.csv
+[2025-07-29T09:11:09.984Z] [fileWatcher] [INFO] File removed: P1_dv.csv
+[2025-07-29T09:11:56.082Z] [fileWatcher] [INFO] New file detected: ASi_dv.csv
+[2025-07-29T09:11:57.085Z] [fileWatcher] [INFO] Processing file: ASi_dv.csv
+[2025-07-29T09:11:57.115Z] [fileWatcher] [INFO] Processing result: {"total_rows":4,"mapped_rows":4,"unmapped_rows":0,"mapping_stats":{"high_confidence":4,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"DV","rows_processed":4,"success":true,"result":{"processed":4,"skipped":0,"errors":0,"total":4}}],"unmapped_samples":[]}
+[2025-07-29T09:11:57.117Z] [fileWatcher] [INFO] Archived: ASi_dv.csv → ASi_dv.csv_processed_2025-07-29T09-11-57-116Z.csv
+[2025-07-29T09:11:57.219Z] [fileWatcher] [INFO] File removed: ASi_dv.csv
+[2025-07-29T09:12:39.679Z] [fileWatcher] [INFO] New file detected: ASi_cl.csv
+[2025-07-29T09:12:40.682Z] [fileWatcher] [INFO] Processing file: ASi_cl.csv
+[2025-07-29T09:12:40.723Z] [fileWatcher] [INFO] Processing result: {"total_rows":5,"mapped_rows":5,"unmapped_rows":0,"mapping_stats":{"high_confidence":5,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"CL","rows_processed":5,"success":true,"result":{"processed":5,"skipped":0,"errors":0,"total":5}}],"unmapped_samples":[]}
+[2025-07-29T09:12:40.725Z] [fileWatcher] [INFO] Archived: ASi_cl.csv → ASi_cl.csv_processed_2025-07-29T09-12-40-724Z.csv
+[2025-07-29T09:12:40.828Z] [fileWatcher] [INFO] File removed: ASi_cl.csv
+[2025-07-29T09:14:52.829Z] [socket] [INFO] New client connected to log stream
+[2025-07-29T09:15:01.505Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-29T09:15:02.710Z] [socket] [INFO] New client connected to log stream
+[2025-07-29T09:15:03.416Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-29T09:32:13.218Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T09:32:13.220Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T09:32:13.226Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T09:32:13.228Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T09:32:13.254Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T09:32:23.590Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T09:32:23.594Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T09:32:23.600Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T09:32:23.603Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T09:32:23.632Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T09:32:57.030Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T09:32:57.033Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T09:32:57.037Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T09:32:57.039Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T09:32:57.062Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T09:58:32.792Z] [server] [INFO] Server closed
+[2025-07-29T09:58:38.222Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T09:58:38.225Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T09:58:38.229Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T09:58:38.231Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T09:58:38.260Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T10:49:19.235Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T10:49:19.240Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T10:49:19.247Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T10:49:19.249Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T10:49:19.290Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:23:35.720Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:23:35.722Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:23:35.727Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:23:35.729Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:23:35.753Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:24:37.030Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:24:37.032Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:24:37.036Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:24:37.038Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:24:37.061Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:24:47.309Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:24:47.312Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:24:47.317Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:24:47.319Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:24:47.345Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:24:59.640Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:24:59.642Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:24:59.648Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:24:59.650Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:24:59.675Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:25:10.227Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:25:10.230Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:25:10.235Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:25:10.237Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:25:10.265Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:25:22.329Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-29T11:25:22.332Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-29T11:25:22.338Z] [server] [INFO] Server started and listening for connections
+[2025-07-29T11:25:22.340Z] [server] [INFO] File watcher initialized successfully
+[2025-07-29T11:25:22.368Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-29T11:45:53.879Z] [socket] [INFO] New client connected to log stream
+[2025-07-29T11:56:57.276Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-30T04:36:57.884Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T04:36:57.887Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T04:36:57.896Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T04:36:57.898Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T04:36:57.910Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:33:45.960Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:33:45.963Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:33:45.967Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:33:45.969Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:33:45.992Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:33:50.438Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:33:50.441Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:33:50.446Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:33:50.448Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:33:50.473Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:48:55.157Z] [socket] [INFO] New client connected to log stream
+[2025-07-30T11:48:56.556Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-30T11:50:46.218Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:50:46.222Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:50:46.227Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:50:46.230Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:50:46.259Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:50:50.660Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:50:50.664Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:50:50.671Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:50:50.674Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:50:50.717Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:51:40.620Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:51:40.623Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:51:40.628Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:51:40.630Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:51:40.653Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:51:44.007Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:51:44.010Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:51:44.016Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:51:44.018Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:51:44.046Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:52:29.740Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:52:29.743Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:52:29.748Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:52:29.750Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:52:29.773Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:52:48.418Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:52:48.421Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:52:48.425Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:52:48.428Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:52:48.451Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:53:13.999Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:53:14.002Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:53:14.006Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:53:14.007Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:53:14.033Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:53:34.499Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:53:34.501Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:53:34.506Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:53:34.508Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:53:34.537Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:53:52.744Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:53:52.747Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:53:52.753Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:53:52.755Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:53:52.785Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:54:11.989Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:54:11.992Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:54:11.999Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:54:12.001Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:54:12.027Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T11:54:30.725Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T11:54:30.727Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T11:54:30.733Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T11:54:30.734Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T11:54:30.758Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T12:11:50.653Z] [socket] [INFO] New client connected to log stream
+[2025-07-30T12:11:51.364Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-30T12:11:53.375Z] [socket] [INFO] New client connected to log stream
+[2025-07-30T12:12:03.530Z] [socket] [INFO] Client disconnected from log stream
+[2025-07-30T12:12:08.883Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T12:12:08.885Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T12:12:08.890Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T12:12:08.892Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T12:12:08.913Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T12:12:32.805Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T12:12:32.808Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T12:12:32.813Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T12:12:32.815Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T12:12:32.845Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T12:12:56.891Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T12:12:56.894Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T12:12:56.905Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T12:12:56.908Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T12:12:56.948Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-07-30T12:13:16.376Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-07-30T12:13:16.379Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-07-30T12:13:16.383Z] [server] [INFO] Server started and listening for connections
+[2025-07-30T12:13:16.384Z] [server] [INFO] File watcher initialized successfully
+[2025-07-30T12:13:16.406Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T04:51:31.277Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T04:51:31.281Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T04:51:31.289Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T04:51:31.292Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T04:51:31.334Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T04:52:43.644Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T04:52:57.800Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T04:59:34.462Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T04:59:34.466Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T04:59:34.473Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T04:59:34.477Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T04:59:34.506Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T04:59:54.345Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T04:59:54.349Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T04:59:54.357Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T04:59:54.363Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T04:59:54.408Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:01:16.756Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:01:16.759Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:01:16.766Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:01:16.769Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:01:16.802Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:01:29.385Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:01:29.388Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:01:29.394Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:01:29.397Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:01:29.436Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:06:33.258Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:06:33.296Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:06:33.333Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:06:33.342Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:06:33.399Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:31:28.900Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:31:28.903Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:31:28.910Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:31:28.912Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:31:28.923Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:31:36.225Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:31:36.229Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:31:36.238Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:31:36.241Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:31:36.253Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:31:44.350Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:31:44.353Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:31:44.358Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:31:44.360Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:31:44.368Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:31:52.796Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:31:52.799Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:31:52.806Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:31:52.808Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:31:52.819Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:09.364Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:09.368Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:09.375Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:09.378Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:09.417Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:16.360Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:16.363Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:16.368Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:16.370Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:16.381Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:25.414Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:25.417Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:25.424Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:25.425Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:25.439Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:33.402Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:33.405Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:33.412Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:33.414Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:33.426Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:44.911Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:44.914Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:44.919Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:44.922Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:44.930Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:32:54.504Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:32:54.507Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:32:54.512Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:32:54.514Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:32:54.522Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:33:04.298Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:33:04.301Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:33:04.307Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:33:04.309Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:33:04.322Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:33:13.341Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:33:13.344Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:33:13.350Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:33:13.353Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:33:13.364Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:33:21.113Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:33:21.115Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:33:21.120Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:33:21.122Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:33:21.132Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:33:27.413Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:33:27.416Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:33:27.422Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:33:27.424Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:33:27.434Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:33:42.580Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:33:42.584Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:33:42.592Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:33:42.596Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:33:42.611Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:35:06.369Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:35:06.372Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:35:06.377Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:35:06.379Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:35:06.406Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:35:07.547Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:35:07.550Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:35:07.556Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:35:07.559Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:35:07.589Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:00.182Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:00.185Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:00.190Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:00.193Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:00.221Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:06.868Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:06.872Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:06.877Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:06.880Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:06.911Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:12.926Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:12.929Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:12.934Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:12.936Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:12.967Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:20.818Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:20.821Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:20.825Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:20.826Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:20.854Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:28.196Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:28.199Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:28.203Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:28.205Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:28.238Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:35.375Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:35.379Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:35.386Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:35.388Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:35.419Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:37.163Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:37.166Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:37.170Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:37.173Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:37.201Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:36:45.085Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:36:45.087Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:36:45.091Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:36:45.093Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:36:45.120Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:00.276Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:00.278Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:00.283Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:00.285Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:00.312Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:07.281Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:07.284Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:07.289Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:07.291Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:07.320Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:23.085Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:23.087Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:23.092Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:23.094Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:23.120Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:30.080Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:30.083Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:30.087Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:30.089Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:30.119Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:42.250Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:42.253Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:42.257Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:42.259Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:42.293Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:51.793Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:51.795Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:51.799Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:51.802Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:51.828Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:37:58.026Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:37:58.030Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:37:58.035Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:37:58.038Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:37:58.068Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:00.417Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:00.419Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:00.424Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:00.426Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:00.453Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:05.050Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:05.053Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:05.058Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:05.060Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:05.090Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:09.306Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:09.311Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:09.316Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:09.319Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:09.348Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:17.388Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:17.391Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:17.398Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:17.400Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:17.434Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:20.734Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:20.737Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:20.741Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:20.743Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:20.770Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:30.952Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:30.955Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:30.959Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:30.961Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:30.993Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:40.237Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:40.240Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:40.245Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:40.247Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:40.270Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:38:48.809Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:38:48.812Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:38:48.817Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:38:48.819Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:38:48.842Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:02.728Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:02.730Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:02.735Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:02.736Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:02.764Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:11.799Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:11.802Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:11.806Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:11.808Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:11.839Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:21.174Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:21.176Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:21.180Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:21.182Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:21.206Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:29.487Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:29.490Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:29.494Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:29.496Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:29.525Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:43.224Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:43.226Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:43.231Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:43.232Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:43.267Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:39:54.813Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:39:54.816Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:39:54.820Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:39:54.822Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:39:54.846Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:40:02.745Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:40:02.747Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:40:02.752Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:40:02.754Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:40:02.785Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:40:25.099Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:40:25.102Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:40:25.106Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:40:25.108Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:40:25.136Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:40:34.284Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:40:34.287Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:40:34.291Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:40:34.293Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:40:34.320Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:40:43.286Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:40:43.289Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:40:43.294Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:40:43.295Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:40:43.324Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:40:55.277Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:40:55.279Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:40:55.284Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:40:55.286Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:40:55.322Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:41:04.636Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:41:04.639Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:41:04.644Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:41:04.645Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:41:04.671Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:41:12.169Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:41:12.172Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:41:12.176Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:41:12.178Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:41:12.209Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:41:31.379Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:41:31.382Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:41:31.387Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:41:31.388Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:41:31.420Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:41:40.917Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:41:40.920Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:41:40.924Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:41:40.926Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:41:40.955Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:41:54.092Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:41:54.095Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:41:54.101Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:41:54.104Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:41:54.133Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:42:04.393Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:42:04.397Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:42:04.401Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:42:04.403Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:42:04.431Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:42:19.891Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:42:19.894Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:42:19.899Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:42:19.901Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:42:19.927Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:42:30.985Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:42:30.988Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:42:30.993Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:42:30.995Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:42:31.032Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:42:40.666Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:42:40.669Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:42:40.673Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:42:40.676Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:42:40.704Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:42:48.857Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:42:48.860Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:42:48.865Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:42:48.867Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:42:48.895Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:43:04.307Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:43:04.310Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:43:04.316Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:43:04.318Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:43:04.350Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:43:13.911Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:43:13.914Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:43:13.921Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:43:13.924Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:43:13.959Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:43:22.083Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:43:22.086Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:43:22.091Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:43:22.093Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:43:22.130Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:44:05.668Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:44:05.672Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:44:05.678Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:44:05.680Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:44:05.709Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:44:10.981Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:44:10.986Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:44:10.993Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:44:10.996Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:44:11.022Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:45:38.566Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:45:38.570Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:45:38.578Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:45:38.580Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:45:38.617Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:45:56.444Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:45:56.447Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:45:56.454Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:45:56.458Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:45:56.499Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:45:59.332Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:45:59.335Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:45:59.344Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:45:59.348Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:45:59.389Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:46:06.848Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:46:06.852Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:46:06.858Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:46:06.861Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:46:06.893Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:46:23.181Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:46:23.184Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:46:23.189Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:46:23.191Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:46:23.221Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:46:35.791Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:46:35.795Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:46:35.800Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:46:35.802Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:46:35.834Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:46:56.998Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:46:57.000Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:46:57.005Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:46:57.007Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:46:57.038Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:47:13.503Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:47:13.507Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:47:13.513Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:47:13.515Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:47:13.557Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:47:32.202Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:47:32.205Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:47:32.211Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:47:32.214Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:47:32.257Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:47:49.297Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:47:49.300Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:47:49.304Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:47:49.306Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:47:49.332Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:48:25.327Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:48:25.330Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:48:25.335Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:48:25.338Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:48:25.368Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:48:37.876Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:48:37.879Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:48:37.884Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:48:37.885Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:48:37.914Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:49:26.896Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:49:26.899Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:49:26.903Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:49:26.905Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:49:26.932Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:49:44.958Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:49:44.961Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:49:44.965Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:49:44.967Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:49:44.993Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:50:46.814Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:50:46.818Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:50:46.824Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:50:46.827Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:50:46.861Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:51:08.702Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:51:08.704Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:51:08.709Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:51:08.711Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:51:08.736Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T05:56:56.830Z] [server] [INFO] Server closed
+[2025-08-01T05:56:59.063Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T05:56:59.066Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T05:56:59.070Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T05:56:59.072Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T05:56:59.100Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:03:47.881Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T06:03:48.649Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T06:13:28.717Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:13:28.719Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:13:28.724Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:13:28.725Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:13:28.751Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:13:42.876Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:13:42.882Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:13:42.887Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:13:42.889Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:13:42.944Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:19:09.901Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:19:09.904Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:19:09.909Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:19:09.911Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:19:09.935Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:19:40.030Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:19:40.033Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:19:40.038Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:19:40.040Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:19:40.078Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:22:12.137Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:22:12.140Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:22:12.144Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:22:12.146Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:22:12.175Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:23:41.389Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:23:41.392Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:23:41.396Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:23:41.399Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:23:41.427Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:24:13.059Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:24:13.071Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:24:13.081Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:24:13.092Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:24:13.139Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:24:32.880Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:24:32.882Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:24:32.887Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:24:32.890Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:24:32.920Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:25:20.135Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:25:20.138Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:25:20.144Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:25:20.147Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:25:20.175Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:25:41.718Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:25:41.721Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:25:41.726Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:25:41.728Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:25:41.760Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:26:35.798Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:26:35.801Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:26:35.805Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:26:35.807Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:26:35.836Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:26:42.009Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:26:42.014Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:26:42.020Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:26:42.022Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:26:42.059Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:26:57.532Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:26:57.535Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:26:57.540Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:26:57.542Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:26:57.570Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:34:19.630Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:34:19.633Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:34:19.637Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:34:19.639Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:34:19.668Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:34:50.200Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:34:50.203Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:34:50.207Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:34:50.208Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:34:50.241Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:37:40.027Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:37:40.030Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:37:40.034Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:37:40.036Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:37:40.066Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:48:28.386Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:48:28.389Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:48:28.393Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:48:28.394Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:48:28.420Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:48:43.421Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:48:43.425Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:48:43.432Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:48:43.434Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:48:43.470Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:49:11.330Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:49:11.332Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:49:11.337Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:49:11.339Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:49:11.369Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:49:30.949Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:49:30.953Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:49:30.960Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:49:30.963Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:49:31.007Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:49:55.900Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:49:55.903Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:49:55.920Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:49:55.922Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:49:55.952Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:49:59.065Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:49:59.068Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:49:59.073Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:49:59.075Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:49:59.104Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:50:13.104Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:50:13.107Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:50:13.112Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:50:13.114Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:50:13.141Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:50:38.735Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:50:38.737Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:50:38.742Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:50:38.744Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:50:38.777Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:50:59.437Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:50:59.439Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:50:59.443Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:50:59.446Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:50:59.474Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:51:16.589Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:51:16.592Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:51:16.598Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:51:16.600Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:51:16.633Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T06:53:54.773Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T06:53:54.775Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T06:53:54.780Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T06:53:54.782Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T06:53:54.812Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T08:34:52.506Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T08:34:54.336Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T08:40:16.020Z] [server] [INFO] Server closed
+[2025-08-01T08:50:43.612Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T08:50:43.615Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T08:50:43.622Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T08:50:43.625Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T08:50:43.659Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T08:52:43.481Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T08:52:44.221Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T09:09:37.558Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T09:09:38.283Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:00:16.669Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:00:24.435Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:09:41.018Z] [fileWatcher] [INFO] New file detected: ASi_dv.csv
+[2025-08-01T10:09:42.021Z] [fileWatcher] [INFO] Processing file: ASi_dv.csv
+[2025-08-01T10:09:42.052Z] [fileWatcher] [INFO] Processing result: {"total_rows":4,"mapped_rows":4,"unmapped_rows":0,"mapping_stats":{"high_confidence":4,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"DV","rows_processed":4,"success":true,"result":{"processed":0,"skipped":4,"errors":0,"total":4}}],"unmapped_samples":[]}
+[2025-08-01T10:09:42.057Z] [fileWatcher] [INFO] Archived: ASi_dv.csv → ASi_dv.csv_processed_2025-08-01T10-09-42-055Z.csv
+[2025-08-01T10:09:42.162Z] [fileWatcher] [INFO] File removed: ASi_dv.csv
+[2025-08-01T10:22:03.088Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:22:03.091Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:22:03.096Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:22:03.098Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:22:03.123Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:22:21.161Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:22:21.164Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:22:21.169Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:22:21.171Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:22:21.198Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:22:41.980Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:22:41.982Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:22:41.988Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:22:41.990Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:22:42.014Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:22:59.721Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:22:59.723Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:22:59.729Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:22:59.732Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:22:59.755Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:23:17.939Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:23:17.942Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:23:17.946Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:23:17.948Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:23:17.973Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:26:21.432Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:26:21.435Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:26:21.442Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:26:21.445Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:26:21.478Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:27:22.461Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:27:23.627Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:27:55.080Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:27:55.381Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:27:56.351Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:27:57.399Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:28:04.843Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:38:19.072Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:38:19.122Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:42:04.087Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:42:04.135Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:42:17.403Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:42:17.459Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:42:26.538Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:42:26.541Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:42:26.546Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:42:26.548Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:42:26.575Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:42:27.508Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:42:31.139Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:42:31.222Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:42:48.779Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:42:48.781Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:42:48.786Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:42:48.788Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:42:48.815Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:42:49.699Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:43:02.156Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:43:02.159Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:43:02.165Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:43:02.167Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:43:02.196Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:43:02.918Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:43:28.813Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:43:28.815Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:43:28.820Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:43:28.822Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:43:28.853Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:43:29.346Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:43:38.314Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:43:38.368Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:43:50.851Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:43:50.917Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:44:15.772Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:44:15.810Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:44:28.996Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:44:29.039Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:45:27.213Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:50:00.298Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:51:53.498Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:51:53.546Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:52:08.235Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:52:08.292Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:52:26.787Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:52:26.831Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:52:43.589Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:52:43.638Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:52:58.862Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:52:58.911Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:53:13.874Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:53:13.924Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:53:26.077Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:53:26.103Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:53:56.329Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:53:56.379Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:54:11.049Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:54:11.089Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:54:22.311Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:54:22.367Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:54:31.076Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:54:31.114Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:55:08.698Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:55:08.739Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:55:25.515Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:55:25.568Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:55:42.956Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:55:43.015Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:56:00.677Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:56:00.715Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:56:22.998Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:56:23.025Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:56:58.795Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:56:58.823Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:57:32.653Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T10:57:32.656Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T10:57:32.662Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T10:57:32.664Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T10:57:32.696Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T10:57:32.871Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:57:37.034Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:57:38.757Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:57:43.145Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:57:43.182Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:58:03.085Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:58:03.124Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:58:38.584Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:58:38.655Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:58:50.924Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:58:50.979Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:58:53.531Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:58:55.599Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:59:00.623Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:59:00.661Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:59:12.802Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:59:12.839Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:59:24.017Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:59:24.072Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:59:40.280Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T10:59:40.334Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T10:59:42.464Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:02:42.284Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:02:49.200Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:03:13.633Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:03:18.417Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:03:18.440Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:03:27.575Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:03:27.602Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:03:39.864Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:03:39.887Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:03:58.975Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:03:59.000Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:04:18.448Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:04:18.540Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:04:30.848Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:04:36.649Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:04:45.122Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:04:45.143Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:04:54.586Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:04:54.604Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:05:07.915Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:05:07.988Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:05:22.274Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:06:14.991Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:06:52.232Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:06:52.256Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:06:59.486Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:06:59.509Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:07:14.232Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:07:14.252Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:07:28.674Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:07:38.004Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:08:31.653Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:08:31.719Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:08:41.159Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:08:41.210Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:09:01.160Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:09:01.200Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:09:14.089Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:09:14.144Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:09:24.086Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:09:24.136Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:09:39.914Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:09:39.966Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:10:01.160Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:10:01.210Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:10:18.558Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:10:18.596Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:11:55.431Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:11:55.469Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:12:20.019Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:12:20.051Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:13:49.314Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:13:49.355Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:14:00.321Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:14:00.360Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:15:00.863Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:15:00.900Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:15:29.501Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:15:29.543Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:15:41.513Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:15:41.558Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:15:58.289Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:15:58.314Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:16:56.345Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:16:56.375Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:17:07.548Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:17:07.582Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:17:22.743Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:17:22.776Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:17:35.694Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:17:35.743Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:17:58.212Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:17:58.259Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:20:27.267Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:20:27.300Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:20:40.004Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:20:40.051Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:21:05.601Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:21:05.634Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:21:19.026Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:21:19.093Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:21:38.283Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:21:38.340Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:21:46.061Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T11:21:46.063Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T11:21:46.067Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T11:21:46.069Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T11:21:46.099Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T11:21:46.237Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:21:57.332Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T11:21:58.336Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T11:21:58.341Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:21:58.346Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:22:17.699Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:22:19.547Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:22:57.596Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:23:05.386Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:24:00.359Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:24:00.405Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:24:14.760Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:24:14.816Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:24:24.725Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:24:24.780Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:24:56.344Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:24:56.414Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:25:10.741Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:25:10.775Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:25:22.111Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:25:22.151Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:25:37.015Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:25:37.058Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:27:23.066Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:27:23.092Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:27:33.867Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:27:33.908Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:27:51.970Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:27:52.006Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:28:16.860Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:28:16.888Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:29:27.449Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:29:27.484Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:29:49.711Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:29:49.757Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:30:27.135Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:30:27.172Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:30:38.350Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:30:38.388Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:30:53.873Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:30:53.912Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:31:05.483Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:31:06.717Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:31:36.902Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:31:36.948Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:31:54.259Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:31:54.290Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:32:12.024Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:32:12.048Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:32:41.831Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:32:43.529Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:34:02.957Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:34:03.002Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:34:07.281Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:34:10.221Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:34:19.219Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T11:34:19.222Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T11:34:19.227Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T11:34:20.159Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:34:20.225Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T11:34:20.227Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:34:20.228Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:34:20.229Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T11:34:20.235Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T11:34:20.236Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T11:34:21.235Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T11:34:21.236Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:34:21.237Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:34:37.164Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:34:37.205Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:34:55.999Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:34:56.023Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:35:10.921Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T11:35:10.924Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T11:35:10.929Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T11:35:11.931Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T11:35:11.934Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:35:11.935Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T11:35:11.937Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T11:35:11.942Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T11:35:11.943Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T11:35:11.977Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:35:12.946Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T11:35:12.948Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:35:12.949Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T11:46:47.941Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:46:49.577Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:58:58.941Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T11:59:04.482Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T11:59:04.711Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T12:03:47.904Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T12:03:48.648Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T13:14:55.719Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:14:55.723Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T13:14:55.733Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:14:57.044Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:14:57.048Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T13:14:57.054Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:14:58.055Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:14:58.058Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:14:58.059Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:14:58.061Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T13:14:58.092Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T13:14:58.094Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T13:14:59.094Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:14:59.095Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:14:59.096Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:15:06.581Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T13:15:12.154Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:15:12.157Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T13:15:12.163Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:15:13.160Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T13:15:13.164Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:15:13.165Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:15:13.166Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:15:13.168Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T13:15:13.177Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T13:15:13.177Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T13:15:14.178Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:15:14.180Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:15:14.181Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:15:20.616Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:15:20.619Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-01T13:15:20.623Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:15:21.633Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:15:21.636Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:15:21.637Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-01T13:15:21.639Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T13:15:21.644Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-01T13:15:21.645Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T13:15:21.661Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T13:15:22.646Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-01T13:15:22.647Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:15:22.648Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-01T13:16:33.463Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T13:16:34.533Z] [socket] [INFO] New client connected to log stream
+[2025-08-01T13:16:44.765Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-01T13:16:57.975Z] [fileWatcher] [INFO] File removed: pp.csv
+[2025-08-01T13:17:25.914Z] [server] [INFO] Server closed
+[2025-08-01T13:17:27.908Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:17:27.911Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T13:17:27.916Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:17:27.918Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T13:17:27.952Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T13:17:37.754Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T13:17:37.762Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T13:17:37.771Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T13:17:37.773Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T13:17:37.814Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T16:05:48.254Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T16:05:48.256Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T16:05:48.261Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T16:05:48.263Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T16:05:48.294Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T16:06:05.848Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T16:06:05.850Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T16:06:05.855Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T16:06:05.857Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T16:06:05.888Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-01T16:06:35.927Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-01T16:06:35.930Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-01T16:06:35.936Z] [server] [INFO] Server started and listening for connections
+[2025-08-01T16:06:35.938Z] [server] [INFO] File watcher initialized successfully
+[2025-08-01T16:06:35.975Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-04T11:23:12.686Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-04T11:23:12.690Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-04T11:23:12.695Z] [server] [INFO] Server started and listening for connections
+[2025-08-04T11:23:12.697Z] [server] [INFO] File watcher initialized successfully
+[2025-08-04T11:23:12.739Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-04T11:34:58.803Z] [socket] [INFO] New client connected to log stream
+[2025-08-04T11:35:20.193Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-04T11:38:04.892Z] [socket] [INFO] New client connected to log stream
+[2025-08-04T11:38:06.658Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-04T13:46:51.955Z] [socket] [INFO] New client connected to log stream
+[2025-08-04T13:47:17.430Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:27:41.247Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:27:41.250Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:27:41.256Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:27:41.257Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:27:41.266Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:37:04.676Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:37:05.048Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:39:00.307Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:39:01.663Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:40:02.818Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:40:02.822Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:40:02.827Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:40:02.830Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:40:02.861Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:41:22.166Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:41:22.169Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:41:22.173Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:41:22.175Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:41:22.201Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:42:11.951Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:42:11.953Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:42:11.957Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:42:11.959Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:42:11.991Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:42:54.803Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:42:54.806Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:42:54.812Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:42:54.814Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:42:54.844Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:43:33.782Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:43:33.785Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:43:33.789Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:43:33.791Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:43:33.814Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:43:57.816Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:43:57.820Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:43:57.826Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:43:57.828Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:43:57.858Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:44:13.710Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T04:44:13.717Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T04:44:13.726Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T04:44:13.734Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T04:44:13.788Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T04:44:31.950Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:45:44.270Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:45:44.296Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:45:48.878Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:45:51.455Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:45:54.948Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:45:54.990Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:46:12.846Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:46:12.878Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:46:23.071Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:46:23.102Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:46:31.139Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:46:31.179Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:46:40.804Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:46:40.824Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:46:50.617Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:46:50.659Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:47:20.281Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:47:20.328Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:47:28.310Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:47:28.351Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:48:31.810Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:48:31.890Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:48:58.942Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:48:59.018Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:49:12.347Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:49:12.380Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:50:08.804Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:50:08.875Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:50:19.056Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:50:19.091Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:50:58.190Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:50:58.241Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:51:26.283Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:51:26.330Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:51:39.408Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:51:39.461Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:51:49.189Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:51:50.965Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:52:23.509Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:53:40.497Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:53:42.052Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T04:55:12.104Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T04:55:26.700Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:00:27.885Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:00:33.730Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:00:37.111Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:00:40.591Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:03:37.989Z] [server] [INFO] Server closed
+[2025-08-05T05:03:40.662Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T05:03:40.665Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T05:03:40.670Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T05:03:40.672Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T05:03:40.698Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T05:04:06.691Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:04:07.996Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:13:55.367Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:14:17.994Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:15:52.663Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:15:53.002Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:15:54.964Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:15:59.609Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T05:16:09.566Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T05:16:09.787Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T06:39:13.150Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T06:40:46.519Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T06:58:58.437Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T06:59:04.529Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T07:00:22.409Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T07:01:12.866Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:01:12.868Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:01:12.873Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:01:12.874Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:01:12.909Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:01:13.053Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T07:01:18.387Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T07:01:27.453Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:01:27.455Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:01:27.461Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:01:27.463Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:01:27.492Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:02:55.443Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:02:55.446Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:02:55.451Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:02:55.454Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:02:55.486Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:03:07.515Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:03:07.519Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:03:07.523Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:03:07.526Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:03:07.562Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:03:40.593Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:03:40.596Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:03:40.600Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:03:40.602Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:03:40.633Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:03:42.666Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T07:03:42.669Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T07:03:42.673Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T07:03:42.676Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T07:03:42.711Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T07:04:53.055Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T07:04:59.483Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T08:36:08.913Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T08:36:08.919Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T08:36:08.929Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T08:36:08.932Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T08:36:08.991Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T08:39:07.819Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-05T08:39:07.823Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-05T08:39:07.829Z] [server] [INFO] Server started and listening for connections
+[2025-08-05T08:39:07.833Z] [server] [INFO] File watcher initialized successfully
+[2025-08-05T08:39:07.870Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-05T08:43:37.222Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T08:43:37.784Z] [socket] [INFO] Client disconnected from log stream
+[2025-08-05T08:53:42.709Z] [fileWatcher] [INFO] New file detected: rama_pd.csv
+[2025-08-05T08:53:43.713Z] [fileWatcher] [INFO] Processing file: rama_pd.csv
+[2025-08-05T08:53:43.746Z] [fileWatcher] [INFO] Processing result: {"total_rows":4,"mapped_rows":4,"unmapped_rows":0,"mapping_stats":{"high_confidence":4,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"PD","rows_processed":4,"success":true,"result":{"processed":4,"skipped":0,"errors":0,"total":4}}],"unmapped_samples":[]}
+[2025-08-05T08:53:43.749Z] [fileWatcher] [INFO] Archived: rama_pd.csv → rama_pd.csv_processed_2025-08-05T08-53-43-748Z.csv
+[2025-08-05T08:53:43.852Z] [fileWatcher] [INFO] File removed: rama_pd.csv
+[2025-08-05T08:53:46.995Z] [socket] [INFO] New client connected to log stream
+[2025-08-05T08:54:49.530Z] [fileWatcher] [INFO] New file detected: rama.csv
+[2025-08-05T08:54:50.533Z] [fileWatcher] [INFO] Processing file: rama.csv
+[2025-08-05T08:54:50.535Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: rama.csv
+Error: Domain name is missing or not in the expected format in filename: rama.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-05T08:54:50.536Z] [fileWatcher] [ERROR] Error processing file rama.csv: Domain name is missing or not in the expected format in filename: rama.csv
+Error: Domain name is missing or not in the expected format in filename: rama.csv
+    at processCSVFile (C:\Users\2020r\dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-05T08:55:06.125Z] [fileWatcher] [INFO] File removed: rama.csv
+[2025-08-05T08:55:08.058Z] [fileWatcher] [INFO] New file detected: rama_pd.csv
+[2025-08-05T08:55:09.065Z] [fileWatcher] [INFO] Processing file: rama_pd.csv
+[2025-08-05T08:55:09.086Z] [fileWatcher] [INFO] Processing result: {"total_rows":3,"mapped_rows":3,"unmapped_rows":0,"mapping_stats":{"high_confidence":3,"medium_confidence":0,"low_confidence":0,"none_confidence":0},"processing_results":[{"domain":"PD","rows_processed":3,"success":true,"result":{"processed":3,"skipped":0,"errors":0,"total":3}}],"unmapped_samples":[]}
+[2025-08-05T08:55:09.088Z] [fileWatcher] [INFO] Archived: rama_pd.csv → rama_pd.csv_processed_2025-08-05T08-55-09-087Z.csv
+[2025-08-05T08:55:09.191Z] [fileWatcher] [INFO] File removed: rama_pd.csv
+[2025-08-05T08:55:24.450Z] [socket] [INFO] Client disconnected from log stream
