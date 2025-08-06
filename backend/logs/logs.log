@@ -1486,3 +1486,40 @@ Error: Domain name is missing or not in the expected format in filename: pp.csv
     at async FSWatcher.<anonymous> (C:\Users\2020r\dashboard\backend\utils\fileWatcher.js:45:11)
 [2025-08-01T11:46:47.941Z] [socket] [INFO] Client disconnected from log stream
 [2025-08-01T11:46:49.577Z] [socket] [INFO] New client connected to log stream
+[2025-08-02T12:57:01.344Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-02T12:57:01.359Z] [fileWatcher] [INFO] Found 1 existing CSV file(s)
+[2025-08-02T12:57:01.446Z] [server] [INFO] Server started and listening for connections
+[2025-08-02T12:57:02.368Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-02T12:57:02.376Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-02T12:57:02.405Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FileWatcher.processExistingFiles (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:81:11)
+    at async FileWatcher.startWatching (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:26:7)
+[2025-08-02T12:57:02.410Z] [server] [INFO] File watcher initialized successfully
+[2025-08-02T12:57:02.424Z] [fileWatcher] [INFO] New file detected: pp.csv
+[2025-08-02T12:57:02.425Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
+[2025-08-02T12:57:03.431Z] [fileWatcher] [INFO] Processing file: pp.csv
+[2025-08-02T12:57:03.433Z] [enhancedCSVProcessor] [ERROR] Error processing CSV file: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-02T12:57:03.435Z] [fileWatcher] [ERROR] Error processing file pp.csv: Domain name is missing or not in the expected format in filename: pp.csv
+Error: Domain name is missing or not in the expected format in filename: pp.csv
+    at processCSVFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\enhancedCSVProcessor.js:137:13)
+    at FileWatcher.processNewFile (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:118:28)
+    at async FSWatcher.<anonymous> (C:\Users\Bhavya\OneDrive\Desktop\dashboard\ASI_Dashboard\backend\utils\fileWatcher.js:45:11)
+[2025-08-02T12:59:45.287Z] [fileWatcher] [INFO] File removed: pp.csv
+[2025-08-02T13:00:06.416Z] [server] [INFO] Server closed
+[2025-08-02T13:00:12.759Z] [fileWatcher] [INFO] Scanning for existing CSV files...
+[2025-08-02T13:00:12.765Z] [fileWatcher] [INFO] No existing CSV files found in directory
+[2025-08-02T13:00:12.774Z] [server] [INFO] Server started and listening for connections
+[2025-08-02T13:00:12.777Z] [server] [INFO] File watcher initialized successfully
+[2025-08-02T13:00:12.820Z] [fileWatcher] [INFO] File watcher is ready and monitoring for new CSV files...
