@@ -41,7 +41,7 @@ Update the `.env` file in the backend folder:
 ```env
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=your_mysql_password
+  DB_PASSWORD=your_mysql_password
 DB_NAME=eda_dashboard
 DB_PORT=3306
 JWT_SECRET=your_super_secret_jwt_key_here

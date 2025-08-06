@@ -75,7 +75,7 @@ app.use('*', (req, res) => {
 });
 
 // Environment variable validation
-const requiredEnv = ['PORT', 'CORS_ORIGIN', 'DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
+const requiredEnv = ['PORT', 'CORS_ORIGIN', 'DB_HOST', 'DB_USER', 'DB_NAME'];
 const missingEnv = requiredEnv.filter(key => !process.env[key]);
 if (missingEnv.length) {
   console.error('❌ Missing required environment variables:', missingEnv.join(', '));
