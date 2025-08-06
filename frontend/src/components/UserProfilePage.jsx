@@ -121,10 +121,15 @@ const UserProfilePage = ({ user, onLogout, onUserUpdate }) => {
                 src={`http://localhost:5000${user.profile_picture}`} 
                 alt="Profile" 
                 className="profile-picture"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
               />
-            ) : (
-              getUserInitials(user?.name)
-            )}
+            ) : null}
+            <div className="profile-initials" style={{ display: user?.profile_picture ? 'none' : 'flex' }}>
+              {getUserInitials(user?.name)}
+            </div>
             {uploading && <div className="upload-overlay">Uploading...</div>}
             <div className="avatar-upload-icon">📷</div>
           </div>

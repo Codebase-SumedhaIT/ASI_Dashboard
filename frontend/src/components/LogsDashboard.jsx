@@ -34,6 +34,7 @@ const LogsDashboard = ({ user }) => {
   const [availableDates, setAvailableDates] = useState([]);
   const [selectedHour, setSelectedHour] = useState(null);
   const [viewMode, setViewMode] = useState('hours'); // 'hours' or 'minutes'
+  const [showDateFilter, setShowDateFilter] = useState(false);
 
   // Helper: Parse timestamps from log lines and group by minute and level, filtered by date if selected and by level if filtered
   const getLogsOverTimeMultiSeries = (levelFilter = 'all') => {
@@ -50,22 +51,15 @@ const LogsDashboard = ({ user }) => {
       });
     }
 
-    // If no date is selected, use last 30 minutes
+    // If no date is selected, show all data grouped by date
     if (!selectedDate) {
-      const now = dayjs();
-      const lastN = 30;
-      // Initialize counts for each minute and level
+      // Group logs by date
       let counts = {};
-      for (let i = lastN - 1; i >= 0; i--) {
-        const minute = now.subtract(i, 'minute').format('YYYY-MM-DD HH:mm');
-        counts[minute] = { error: 0, total: 0 };
-      }
       
-      // Count logs per minute and level (errors and success)
       filteredLogs.forEach(log => {
         const match = log.match(timeRegex);
         if (match) {
-          const minute = dayjs(match[1]).format('YYYY-MM-DD HH:mm');
+          const date = dayjs(match[1]).format('YYYY-MM-DD');
           
           // More precise detection logic
           const hasSuccessTrue = /"success":\s*true/i.test(log);
@@ -80,25 +74,25 @@ const LogsDashboard = ({ user }) => {
           const hasErrorTag = /\[error\]/i.test(log); // Check for [ERROR] tag
           const isError = hasErrorTrue || hasException || hasErrorCount || hasErrorTag;
           
-          counts[minute] = counts[minute] || { error: 0, success: 0, total: 0 };
+          counts[date] = counts[date] || { error: 0, success: 0, total: 0 };
           
           if (isSuccess) {
-            counts[minute].success++;
-            counts[minute].total++;
+            counts[date].success++;
+            counts[date].total++;
           } else if (isError) {
-            counts[minute].error++;
-            counts[minute].total++;
+            counts[date].error++;
+            counts[date].total++;
           }
         }
       });
       
-      // Prepare data arrays for last 30 minutes
-      const labels = Object.keys(counts);
+      // Prepare data arrays for all dates
+      const labels = Object.keys(counts).sort(); // Sort dates chronologically
       return {
-        labels: labels.map(l => dayjs(l).format('HH:mm')),
-        error: labels.map(minute => counts[minute].error),
-        success: labels.map(minute => counts[minute].success),
-        total: labels.map(minute => counts[minute].total),
+        labels: labels.map(l => dayjs(l).format('MM/DD')),
+        error: labels.map(date => counts[date].error),
+        success: labels.map(date => counts[date].success),
+        total: labels.map(date => counts[date].total),
       };
     } else {
       // For selected date, show hours by default, or minutes if a specific hour is selected
@@ -221,6 +215,19 @@ const LogsDashboard = ({ user }) => {
     });
   };
 
+  // Helper to get error reasons for a given date
+  const getErrorReasonsForDate = (dateLabel) => {
+    const timeRegex = /^\[(.*?)\]/;
+    // Find logs for the selected date and that are errors
+    return logs.filter(log => {
+      const match = log.match(timeRegex);
+      if (!match) return false;
+      // Format log's timestamp to MM/DD to match chart label
+      const logDate = dayjs(match[1]).format('MM/DD');
+      return logDate === dateLabel && /error|exception|fail/i.test(log);
+    });
+  };
+
   // Animation state for fade-in
   const [animate, setAnimate] = useState(false);
   useEffect(() => {
@@ -269,13 +276,12 @@ const LogsDashboard = ({ user }) => {
     let isMounted = true;
     setLoading(true);
     
-    // Fetch initial logs from backend (last 30 minutes)
+    // Fetch initial logs from backend (all logs when no date selected)
     const fetchLogs = async () => {
       try {
         const token = localStorage.getItem('token');
-        // Get logs from the last 30 minutes
-        const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
-        const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=1000&since=${thirtyMinutesAgo}`, {
+        // Get all logs when no date is selected
+        const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=10000`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -418,9 +424,8 @@ const LogsDashboard = ({ user }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      // Get logs from the last 30 minutes
-      const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
-      const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=1000&since=${thirtyMinutesAgo}`, {
+      // Get all logs when no date is selected
+      const res = await fetch(`http://localhost:5000/api/data/duplicates/logs?limit=10000`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -462,7 +467,37 @@ const LogsDashboard = ({ user }) => {
 
   // Modern UI inspired by Dribbble shot
   return (
-    <div className="dashboard-content" style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', minHeight: '100vh' }}>
+    <div className="dashboard-content" style={{ 
+      background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', 
+      minHeight: '100vh',
+      // Add CSS animation for slide-down effect
+      '--slideDown': `
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `
+    }}>
+      <style>
+        {`
+          @keyframes slideDown {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
       <h2 style={{ fontWeight: 700, fontSize: '2rem', marginBottom: 24 }}>System Status Dashboard</h2>
       <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 32 }}>
         <div className="card" style={{ flex: 1, minWidth: 180, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 4px 24px rgba(59,130,246,0.12)' }}>
@@ -484,110 +519,287 @@ const LogsDashboard = ({ user }) => {
         </div>
       </div>
 
-      {/* Filters for date (MUI DatePicker) */}
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Box sx={{ 
-          display: 'flex', 
-          gap: 2, 
-          alignItems: 'center', 
-          mb: 3, 
-          p: 3, 
-          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)', 
-          borderRadius: 3, 
-          boxShadow: '0 4px 16px #e0e7ef33', 
-          maxWidth: 900, 
-          mx: 'auto',
-          flexWrap: 'wrap'
-        }}>
-          <CalendarMonthIcon sx={{ color: '#3b82f6', fontSize: 32, mr: 1 }} />
-          <Typography sx={{ fontWeight: 700, mr: 2, fontSize: 18 }}>Filter by Date:</Typography>
-          <DatePicker
-            value={selectedDate}
-            onChange={date => setSelectedDate(date)}
-            slotProps={{ 
-              textField: { 
-                size: 'small', 
-                sx: { minWidth: 180, backgroundColor: '#fff' },
-                placeholder: 'Select date...'
-              } 
-            }}
-            format="YYYY-MM-DD"
-            disableFuture
-          />
-          {selectedDate && (
-            <Button
-              variant="outlined"
-              color="primary"
-              sx={{ ml: 2, fontWeight: 600, borderRadius: 2, textTransform: 'none' }}
-              onClick={() => setSelectedDate(null)}
-            >
-              Clear
-            </Button>
-          )}
-          
-          {/* Available dates info */}
-          {availableDates.length > 0 && (
-            <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography sx={{ fontSize: 14, color: '#64748b', fontWeight: 500 }}>
-                Available dates: {availableDates.length}
+      {/* Collapsible Date Filter Button */}
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+        <Button
+          variant="contained"
+          onClick={() => setShowDateFilter(!showDateFilter)}
+          sx={{ 
+            fontWeight: 700, 
+            borderRadius: 4, 
+            textTransform: 'none',
+            px: 4,
+            py: 2,
+            fontSize: 16,
+            background: selectedDate 
+              ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)'
+              : 'linear-gradient(135deg, #64748b 0%, #475569 100%)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+            '&:hover': {
+              background: selectedDate 
+                ? 'linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)'
+                : 'linear-gradient(135deg, #475569 0%, #374151 100%)',
+              boxShadow: '0 12px 40px rgba(0,0,0,0.2)',
+              transform: 'translateY(-2px)'
+            },
+            transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)'
+          }}
+          startIcon={<CalendarMonthIcon sx={{ fontSize: 24 }} />}
+          endIcon={
+            <span style={{ 
+              fontSize: 18, 
+              transition: 'transform 0.3s ease',
+              transform: showDateFilter ? 'rotate(180deg)' : 'rotate(0deg)'
+            }}>
+              ▼
+            </span>
+          }
+        >
+          {selectedDate 
+            ? `Filtered: ${dayjs(selectedDate).format('MMM DD, YYYY')}`
+            : 'Show Date Filter'
+          }
+        </Button>
+      </Box>
+
+      {/* Collapsible Date Filter Content */}
+      {showDateFilter && (
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box sx={{ 
+            mb: 4,
+            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            borderRadius: 4,
+            border: '2px solid #e2e8f0',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
+            overflow: 'hidden',
+            position: 'relative',
+            animation: 'slideDown 0.3s ease-out'
+          }}>
+            {/* Header */}
+            <Box sx={{
+              background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+              p: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2
+            }}>
+              <CalendarMonthIcon sx={{ color: '#fff', fontSize: 28 }} />
+              <Typography sx={{ 
+                fontWeight: 800, 
+                fontSize: 20, 
+                color: '#fff',
+                letterSpacing: 0.5
+              }}>
+                Date Filter
               </Typography>
-              <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap', maxWidth: 300 }}>
-                {availableDates.slice(0, 5).map((date, idx) => (
-                  <Box
-                    key={date}
-                    sx={{
-                      px: 1,
-                      py: 0.5,
-                      borderRadius: 1,
-                      backgroundColor: '#e2e8f0',
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: '#475569',
-                      cursor: 'pointer',
-                      '&:hover': {
-                        backgroundColor: '#3b82f6',
-                        color: '#fff'
-                      }
-                    }}
-                    onClick={() => setSelectedDate(dayjs(date))}
-                  >
-                    {dayjs(date).format('MM/DD')}
-                  </Box>
-                ))}
-                {availableDates.length > 5 && (
-                  <Box sx={{ px: 1, py: 0.5, fontSize: 12, color: '#64748b' }}>
-                    +{availableDates.length - 5} more
-                  </Box>
-                )}
+              <Box sx={{ 
+                ml: 'auto',
+                background: 'rgba(255,255,255,0.2)',
+                borderRadius: 2,
+                px: 2,
+                py: 0.5
+              }}>
+                <Typography sx={{ 
+                  fontSize: 14, 
+                  color: '#fff', 
+                  fontWeight: 600 
+                }}>
+                  {selectedDate ? 'Filtered' : 'All Data'}
+                </Typography>
               </Box>
             </Box>
-          )}
-        </Box>
-      </LocalizationProvider>
 
-      {/* Filters */}
-      <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
-        <select value={levelFilter} onChange={e => setLevelFilter(e.target.value)} style={{ padding: 8, borderRadius: 8, border: '1px solid #d1d5db' }}>
-          <option value="all">All Logs (No Info)</option>
-          <option value="error">Error Only</option>
-          <option value="success">Success Only</option>
-          <option value="warning">Warning Only</option>
-        </select>
-        <input type="text" placeholder="Search logs..." value={search} onChange={e => setSearch(e.target.value)} style={{ padding: 8, borderRadius: 8, border: '1px solid #d1d5db', flex: 1 }} />
-        <button 
-          onClick={refreshLogs}
-          style={{ padding: '8px 16px', borderRadius: 8, background: '#10b981', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}
-        >
-          Refresh
-        </button>
-        <button style={{ padding: '8px 16px', borderRadius: 8, background: '#3b82f6', color: '#fff', border: 'none', fontWeight: 600 }}>Export CSV</button>
-        <button 
-          onClick={clearLogs}
-          style={{ padding: '8px 16px', borderRadius: 8, background: '#ef4444', color: '#fff', border: 'none', fontWeight: 600, cursor: 'pointer' }}
-        >
-          Clear Logs
-        </button>
-      </div>
+            {/* Content */}
+            <Box sx={{ p: 4 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                gap: 3, 
+                alignItems: 'center', 
+                flexWrap: 'wrap',
+                mb: 3
+              }}>
+                {/* Date Picker */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Typography sx={{ 
+                    fontWeight: 600, 
+                    fontSize: 16, 
+                    color: '#374151',
+                    minWidth: 120
+                  }}>
+                    Select Date:
+                  </Typography>
+                  <DatePicker
+                    value={selectedDate}
+                    onChange={date => setSelectedDate(date)}
+                    slotProps={{ 
+                      textField: { 
+                        size: 'medium',
+                        sx: { 
+                          minWidth: 200,
+                          backgroundColor: '#fff',
+                          '& .MuiOutlinedInput-root': {
+                            borderRadius: 3,
+                            boxShadow: '0 2px 8px rgba(59,130,246,0.1)',
+                            '&:hover': {
+                              boxShadow: '0 4px 12px rgba(59,130,246,0.2)'
+                            },
+                            '&.Mui-focused': {
+                              boxShadow: '0 4px 16px rgba(59,130,246,0.3)'
+                            }
+                          }
+                        },
+                        placeholder: 'Choose a date to filter...'
+                      } 
+                    }}
+                    format="YYYY-MM-DD"
+                    disableFuture
+                  />
+                </Box>
+
+                {/* Clear Button */}
+                {selectedDate && (
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    sx={{ 
+                      fontWeight: 600, 
+                      borderRadius: 3, 
+                      textTransform: 'none',
+                      px: 3,
+                      py: 1.5,
+                      borderWidth: 2,
+                      '&:hover': {
+                        borderWidth: 2,
+                        background: 'rgba(239,68,68,0.1)'
+                      }
+                    }}
+                    onClick={() => setSelectedDate(null)}
+                    startIcon={<span style={{ fontSize: 18 }}>✕</span>}
+                  >
+                    Clear Filter
+                  </Button>
+                )}
+
+                {/* Show All Data Button */}
+                {!selectedDate && (
+                  <Button
+                    variant="contained"
+                    sx={{ 
+                      fontWeight: 600, 
+                      borderRadius: 3, 
+                      textTransform: 'none',
+                      px: 3,
+                      py: 1.5,
+                      background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                      boxShadow: '0 4px 12px rgba(16,185,129,0.3)',
+                      '&:hover': {
+                        background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                        boxShadow: '0 6px 16px rgba(16,185,129,0.4)'
+                      }
+                    }}
+                    startIcon={<span style={{ fontSize: 18 }}>📊</span>}
+                  >
+                    Showing All Data
+                  </Button>
+                )}
+              </Box>
+
+              {/* Available Dates */}
+              {availableDates.length > 0 && (
+                <Box sx={{ 
+                  mt: 3,
+                  p: 3,
+                  background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+                  borderRadius: 3,
+                  border: '1px solid #e2e8f0'
+                }}>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: 2,
+                    mb: 2
+                  }}>
+                    <Typography sx={{ 
+                      fontSize: 16, 
+                      color: '#374151', 
+                      fontWeight: 600 
+                    }}>
+                      Quick Select:
+                    </Typography>
+                    <Box sx={{ 
+                      background: 'rgba(59,130,246,0.1)',
+                      borderRadius: 2,
+                      px: 2,
+                      py: 0.5
+                    }}>
+                      <Typography sx={{ 
+                        fontSize: 14, 
+                        color: '#3b82f6', 
+                        fontWeight: 600 
+                      }}>
+                        {availableDates.length} dates available
+                      </Typography>
+                    </Box>
+                  </Box>
+                  
+                  <Box sx={{ 
+                    display: 'flex', 
+                    gap: 1, 
+                    flexWrap: 'wrap',
+                    maxWidth: '100%'
+                  }}>
+                    {availableDates.slice(0, 8).map((date, idx) => (
+                      <Button
+                        key={date}
+                        variant="outlined"
+                        size="small"
+                        sx={{
+                          borderRadius: 2,
+                          px: 2,
+                          py: 0.5,
+                          fontSize: 12,
+                          fontWeight: 600,
+                          borderColor: '#d1d5db',
+                          color: '#475569',
+                          textTransform: 'none',
+                          minWidth: 'auto',
+                          '&:hover': {
+                            background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+                            borderColor: '#3b82f6',
+                            color: '#fff',
+                            boxShadow: '0 4px 12px rgba(59,130,246,0.3)'
+                          }
+                        }}
+                        onClick={() => setSelectedDate(dayjs(date))}
+                      >
+                        {dayjs(date).format('MMM DD')}
+                      </Button>
+                    ))}
+                    {availableDates.length > 8 && (
+                      <Button
+                        variant="text"
+                        size="small"
+                        sx={{
+                          fontSize: 12,
+                          color: '#64748b',
+                          textTransform: 'none',
+                          '&:hover': {
+                            color: '#3b82f6'
+                          }
+                        }}
+                      >
+                        +{availableDates.length - 8} more
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              )}
+            </Box>
+          </Box>
+        </LocalizationProvider>
+      )}
+
+
 
       {/* Graphs (Logs Over Time) - Modern Card */}
       <div style={{
@@ -670,6 +882,97 @@ const LogsDashboard = ({ user }) => {
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              {/* Log Level Filter */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                <Typography sx={{ 
+                  fontWeight: 600, 
+                  fontSize: 14, 
+                  color: '#374151'
+                }}>
+                  Filter:
+                </Typography>
+                <select 
+                  value={levelFilter} 
+                  onChange={e => setLevelFilter(e.target.value)}
+                  style={{ 
+                    padding: '8px 12px', 
+                    borderRadius: 6, 
+                    border: '2px solid #d1d5db',
+                    fontSize: 13,
+                    fontWeight: 500,
+                    backgroundColor: '#fff',
+                    minWidth: 140,
+                    cursor: 'pointer',
+                    outline: 'none',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#3b82f6';
+                    e.target.style.boxShadow = '0 4px 8px rgba(59,130,246,0.2)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#d1d5db';
+                    e.target.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                  }}
+                >
+                  <option value="all">All Logs</option>
+                  <option value="error">Error Only</option>
+                  <option value="success">Success Only</option>
+                  <option value="warning">Warning Only</option>
+                </select>
+              </Box>
+
+              {/* Action Buttons */}
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={refreshLogs}
+                  sx={{ 
+                    fontWeight: 600, 
+                    borderRadius: 2, 
+                    textTransform: 'none',
+                    px: 2,
+                    py: 0.5,
+                    fontSize: 12,
+                    borderWidth: 1.5,
+                    borderColor: '#10b981',
+                    color: '#10b981',
+                    '&:hover': {
+                      borderWidth: 1.5,
+                      background: 'rgba(16,185,129,0.1)'
+                    }
+                  }}
+                  startIcon={<span style={{ fontSize: 14 }}>🔄</span>}
+                >
+                  Refresh
+                </Button>
+
+                <Button
+                  variant="outlined"
+                  size="small"
+                  color="error"
+                  onClick={clearLogs}
+                  sx={{ 
+                    fontWeight: 600, 
+                    borderRadius: 2, 
+                    textTransform: 'none',
+                    px: 2,
+                    py: 0.5,
+                    fontSize: 12,
+                    borderWidth: 1.5,
+                    '&:hover': {
+                      borderWidth: 1.5,
+                      background: 'rgba(239,68,68,0.1)'
+                    }
+                  }}
+                  startIcon={<span style={{ fontSize: 14 }}>🗑️</span>}
+                >
+                  Clear
+                </Button>
+              </Box>
+
               <span style={{
                 background: 'linear-gradient(90deg, #10b981 0%, #3b82f6 100%)',
                 color: '#fff',
@@ -693,21 +996,21 @@ const LogsDashboard = ({ user }) => {
             justifyContent: 'space-between',
             zIndex: 2,
           }}>
-            <div style={{ color: '#64748b', fontWeight: 500, fontSize: 16 }}>
-              {selectedDate 
-                ? viewMode === 'minutes' && selectedHour !== null
-                  ? `Showing minute details for ${dayjs(selectedDate).format('YYYY-MM-DD')} Hour ${selectedHour}:00 (${filteredLogs.length} items)`
-                  : `Showing errors & success for ${dayjs(selectedDate).format('YYYY-MM-DD')} (${filteredLogs.length} items) - Click on any hour to see minute details`
-                : `Last 30 minutes (live) - ${filteredLogs.length} recent logs`
-              }
-            </div>
+                          <div style={{ color: '#64748b', fontWeight: 500, fontSize: 16 }}>
+                {selectedDate 
+                  ? viewMode === 'minutes' && selectedHour !== null
+                    ? `Showing minute details for ${dayjs(selectedDate).format('YYYY-MM-DD')} Hour ${selectedHour}:00 (${filteredLogs.length} items)`
+                    : `Showing errors & success for ${dayjs(selectedDate).format('YYYY-MM-DD')} (${filteredLogs.length} items) - Click on any hour to see minute details`
+                  : `All data from all dates (${filteredLogs.length} total logs) - Select a date to filter`
+                }
+              </div>
             {/* Peak log rate summary */}
             <div style={{ color: '#3b82f6', fontWeight: 700, fontSize: 16 }}>
               {selectedDate 
                 ? viewMode === 'minutes' && selectedHour !== null
                   ? `Peak: ${Math.max(...logsOverTime.total, 0)} logs/min`
                   : `Peak: ${Math.max(...logsOverTime.total, 0)} logs/hour`
-                : `Peak: ${Math.max(...logsOverTime.total, 0)} logs/min`
+                : `Peak: ${Math.max(...logsOverTime.total, 0)} logs/day`
               }
             </div>
           </div>
@@ -735,7 +1038,9 @@ const LogsDashboard = ({ user }) => {
                   xAxis={[{
                     data: logsOverTime.labels,
                     scaleType: 'point',
-                    label: viewMode === 'minutes' ? 'Time (minute)' : 'Time (hour)',
+                    label: selectedDate 
+                      ? (viewMode === 'minutes' ? 'Time (minute)' : 'Time (hour)')
+                      : 'Date',
                     tickLabelStyle: { fontSize: 14, fill: '#64748b' },
                     labelStyle: { fontWeight: 700, fill: '#3b82f6' }
                   }]}
@@ -745,6 +1050,12 @@ const LogsDashboard = ({ user }) => {
                       const hour = parseInt(logsOverTime.labels[hourIndex].split(':')[0]);
                       setSelectedHour(hour);
                       setViewMode('minutes');
+                    } else if (!selectedDate && data && data.value !== undefined) {
+                      // When no date is selected, clicking on a date should select that date
+                      const dateIndex = data.value;
+                      const dateStr = logsOverTime.labels[dateIndex];
+                      const selectedDateObj = dayjs(dateStr, 'MM/DD').year(dayjs().year());
+                      setSelectedDate(selectedDateObj);
                     }
                   }}
                                     series={
@@ -795,8 +1106,10 @@ const LogsDashboard = ({ user }) => {
                       formatter: (params) => {
                         if (!params || typeof params.value === 'undefined') return '';
                         const idx = params.dataIndex;
-                        const minuteLabel = logsOverTime.labels[idx];
-                        let tooltip = `Time: ${minuteLabel}<br/>`;
+                        const label = logsOverTime.labels[idx];
+                        let tooltip = selectedDate 
+                          ? `Time: ${label}<br/>`
+                          : `Date: ${label}<br/>`;
                         
                         if (levelFilter === 'all') {
                           tooltip += `<span style='color:#10b981'>●</span> Success: ${logsOverTime.success[idx]}<br/>`;
@@ -805,7 +1118,9 @@ const LogsDashboard = ({ user }) => {
                           tooltip += `<span style='color:#ef4444'>●</span> Error: ${logsOverTime.error[idx]}<br/>`;
                           // Show error reasons if hovering error point and there are errors
                           if (logsOverTime.error[idx] > 0) {
-                            const reasons = getErrorReasonsForMinute(minuteLabel);
+                            const reasons = selectedDate 
+                              ? getErrorReasonsForMinute(label)
+                              : getErrorReasonsForDate(label);
                             if (reasons.length > 0) {
                               tooltip += `<div style='margin-top:4px;'><b>Error Reasons:</b><ul style='margin:0;padding-left:16px;'>`;
                               reasons.slice(0, 5).forEach(r => {
@@ -852,7 +1167,7 @@ const LogsDashboard = ({ user }) => {
                 <Typography variant="body2" sx={{ color: '#94a3b8' }}>
                   {selectedDate 
                     ? `No logs found for ${dayjs(selectedDate).format('YYYY-MM-DD')}. Try a different date.`
-                    : 'No recent log activity. Logs will appear here when system activity is detected.'
+                    : 'No log data available. Logs will appear here when system activity is detected.'
                   }
                 </Typography>
               </Box>
@@ -865,7 +1180,51 @@ const LogsDashboard = ({ user }) => {
 
       {/* Real-time Logs Table */}
       <div style={{ background: '#fff', borderRadius: 16, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-        <div style={{ fontWeight: 600, marginBottom: 16 }}>Live System Activity</div>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          marginBottom: 16 
+        }}>
+          <div style={{ fontWeight: 600, fontSize: 18 }}>Live System Activity</div>
+          
+          {/* Search Input */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography sx={{ 
+              fontWeight: 600, 
+              fontSize: 14, 
+              color: '#374151'
+            }}>
+              Search:
+            </Typography>
+            <input 
+              type="text" 
+              placeholder="Search logs..." 
+              value={search} 
+              onChange={e => setSearch(e.target.value)}
+              style={{ 
+                padding: '8px 12px', 
+                borderRadius: 6, 
+                border: '2px solid #d1d5db',
+                fontSize: 13,
+                fontWeight: 500,
+                backgroundColor: '#fff',
+                minWidth: 200,
+                outline: 'none',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#3b82f6';
+                e.target.style.boxShadow = '0 4px 8px rgba(59,130,246,0.2)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = '#d1d5db';
+                e.target.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+              }}
+            />
+          </Box>
+        </div>
         {loading ? <div>Loading logs...</div> : (
           <div style={{ maxHeight: 320, overflowY: 'auto', fontFamily: 'monospace', fontSize: 14 }}>
             {filteredLogs.map((log, idx) => {

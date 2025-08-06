@@ -35,7 +35,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from uploads directory
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads', {
+  setHeaders: (res, path) => {
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}));
 
 // Test database connection
 testConnection();
@@ -77,7 +83,7 @@ app.use('*', (req, res) => {
 });
 
 // Environment variable validation
-const requiredEnv = ['PORT', 'CORS_ORIGIN', 'DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
+const requiredEnv = ['PORT', 'CORS_ORIGIN', 'DB_HOST', 'DB_USER', 'DB_NAME'];
 const missingEnv = requiredEnv.filter(key => !process.env[key]);
 if (missingEnv.length) {
   console.error('❌ Missing required environment variables:', missingEnv.join(', '));

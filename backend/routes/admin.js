@@ -309,27 +309,35 @@ router.delete('/projects/:id', auth, requireAdmin, async (req, res) => {
       return res.status(404).json({ message: 'Project not found' });
     }
 
-    // Check if project has associated data
-    const [pdData] = await pool.execute(
-      'SELECT COUNT(*) as count FROM pd_data_raw WHERE project_id = ?',
-      [id]
-    );
+    // Start a transaction to ensure data consistency
+    const connection = await pool.getConnection();
+    await connection.beginTransaction();
 
-    const [dvData] = await pool.execute(
-      'SELECT COUNT(*) as count FROM dv_data_raw WHERE project_id = ?',
-      [id]
-    );
+    try {
+      // Delete all related data first
+      await connection.execute('DELETE FROM cl_data_raw WHERE project_id = ?', [id]);
+      await connection.execute('DELETE FROM pd_data_raw WHERE project_id = ?', [id]);
+      await connection.execute('DELETE FROM dv_data_raw WHERE project_id = ?', [id]);
+      await connection.execute('DELETE FROM tb_dev WHERE project_id = ?', [id]);
+      
+      // Delete project-domain associations
+      await connection.execute('DELETE FROM project_domains WHERE project_id = ?', [id]);
+      
+      // Finally delete the project
+      await connection.execute('DELETE FROM projects WHERE id = ?', [id]);
 
-    if (pdData[0].count > 0 || dvData[0].count > 0) {
-      return res.status(400).json({ 
-        message: 'Cannot delete project. It has associated data. Please delete the data first.' 
-      });
+      // Commit the transaction
+      await connection.commit();
+      
+      res.json({ message: 'Project and all related data deleted successfully' });
+
+    } catch (error) {
+      // Rollback on error
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
-
-    // Delete project
-    await pool.execute('DELETE FROM projects WHERE id = ?', [id]);
-
-    res.json({ message: 'Project deleted successfully' });
 
   } catch (error) {
     console.error('Delete project error:', error);

@@ -1,0 +1,26 @@
+project,block_name,domain,experiment,RTL _tag,user_name,run_directory,run end time,stage,internal timing,Interface timing,Max tran (WNS/NVP),Max cap (WNS/NVP),Noise,MPW/min period/Double switching,Congestion/DRC metrics,Area,Inst count,Utilization,Logs Errors & Warnings,run status  (pass/fail/continue_with_error),runtime,AI based overall summary and suggestions,IR  (Static),"EM (power, signal)","PV (DRC (Base drc, metal drc, antenna)",LVS,LEC
+proj1,blk2,PD,exp1,bronze,user2,/proj/proj1/pd/users/user2/blk2/exp1,25/05/2025,synthesis,"Setup:
+r2r: -0.312/-3.5/338
+Hold:
+NA","Setup:
+i2r: -0.06/-2.7/376
+Hold:
+NA",-0.6/459,-0.05/342,NA,NA,NA,3.2345um2,376484,NA,"Errors: 575
+warnings: 454",pass,5:17,"analyze the violations
+seem to be optimization issue",NA,NA,NA,NA,Pass
+proj1,blk2,PD,exp1,bronze,user2,/proj/proj1/pd/users/user2/blk2/exp1,26/05/2025,Floorplan,"Setup:
+r2r: -0.26/-2.7/278
+Hold:
+NA","Setup:
+i2r: -0.04/-2.4/223
+Hold:
+NA",-0.56/460,-0.04/343,NA,NA,NA,3.324um2,376564,NA,"Errors: 0
+warnings: 335",pass,3:12,analyze port placement issues,NA,NA,NA,NA,Fail
+proj1,blk2,PD,exp1,bronze,user2,/proj/proj1/pd/users/user2/blk2/exp1,27/05/2025,Placement,"Setup:
+r2r: -0.04/-0.4/40
+Hold:
+NA","Setup:
+i2r: -0.03/-1.8/294
+Hold:
+NA",-0.62/567,-0.07/521,NA,NA,0.2,3.453um2,384783,65%%,"Errors: 255
+warnings: 442",fail,7:42,legalization issues,NA,NA,NA,NA,Fail

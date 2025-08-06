@@ -26,11 +26,25 @@ const requireAdmin = async (req, res, next) => {
 // Get all users (admin only)
 router.get('/', auth, requireAdmin, async (req, res) => {
   try {
+    // First get users with their roles
     const [users] = await pool.execute(
-      'SELECT u.id, u.name, u.email, u.is_active, u.created_at, r.role_name, COALESCE((SELECT JSON_ARRAYAGG(project_id) FROM project_users pu WHERE pu.user_id = u.id AND pu.is_active = 1), JSON_ARRAY()) AS project_ids FROM users u JOIN user_roles r ON u.role_id = r.id ORDER BY u.created_at DESC'
+      'SELECT u.id, u.name, u.email, u.is_active, u.created_at, r.role_name FROM users u JOIN user_roles r ON u.role_id = r.id ORDER BY u.created_at DESC'
     );
 
-    res.json({ users });
+    // Then get project assignments for each user
+    const usersWithProjects = await Promise.all(users.map(async (user) => {
+      const [projects] = await pool.execute(
+        'SELECT project_id FROM project_users WHERE user_id = ? AND is_active = 1',
+        [user.id]
+      );
+      
+      return {
+        ...user,
+        project_ids: projects.map(p => p.project_id)
+      };
+    }));
+
+    res.json({ users: usersWithProjects });
   } catch (error) {
     console.error('Get users error:', error);
     res.status(500).json({ message: 'Server error' });
